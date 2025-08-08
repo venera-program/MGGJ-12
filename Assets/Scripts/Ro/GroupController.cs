@@ -48,7 +48,8 @@ public class GroupController : MonoBehaviour{
                                 (yPos * ring.radius) + transform.position.y + ring.offset.y);
             GameObject projectile = Instantiate(ring.projectile, projectilePosition, Quaternion.identity, transform );
             Projectile proj = projectile.GetComponent<Projectile>();
-            proj.ConstructProjectile(ring.speed, positionAngle * Mathf.Rad2Deg);
+            float movementAngle = HelperFunctions.CaluclateProjectileMovementAngle(i, ring, projectilePosition);
+            proj.ConstructProjectile(ring.speed, movementAngle);
         }
     }
 

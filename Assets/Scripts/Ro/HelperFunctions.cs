@@ -29,6 +29,7 @@ public class HelperFunctions {
         return betweenX && betweenY;
     }
 
+    // Returns the angle in radians to be used for position
     public static float CalculateProjectilePositionAngle(int index, Group group){
         
         switch(group.pattern){
@@ -76,7 +77,39 @@ public class HelperFunctions {
         return 0f;
     }
 
-    public static float CaluclateProjectileMovementAngle(int i, Group ring, Vector3 position){
+    // returns angle in degrees for rotation
+    public static float CaluclateProjectileMovementAngle(int index, Group group, Vector3 position){
+        switch(group.pattern){
+            case(GroupType.Ring):
+                return CalculateRingMovementAngle(index, group, position);
+            case(GroupType.Spread):
+                return CalculateSpreadMovementAngle(index, group, position);
+            case(GroupType.Stack):
+                return CalculateStackMovementAngle(index, group, position);
+            default:
+                return 0f;
+        }
+    }
+
+    private static float CalculateRingMovementAngle(int i, Group ring, Vector3 position){
+        // return the angle that the projectile should be rotated towards
+
+        if(ring.movementAngle == MovementAngle.Fixed){
+            return CalculateRingPositionAngle(i, ring) * Mathf.Rad2Deg;
+        } else if (ring.movementAngle == MovementAngle.TowardsPlayer){
+            Vector3 playerPosition = new Vector3(0f, -5f, 0f); 
+            Vector3 angleDiff = playerPosition - position;
+            float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
+            return angle;
+        }
+        return 0f;
+    }
+
+    private static float CalculateSpreadMovementAngle(int i, Group ring, Vector3 position){
+        return 0f;
+    }
+
+    private static float CalculateStackMovementAngle(int i, Group ring, Vector3 position){
         return 0f;
     }
 

@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     }
     public void ConstructProjectile(float speed, float movementAngle){
         this.speed = speed;
-        transform.Rotate(new Vector3(0f,0f,movementAngle));
+        transform.Rotate(new Vector3(0f,0f,movementAngle), Space.World);
         StartMoving();
     }
     
