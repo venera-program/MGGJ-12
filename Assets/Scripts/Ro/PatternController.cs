@@ -31,7 +31,7 @@ public struct Group {
     public float radius;
     public Vector2 offset;
     public MovementAngle movementAngle;
-    public SpawnLocationType spawnLocation;
+    public PositionAngle positionAngle;
     public float speed;
     public GameObject projectile;
 }
@@ -42,8 +42,3 @@ public struct Pattern{
     public float HPValueEnd;
 }
 
-[Serializable]
-public enum SpawnLocationType{
-    fixedPosition,
-    randomPosition,
-}

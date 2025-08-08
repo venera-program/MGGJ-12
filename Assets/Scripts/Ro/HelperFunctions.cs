@@ -29,25 +29,25 @@ public class HelperFunctions {
         return betweenX && betweenY;
     }
 
-    public static float CalculateProjectileAngle(int index, Group group, Vector3 position){
+    public static float CalculateProjectilePositionAngle(int index, Group group){
         
         switch(group.pattern){
             case(GroupType.Ring):
-                return CalculateRingAngle(index, group, position);
+                return CalculateRingPositionAngle(index, group);
             case(GroupType.Spread):
-                return CalculateSpreadAngle(index, group, position);
+                return CalculateSpreadPositionAngle(index, group);
             case(GroupType.Stack):
-                return CalculateStackAngle(index, group, position);
+                return CalculateStackPositionAngle(index, group);
             default:
                 return 0f;
         }
     }
 
-    private static float CalculateRingAngle(int i, Group ring, Vector3 position){
+    private static float CalculateRingPositionAngle(int i, Group ring){
         bool isStartingAngleLess = ring.startingAngle < ring.endingAngle;
         float angleDiff = Mathf.Abs(ring.startingAngle - ring.endingAngle);
 
-        if(ring.movementAngle == MovementAngle.Fixed){
+        if(ring.positionAngle == PositionAngle.FixedPosition){
             float angleIncrement = angleDiff/ring.projectileCount;
             float angleToCalculate = 0f;
             float rawAngle = angleIncrement * i + ring.startingAngle;
@@ -56,7 +56,7 @@ public class HelperFunctions {
             return angleRad;
         }
 
-        if(ring.movementAngle == MovementAngle.Random){
+        if(ring.positionAngle == PositionAngle.RandomPosition){
             float angleIncrement = Random.Range(0f, angleDiff);
             float angleToCalculate = 0f;
             float rawAngle = angleIncrement + ring.startingAngle;
@@ -64,23 +64,19 @@ public class HelperFunctions {
             return angleToCalculate * Mathf.Deg2Rad;
         }
 
-        if(ring.movementAngle == MovementAngle.TowardsPlayer){
-            Vector3 playerPosition = Vector3.zero; // replace with player position
-            Vector3 direction = playerPosition - position;
-            direction = direction.normalized;
-
-        }
-
-
         return 0f;
 
     }
 
-    private static float CalculateSpreadAngle(int i, Group ring, Vector3 position){
+    private static float CalculateSpreadPositionAngle(int i, Group ring){
         return 0f;
     }
 
-    private static float CalculateStackAngle(int i, Group ring, Vector3 position){
+    private static float CalculateStackPositionAngle(int i, Group ring){
+        return 0f;
+    }
+
+    public static float CaluclateProjectileMovementAngle(int i, Group ring, Vector3 position){
         return 0f;
     }
 

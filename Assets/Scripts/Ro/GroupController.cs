@@ -41,14 +41,14 @@ public class GroupController : MonoBehaviour{
 
     private void SpawnRing(Group ring){
         for (int i = 0 ; i < ring.projectileCount; i++){
-            float angle = HelperFunctions.CalculateProjectileAngle(i, ring, transform.position);
-            float xPos = Mathf.Cos(angle);
-            float yPos = Mathf.Sin(angle);
-            Vector2 projectilePosition = new Vector2((xPos * ring.radius) + transform.position.x, 
-                                (yPos * ring.radius) + transform.position.y);
+            float positionAngle = HelperFunctions.CalculateProjectilePositionAngle(i, ring);
+            float xPos = Mathf.Cos(positionAngle);
+            float yPos = Mathf.Sin(positionAngle);
+            Vector2 projectilePosition = new Vector2((xPos * ring.radius) + transform.position.x + ring.offset.x, 
+                                (yPos * ring.radius) + transform.position.y + ring.offset.y);
             GameObject projectile = Instantiate(ring.projectile, projectilePosition, Quaternion.identity, transform );
             Projectile proj = projectile.GetComponent<Projectile>();
-            proj.ConstructProjectile(ring.speed, angle * Mathf.Rad2Deg);
+            proj.ConstructProjectile(ring.speed, positionAngle * Mathf.Rad2Deg);
         }
     }
 
@@ -67,8 +67,14 @@ public class GroupController : MonoBehaviour{
 public enum MovementAngle {
     Fixed, 
     TowardsPlayer,
-    Random
 }
+
+[Serializable]
+public enum PositionAngle{
+    FixedPosition,
+    RandomPosition,
+}
+
 
 public enum GroupType {
     Ring,
