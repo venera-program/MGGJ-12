@@ -242,7 +242,7 @@ Transform:
   m_GameObject: {fileID: 525004702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.31, y: 3.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -263,14 +263,43 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 0
-      projectileCount: 15
-      startingAngle: 0
-      endingAngle: 180
-      radius: 4
+      projectileCount: 10
+      startingAngle: 200
+      endingAngle: 360
+      spawnInterval: 2
+      delay: 1
+      radius: 1
       offset: {x: 0, y: 0}
-      movementAngle: 1
-      positionAngle: 1
-      speed: 2
+      movementAngle: 0
+      positionAngle: 0
+      speed: 1
+      speedMultiplier: 0.25
+      projectile: {fileID: 6031599074028236495, guid: b037e47b8a28d5343a5cb16dcd0ce80b, type: 3}
+    - pattern: 0
+      projectileCount: 20
+      startingAngle: 0
+      endingAngle: 360
+      spawnInterval: 2
+      delay: 2
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 1
+      speedMultiplier: 0.25
+      projectile: {fileID: 6031599074028236495, guid: b037e47b8a28d5343a5cb16dcd0ce80b, type: 3}
+    - pattern: 2
+      projectileCount: 2
+      startingAngle: 90
+      endingAngle: 360
+      spawnInterval: 2
+      delay: 3
+      radius: 2
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 1
+      speedMultiplier: 0.25
       projectile: {fileID: 6031599074028236495, guid: b037e47b8a28d5343a5cb16dcd0ce80b, type: 3}
     HPValueEnd: 0
 --- !u!114 &525004705
@@ -285,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30deeac04ceb18b4caae192782ed59c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
 --- !u!212 &525004706
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -348,12 +378,12 @@ GameObject:
   - component: {fileID: 697790221}
   - component: {fileID: 697790222}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Badger
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &697790221
 Transform:
   m_ObjectHideFlags: 0
@@ -363,7 +393,7 @@ Transform:
   m_GameObject: {fileID: 697790220}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalPosition: {x: 0, y: -6.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,12 +440,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.369546, g: 0.24056602, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a2fb08044d60977438e75b8e0a703f37, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -430,7 +460,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1264916544}
-  - component: {fileID: 1264916543}
   - component: {fileID: 1264916545}
   m_Layer: 0
   m_Name: Test
@@ -438,21 +467,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1264916543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264916542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb9327fb301f774ab8a4cfd7046ddb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MyObject: {fileID: 1264916542}
-  m_MyOtherObject: {fileID: 697790220}
+  m_IsActive: 1
 --- !u!4 &1264916544
 Transform:
   m_ObjectHideFlags: 0
@@ -462,8 +477,8 @@ Transform:
   m_GameObject: {fileID: 1264916542}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -36,7 +36,7 @@ public class HelperFunctions {
             case(GroupType.Ring):
                 return CalculateRingPositionAngle(index, group);
             case(GroupType.Spread):
-                return CalculateSpreadPositionAngle(index, group);
+                return CalculateRingPositionAngle(index, group);
             case(GroupType.Stack):
                 return CalculateStackPositionAngle(index, group);
             default:
@@ -70,11 +70,12 @@ public class HelperFunctions {
     }
 
     private static float CalculateSpreadPositionAngle(int i, Group ring){
+        // using starting angle 
         return 0f;
     }
 
     private static float CalculateStackPositionAngle(int i, Group ring){
-        return 0f;
+        return Mathf.Deg2Rad * ring.startingAngle;
     }
 
     // returns angle in degrees for rotation
@@ -83,7 +84,7 @@ public class HelperFunctions {
             case(GroupType.Ring):
                 return CalculateRingMovementAngle(index, group, position);
             case(GroupType.Spread):
-                return CalculateSpreadMovementAngle(index, group, position);
+                return CalculateRingMovementAngle(index, group, position);
             case(GroupType.Stack):
                 return CalculateStackMovementAngle(index, group, position);
             default:
@@ -105,11 +106,19 @@ public class HelperFunctions {
         return 0f;
     }
 
-    private static float CalculateSpreadMovementAngle(int i, Group ring, Vector3 position){
+    private static float CalculateSpreadMovementAngle(int i, Group spread, Vector3 position){
         return 0f;
     }
 
-    private static float CalculateStackMovementAngle(int i, Group ring, Vector3 position){
+    private static float CalculateStackMovementAngle(int i, Group stack, Vector3 position){
+       if(stack.movementAngle == MovementAngle.Fixed){
+        return CalculateStackPositionAngle(i, stack) * Mathf.Rad2Deg;
+        } else if (stack.movementAngle == MovementAngle.TowardsPlayer){
+            Vector3 playerPosition = new Vector3(0f, -5f, 0f);
+            Vector3 angleDiff = playerPosition - position;
+            float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
+            return angle;
+        }
         return 0f;
     }
 

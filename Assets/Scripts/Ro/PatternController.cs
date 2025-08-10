@@ -17,7 +17,7 @@ public class PatternController : MonoBehaviour
     }
 
     void Start(){
-        groupSpawner.StartGroup(Patterns[0].groups[0]);
+        groupSpawner.StartGroup(Patterns[0].groups);
     }
 
 }
@@ -28,11 +28,14 @@ public struct Group {
     public float projectileCount;
     [Range(0,360)]public float startingAngle;
     [Range(0,360)]public float endingAngle;
+    public float spawnInterval;
+    public float delay;
     public float radius;
     public Vector2 offset;
     public MovementAngle movementAngle;
     public PositionAngle positionAngle;
     public float speed;
+    public float speedMultiplier;
     public GameObject projectile;
 }
 
