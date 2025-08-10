@@ -19,9 +19,9 @@ public class GroupController : MonoBehaviour{
                 // Floors timer so that modulo actually works with the time given 
                 // And then checks to see if the wave has spawned already since time.deltatime only increases the timer with
                 // fractions of a second, necessatiting a check. 
-                
+
                 float timePastDelay = timer - groups[i].delay;
-                float timePastDelayInt = Mathf.Floor(resetFloat);
+                float timePastDelayInt = Mathf.Floor(timePastDelay);
                 bool isTimeToGenerate = false;
                 if(spawnedThisSecond[i] == timePastDelayInt){
                     continue;
