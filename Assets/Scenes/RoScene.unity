@@ -263,8 +263,8 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 0
-      projectileCount: 10
-      startingAngle: 200
+      projectileCount: 20
+      startingAngle: 0
       endingAngle: 360
       spawnInterval: 2
       delay: 1
@@ -275,22 +275,22 @@ MonoBehaviour:
       speed: 1
       speedMultiplier: 0.25
       projectile: {fileID: 6031599074028236495, guid: b037e47b8a28d5343a5cb16dcd0ce80b, type: 3}
-    - pattern: 0
-      projectileCount: 20
-      startingAngle: 0
-      endingAngle: 360
+    - pattern: 1
+      projectileCount: 10
+      startingAngle: 180
+      endingAngle: 270
       spawnInterval: 2
       delay: 2
       radius: 0.5
       offset: {x: 0, y: 0}
-      movementAngle: 0
+      movementAngle: 1
       positionAngle: 0
       speed: 1
       speedMultiplier: 0.25
       projectile: {fileID: 6031599074028236495, guid: b037e47b8a28d5343a5cb16dcd0ce80b, type: 3}
     - pattern: 2
-      projectileCount: 2
-      startingAngle: 90
+      projectileCount: 5
+      startingAngle: 330
       endingAngle: 360
       spawnInterval: 2
       delay: 3
