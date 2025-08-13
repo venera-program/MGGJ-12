@@ -98,7 +98,7 @@ public class HelperFunctions {
         if(ring.movementAngle == MovementAngle.Fixed){
             return CalculateRingPositionAngle(i, ring) * Mathf.Rad2Deg;
         } else if (ring.movementAngle == MovementAngle.TowardsPlayer){
-            Vector3 playerPosition = new Vector3(0f, -5f, 0f); 
+            Vector3 playerPosition = PlayerControllerScript.instance.transform.position; 
             Vector3 angleDiff = playerPosition - position;
             float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
             return angle;
@@ -114,7 +114,7 @@ public class HelperFunctions {
        if(stack.movementAngle == MovementAngle.Fixed){
         return CalculateStackPositionAngle(i, stack) * Mathf.Rad2Deg;
         } else if (stack.movementAngle == MovementAngle.TowardsPlayer){
-            Vector3 playerPosition = new Vector3(0f, -5f, 0f);
+            Vector3 playerPosition = PlayerControllerScript.instance.transform.position; 
             Vector3 angleDiff = playerPosition - position;
             float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
             return angle;
