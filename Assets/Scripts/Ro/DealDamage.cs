@@ -9,7 +9,7 @@ public abstract class DealDamage : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         for(int i = 0 ; i < tagsToPayAttentionTo.Length ; i++){
             if (other.tag == tagsToPayAttentionTo[i]){
-                other.GetComponent<Health>().TakeDamage(damage);
+                other.GetComponent<Health>()?.TakeDamage(damage);
                 OnContact();
             }
         }

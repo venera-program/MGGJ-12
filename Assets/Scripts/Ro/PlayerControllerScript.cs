@@ -11,6 +11,9 @@ public class PlayerControllerScript : MonoBehaviour
    private Rigidbody2D rb; 
    [Range(0f,30f)]
    public float speed = 5;
+
+   public GameObject projectile; 
+   public Group[] shootingPattern;
    
    void Awake(){
         if(instance != null && instance != this){
@@ -22,6 +25,12 @@ public class PlayerControllerScript : MonoBehaviour
         controller = new PlayerController();
         rb = GetComponent<Rigidbody2D>();
         controller.Enable();
+        controller.Main.Shoot.performed += Shoot;
+   }
+
+   void OnDisable(){
+     controller.Main.Shoot.performed -= Shoot;
+     controller.Disable();
    }
 
    void FixedUpdate(){
@@ -31,5 +40,18 @@ public class PlayerControllerScript : MonoBehaviour
 
    private void Move(Vector2 direction){
         rb.MovePosition((direction * speed * Time.fixedDeltaTime) + (Vector2)transform.position );
+   }
+
+   private void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext cont){
+          for(int i = 0 ; i < shootingPattern.Length ; i++){
+               float rad = shootingPattern[i].startingAngle * Mathf.Deg2Rad;
+               float xPos = Mathf.Cos(rad) * shootingPattern[i].radius;
+               float yPos = Mathf.Sin(rad) * shootingPattern[i].radius;
+               Vector3 finalPosition = new Vector3(transform.position.x + xPos + shootingPattern[i].offset.x, 
+                    transform.position.y + yPos + shootingPattern[i].offset.y, 0f);
+               GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity);
+               Projectile script = project.GetComponent<Projectile>();
+               script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
+          }
    }
 }
