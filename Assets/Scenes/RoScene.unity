@@ -634,6 +634,10 @@ MonoBehaviour:
     speed: 3
     speedMultiplier: 0
     projectile: {fileID: 0}
+  maxSpeed: 25
+  minSpeed: 0
+  accel: 99
+  deccel: 25
 --- !u!114 &697647661
 MonoBehaviour:
   m_ObjectHideFlags: 0

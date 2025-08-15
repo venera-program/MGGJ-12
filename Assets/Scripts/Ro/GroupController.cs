@@ -11,6 +11,9 @@ public class GroupController : MonoBehaviour{
     private float spawnTiming;
     public float timer; 
     private bool startSpawning = false;
+    
+    // add as an option for ring to not deform when moving to players
+
     void Update(){
 
         if(startSpawning){
@@ -21,7 +24,7 @@ public class GroupController : MonoBehaviour{
                 // fractions of a second, necessatiting a check. 
 
                 float timePastDelay = timer - groups[i].delay;
-                float timePastDelayInt = Mathf.Floor(timePastDelay);
+                float timePastDelayInt = Mathf.Floor(timePastDelay); // allow delay  in parts of a second
                 bool isTimeToGenerate = false;
                 if(spawnedThisSecond[i] == timePastDelayInt){
                     continue;
