@@ -16,6 +16,7 @@ public class PatternController : MonoBehaviour
         groupSpawner = GetComponent<GroupController>();
     }
 
+    // percentage of health
     void Start(){
         groupSpawner.StartGroup(Patterns[0].groups);
     }
