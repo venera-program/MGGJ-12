@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public bool isMoving = false;
     public float speed = 0f;
     public float movementAngle = 0f;
+    
 
     public void Update(){
         if(isMoving){
@@ -38,5 +39,10 @@ public class Projectile : MonoBehaviour
     private void DestroySelf(){
         Destroy(gameObject);
     }
+}
+
+public enum ProjectileSprite {
+    Directed, 
+    NonDirected
 }
 

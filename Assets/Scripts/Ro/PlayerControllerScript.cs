@@ -12,8 +12,14 @@ public class PlayerControllerScript : MonoBehaviour
    [Range(0f,30f)]
    public float speed = 5;
 
-   public GameObject projectile; 
    public Group[] shootingPattern;
+   public float maxSpeed;
+   public float minSpeed;
+   public float accel;
+   public float deccel;
+
+   public Transform projectilePool;
+
    
    void Awake(){
         if(instance != null && instance != this){
@@ -39,7 +45,13 @@ public class PlayerControllerScript : MonoBehaviour
    }    
 
    private void Move(Vector2 direction){
-        rb.MovePosition((direction * speed * Time.fixedDeltaTime) + (Vector2)transform.position );
+          float velocity = 0f;
+          if (direction == Vector2.zero){
+               velocity = Mathf.Clamp(speed - Time.fixedDeltaTime * deccel, minSpeed, maxSpeed); 
+          } else {
+               velocity = Mathf.Clamp(Time.fixedDeltaTime * accel + speed, minSpeed, maxSpeed); 
+          }
+        rb.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position );
    }
 
    private void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext cont){
@@ -49,7 +61,13 @@ public class PlayerControllerScript : MonoBehaviour
                float yPos = Mathf.Sin(rad) * shootingPattern[i].radius;
                Vector3 finalPosition = new Vector3(transform.position.x + xPos + shootingPattern[i].offset.x, 
                     transform.position.y + yPos + shootingPattern[i].offset.y, 0f);
-               GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity);
+               GameObject projectile;
+               if(Mathf.Approximately(shootingPattern[i].startingAngle, 90f)){
+                    projectile = ProjectileResources.instance.forward;
+               } else {
+                    projectile = ProjectileResources.instance.angle;
+               }
+               GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity, projectilePool);
                Projectile script = project.GetComponent<Projectile>();
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
           }
