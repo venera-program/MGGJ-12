@@ -16,15 +16,20 @@ public class GroupController : MonoBehaviour{
 
     void Update(){
 
+        // I need to relook at this spawning system math. 
+        // Delay is supposed to work so that it immediately starts spawning when the delay is up, and then repeats from there
+        // Currently it checks if the time given can be divisible by the spawn interval and the timer is past the delay point
+    
         if(startSpawning){
             timer  += Time.deltaTime;
             for(int i = 0 ; i < groups.Length ; i++){
                 // Floors timer so that modulo actually works with the time given 
                 // And then checks to see if the wave has spawned already since time.deltatime only increases the timer with
                 // fractions of a second, necessatiting a check. 
-
+                bool isDelayFinished = timer - groups[i].delay > 0; 
                 float timePastDelay = timer - groups[i].delay;
-                float timePastDelayInt = Mathf.Floor(timePastDelay); // allow delay  in parts of a second
+                float timePastDelayInt = HelperFunctions.RoundToDecimal(timePastDelay,2); // allow delay  in parts of a second
+                Debug.Log(timePastDelayInt);
                 bool isTimeToGenerate = false;
                 if(spawnedThisSecond[i] == timePastDelayInt){
                     continue;
@@ -32,7 +37,7 @@ public class GroupController : MonoBehaviour{
                     isTimeToGenerate =  timePastDelayInt % groups[i].spawnInterval == 0;
                 }
 
-                if(isTimeToGenerate){ 
+                if(isTimeToGenerate && isDelayFinished){ 
                     spawnedThisSecond[i] = timePastDelayInt;
                     StartSpawning(groups[i]);
                 }

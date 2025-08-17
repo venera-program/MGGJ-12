@@ -122,4 +122,9 @@ public class HelperFunctions {
         return 0f;
     }
 
+    public static float RoundToDecimal(float number, int decimalPlaces){
+        float multiplicant = Mathf.Pow(10, (float)decimalPlaces);
+        return (Mathf.Floor(number * multiplicant))/multiplicant;
+    }
+
 }
