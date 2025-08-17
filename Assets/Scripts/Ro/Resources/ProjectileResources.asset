@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db98904389978b4d8a21b694aef9e95, type: 3}
+  m_Name: ProjectileResources
+  m_EditorClassIdentifier: 
+  directed: {fileID: 6031599074028236495, guid: b08028be75155fb489029fa101b4f232, type: 3}
+  directed2: {fileID: 6031599074028236495, guid: f30fef033d90aa04b8ceb511d08d85a7, type: 3}
+  unDirected: {fileID: 6031599074028236495, guid: 7066bb4b445555d4fa078f8c7feded17, type: 3}
+  unDirected2: {fileID: 6031599074028236495, guid: b037e47b8a28d5343a5cb16dcd0ce80b, type: 3}
+  forward: {fileID: 6031599074028236495, guid: 6eab10302fed4114782b71c759a067e1, type: 3}
+  angle: {fileID: 6031599074028236495, guid: 631bef5eb95e8494b85be793258bde7c, type: 3}
+  defaultProjectile: {fileID: 6031599074028236495, guid: 50b063c7f3295214dbdb5b7883c94ea3, type: 3}

@@ -12,7 +12,6 @@ public class PlayerControllerScript : MonoBehaviour
    [Range(0f,30f)]
    public float speed = 5;
 
-   public GameObject projectile; 
    public Group[] shootingPattern;
    public float maxSpeed;
    public float minSpeed;
@@ -60,6 +59,12 @@ public class PlayerControllerScript : MonoBehaviour
                float yPos = Mathf.Sin(rad) * shootingPattern[i].radius;
                Vector3 finalPosition = new Vector3(transform.position.x + xPos + shootingPattern[i].offset.x, 
                     transform.position.y + yPos + shootingPattern[i].offset.y, 0f);
+               GameObject projectile;
+               if(Mathf.Approximately(shootingPattern[i].startingAngle, 90f)){
+                    projectile = ProjectileResources.instance.forward;
+               } else {
+                    projectile = ProjectileResources.instance.angle;
+               }
                GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity);
                Projectile script = project.GetComponent<Projectile>();
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
