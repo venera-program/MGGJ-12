@@ -18,8 +18,6 @@ public class PlayerControllerScript : MonoBehaviour
    public float accel;
    public float deccel;
 
-   public Transform projectilePool;
-
    
    void Awake(){
         if(instance != null && instance != this){
@@ -67,7 +65,7 @@ public class PlayerControllerScript : MonoBehaviour
                } else {
                     projectile = ProjectileResources.instance.angle;
                }
-               GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity, projectilePool);
+               GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity, ProjectilePool.instance.transform);
                Projectile script = project.GetComponent<Projectile>();
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
           }

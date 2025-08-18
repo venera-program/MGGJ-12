@@ -64,12 +64,12 @@ public class GroupController : MonoBehaviour{
                                 (yPos * ring.radius) + transform.position.y + ring.offset.y);
             GameObject projectile;
             if(ring.movementAngle == MovementAngle.Fixed){
-                projectile = Instantiate(ProjectileResources.instance.unDirected, projectilePosition, Quaternion.identity, transform);
+                projectile = Instantiate(ProjectileResources.instance.unDirected, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
             } else if (ring.movementAngle == MovementAngle.TowardsPlayer){
-                projectile = Instantiate(ProjectileResources.instance.directed, projectilePosition, Quaternion.identity, transform);
+                projectile = Instantiate(ProjectileResources.instance.directed, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
             } else {
                 Debug.LogError("How did you get here?");
-                projectile = Instantiate(ProjectileResources.instance.defaultProjectile, projectilePosition, Quaternion.identity, transform);
+                projectile = Instantiate(ProjectileResources.instance.defaultProjectile, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
             }
             
             Projectile proj = projectile.GetComponent<Projectile>();
@@ -88,12 +88,12 @@ public class GroupController : MonoBehaviour{
 
             GameObject projectile;
             if(stack.movementAngle == MovementAngle.Fixed){
-                projectile = Instantiate(ProjectileResources.instance.unDirected, projectilePosition, Quaternion.identity, transform);
+                projectile = Instantiate(ProjectileResources.instance.unDirected, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
             } else if (stack.movementAngle == MovementAngle.TowardsPlayer){
-                projectile = Instantiate(ProjectileResources.instance.directed, projectilePosition, Quaternion.identity, transform);
+                projectile = Instantiate(ProjectileResources.instance.directed, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
             } else {
                 Debug.LogError("How did you get here?");
-                projectile = Instantiate(ProjectileResources.instance.defaultProjectile, projectilePosition, Quaternion.identity, transform);
+                projectile = Instantiate(ProjectileResources.instance.defaultProjectile, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
             }
             Projectile proj = projectile.GetComponent<Projectile>();
             // projectile.GetComponent<SpriteRenderer>().sprite = ProjectileResources.instance.Directed;

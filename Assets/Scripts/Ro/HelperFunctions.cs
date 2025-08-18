@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 public class HelperFunctions {
-
-    public static bool IsOnScreen(Vector2 position){
+    // top/bottom/left/right are ALL in world units are in Pixels
+    public static bool IsOnScreen(Vector2 position, float topBorder = 0f, float bottomBorder = 0f, float leftBorder = 0f, float rightBorder = 0f){ // can modify this to take in borders
         Rect CameraRect = Camera.main.pixelRect;
 
-        Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x, CameraRect.y + CameraRect.height, Camera.main.nearClipPlane));
-        Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width, CameraRect.y + CameraRect.height, Camera.main.nearClipPlane));
-        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x , CameraRect.y, Camera.main.nearClipPlane));
-        Vector3 bottomRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width , CameraRect.y , Camera.main.nearClipPlane));
+        Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
+        Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
+        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
+        Vector3 bottomRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
     
         bool betweenX = (position.x >= topLeft.x) && (position.x <= topRight.x);
         bool betweenY = (position.y <= topRight.y) && (position.y >= bottomRight.y);
@@ -27,6 +27,24 @@ public class HelperFunctions {
         // Doesn't work because position is in worldspace and pixelRect is in screenspace
         //Camera.main.pixelRect.Contains(position)
         return betweenX && betweenY;
+    }
+
+    public static Vector3[] ScreenCorners(float topBorder = 0f, float bottomBorder = 0f, float leftBorder = 0f, float rightBorder = 0f){
+        Rect CameraRect = Camera.main.pixelRect;
+        Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
+        Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
+        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
+        Vector3 bottomRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
+
+        return new Vector3[]{topLeft, topRight, bottomLeft, bottomRight};
+    }
+
+    public static bool IsAtPosition(Vector2 position, Vector2 destination, float accuracy){
+        if((position - destination).sqrMagnitude <= (accuracy * accuracy)){
+            return true;
+        } 
+        
+        return false;
     }
 
     // Returns the angle in radians to be used for position
