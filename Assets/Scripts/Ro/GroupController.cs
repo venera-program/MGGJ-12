@@ -8,40 +8,28 @@ public class GroupController : MonoBehaviour{
 
     private Group[] groups;
     private float[] spawnedThisSecond;
-    private float spawnTiming;
-    public float timer; 
+    public float timer;
     private bool startSpawning = false;
+    public int decimalPlaces = 2;
     
-    // add as an option for ring to not deform when moving to players
 
     void Update(){
-
-        // I need to relook at this spawning system math. 
-        // Delay is supposed to work so that it immediately starts spawning when the delay is up, and then repeats from there
-        // Currently it checks if the time given can be divisible by the spawn interval and the timer is past the delay point
     
         if(startSpawning){
-            timer  += Time.deltaTime;
-            for(int i = 0 ; i < groups.Length ; i++){
-                // Floors timer so that modulo actually works with the time given 
-                // And then checks to see if the wave has spawned already since time.deltatime only increases the timer with
-                // fractions of a second, necessatiting a check. 
-                bool isDelayFinished = timer - groups[i].delay > 0; 
-                float timePastDelay = timer - groups[i].delay;
-                float timePastDelayInt = HelperFunctions.RoundToDecimal(timePastDelay,2); // allow delay  in parts of a second
-                // Debug.Log(timePastDelayInt);
-                bool isTimeToGenerate = false;
-                if(spawnedThisSecond[i] == timePastDelayInt){
-                    continue;
-                } else {
-                    isTimeToGenerate =  timePastDelayInt % groups[i].spawnInterval == 0;
-                }
-
-                if(isTimeToGenerate && isDelayFinished){ 
-                    spawnedThisSecond[i] = timePastDelayInt;
+           timer += Time.deltaTime; 
+           for (int i = 0 ; i < groups.Length ; i++){
+                float truncTime = HelperFunctions.RoundToDecimal(timer, decimalPlaces); // be able to divide to spawn 
+                if(truncTime != spawnedThisSecond[i]){ // statement used so that spawning doesn't happen multiple times per parts of a second
+                bool isDivisible = ((truncTime - groups[i].delay) % groups[i].spawnInterval) == 0;
+                if(Mathf.Approximately(truncTime, groups[i].delay)){
                     StartSpawning(groups[i]);
+                    spawnedThisSecond[i] = truncTime;
+                } else if (isDivisible){
+                    StartSpawning(groups[i]);
+                    spawnedThisSecond[i] = truncTime;
                 }
-            }
+                }
+           }
         }
     }
 
