@@ -37,7 +37,6 @@ public struct Group {
     public PositionAngle positionAngle;
     public float speed;
     public float speedMultiplier;
-    public GameObject projectile;
 }
 
 [Serializable]
