@@ -70,6 +70,7 @@ MonoBehaviour:
   damage: 5
   tagsToPayAttentionTo:
   - Enemy
+  - Boss
 --- !u!222 &6540659251864038295
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -29,6 +29,8 @@ public class HelperFunctions {
         return betweenX && betweenY;
     }
 
+    /// <summary> Returns topleft, top right, bottom left, bottom right screen corners</summary>
+
     public static Vector3[] ScreenCorners(float topBorder = 0f, float bottomBorder = 0f, float leftBorder = 0f, float rightBorder = 0f){
         Rect CameraRect = Camera.main.pixelRect;
         Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
@@ -37,6 +39,33 @@ public class HelperFunctions {
         Vector3 bottomRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
 
         return new Vector3[]{topLeft, topRight, bottomLeft, bottomRight};
+    }
+
+    
+    public static ScreenBorders CloseToBorder(Vector2 position){
+        Vector3[] corners = HelperFunctions.ScreenCorners();
+        //top left
+        //top right
+        //bottom left
+        //bottom right
+
+        // factor in if the enemy is on the screen when spawned
+        float x = position.x;
+        float y = position.y;
+        if (y > corners[0].y ){ //|| (y - corners[0].y < y - corners[2].y)
+            return ScreenBorders.Top;
+        }
+        if (y < corners[2].y ){ // || (y - corners[2].y < y - corners[0].y)
+            return ScreenBorders.Bottom;
+        }
+        if (x < corners[0].x){ //  || (x - corners[0].x > x - corners[1].x)
+            return ScreenBorders.Left;
+        }
+        if (x > corners[1].x){ // || (x - corners[1].x < x - corners[0].x)
+            return ScreenBorders.Right;
+        }
+
+        return ScreenBorders.Default;
     }
 
     public static bool IsAtPosition(Vector2 position, Vector2 destination, float accuracy){

@@ -73,4 +73,48 @@ public class MovementPatternCalculation {
         //should never run into this.
         return Vector3.positiveInfinity;
     }
+
+    public static Vector3 CalculateDirectedScreenPosition(Vector3 position, Rect imagebounds){
+        ScreenBorders border = HelperFunctions.CloseToBorder(position);
+        Rect CameraRect = Camera.main.pixelRect;
+        float height, width;
+        Vector3 cameraHeight, cameraWidth;
+        switch(border){
+            case(ScreenBorders.Top):
+                height = CameraRect.y - imagebounds.height * 1.5f;
+                cameraHeight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x, height, Camera.main.nearClipPlane));
+                return new Vector3(position.x, cameraHeight.y, position.z);
+            case (ScreenBorders.Bottom):
+                height = CameraRect.y + CameraRect.height + imagebounds.height * 1.5f;
+                cameraHeight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x, height, Camera.main.nearClipPlane));
+                return new Vector3(position.x, cameraHeight.y, position.z);
+            case (ScreenBorders.Left):
+                width = CameraRect.width + imagebounds.width;
+                cameraWidth = Camera.main.ScreenToWorldPoint(new Vector3(width, CameraRect.y, Camera.main.nearClipPlane));
+                return new Vector3(cameraWidth.x, position.y, position.z);
+            case (ScreenBorders.Right):
+                width = CameraRect.x - imagebounds.width;
+                cameraWidth = Camera.main.ScreenToWorldPoint(new Vector3(width, CameraRect.y, Camera.main.nearClipPlane));
+                return new Vector3(cameraWidth.x, position.y, position.z);
+            default:
+                return Vector3.zero;
+        }
+    }
+
+    public static Vector3 CalculateDirectedPlayerPosition(Vector3 position){
+        return PlayerControllerScript.instance.transform.position;
+    }
+    public static Vector2 CalculateDirectedBossPosition(Vector3 position, float bossDistance){
+        Vector3 bossPosition = GameObject.FindWithTag("Boss").transform.position;
+        Vector2 direction = (((Vector2) bossPosition) - ((Vector2) position)).normalized;
+        return (Vector2) bossPosition - (direction * bossDistance);
+    }
+}
+
+public enum ScreenBorders {
+    Top,
+    Bottom,
+    Left,
+    Right,
+    Default
 }

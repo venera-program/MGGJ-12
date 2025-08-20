@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMotor : MonoBehaviour
@@ -18,6 +19,9 @@ public class EnemyMotor : MonoBehaviour
     public float accuracy;
     public bool isMoving;
 
+    [Header("For Following Boss Only")]
+    public float bossDistance;
+    
     [Header("Border padding")]
     [Tooltip("In pixels")]
     public float topBorder;
@@ -29,6 +33,7 @@ public class EnemyMotor : MonoBehaviour
     public float rightBorder;
     [Tooltip("In pixels")]
     private Vector3 nextDestination;
+    private Rect imagebounds;
 
     //FOR DEBUGGING PURPOSES
     [Header("For debugging purposes")]
@@ -36,12 +41,22 @@ public class EnemyMotor : MonoBehaviour
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
+        imagebounds = GetComponentInChildren<Image>().sprite.rect;
+    }
+
+    void Start(){
         switch(movementType){
             case EnemyMovementType.Floaty:
             nextDestination = MovementPatternCalculation.CalculateFloatyPosition(transform.position, movementDistance, topBorder, bottomBorder, leftBorder, rightBorder);
                 break;
-            default:
-            nextDestination = Vector3.zero;
+            case EnemyMovementType.DirectedScreen:
+            nextDestination = MovementPatternCalculation.CalculateDirectedScreenPosition(transform.position, imagebounds);
+                break;
+            case EnemyMovementType.DirectedPlayer:
+            nextDestination = MovementPatternCalculation.CalculateDirectedPlayerPosition(transform.position);
+                break;
+            case EnemyMovementType.DirectedBoss:
+            nextDestination = MovementPatternCalculation.CalculateDirectedBossPosition(transform.position, bossDistance);
                 break;
         }
     }
@@ -57,8 +72,14 @@ public class EnemyMotor : MonoBehaviour
             case EnemyMovementType.Floaty:
             HandleFloatyMovement();
                 break;
-            case EnemyMovementType.Directed:
-            HandleDirectedMovement();
+            case EnemyMovementType.DirectedScreen:
+            HandleDirectedScreenMovement();
+                break;
+            case EnemyMovementType.DirectedPlayer:
+            HandleDirectedPlayerMovement();
+                break;
+            case EnemyMovementType.DirectedBoss:
+            HandleDirectedBossMovement();
                 break;
             default: 
                 break;
@@ -66,20 +87,37 @@ public class EnemyMotor : MonoBehaviour
     }
 
     private void HandleFloatyMovement(){
-        if(HelperFunctions.IsAtPosition(transform.position, nextDestination, accuracy)){
+        if(HelperFunctions.IsAtPosition(rb.position, nextDestination, accuracy)){
             nextDestination = MovementPatternCalculation.CalculateFloatyPosition(rb.position, movementDistance, topBorder, bottomBorder, leftBorder, rightBorder);
         }
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
         rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction); 
     }
 
-    private void HandleDirectedMovement(){
-
+    private void HandleDirectedScreenMovement(){
+        if(HelperFunctions.IsAtPosition(rb.position, nextDestination, accuracy)){
+           isMoving = false;
+        }
+        Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
+        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);  
     }
 
-    /// <summary>
-    /// Callback to draw gizmos that are pickable and always drawn.
-    /// </summary>
+    private void HandleDirectedPlayerMovement(){
+        if(HelperFunctions.IsAtPosition(rb.position, nextDestination, accuracy)){
+            nextDestination = MovementPatternCalculation.CalculateDirectedPlayerPosition(rb.position);
+        }
+        Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
+        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction); 
+    }
+
+    private void HandleDirectedBossMovement(){
+        if(HelperFunctions.IsAtPosition(rb.position, nextDestination, accuracy)){
+            nextDestination = MovementPatternCalculation.CalculateDirectedBossPosition(rb.position, bossDistance);
+        }
+        Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
+        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction); 
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -100,5 +138,7 @@ public class EnemyMotor : MonoBehaviour
 
 public enum EnemyMovementType {
     Floaty,
-    Directed
+    DirectedScreen,
+    DirectedPlayer,
+    DirectedBoss
 }

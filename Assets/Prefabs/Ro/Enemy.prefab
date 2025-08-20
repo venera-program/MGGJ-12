@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25086b1cf70770342b72f3cd92cafbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 0
+  movementType: 1
   movementDistance: 6
   speed: 3
   accuracy: 0.25
@@ -319,9 +319,9 @@ MonoBehaviour:
       projectileCount: 5
       startingAngle: 0
       endingAngle: 360
-      spawnInterval: 0.25
-      delay: 0.25
-      radius: 1.5
+      spawnInterval: 1
+      delay: 0
+      radius: 0.5
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
