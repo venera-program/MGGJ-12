@@ -104,10 +104,8 @@ public class MovementPatternCalculation {
     public static Vector3 CalculateDirectedPlayerPosition(Vector3 position){
         return PlayerControllerScript.instance.transform.position;
     }
-    public static Vector2 CalculateDirectedBossPosition(Vector3 position, float bossDistance){
-        Vector3 bossPosition = GameObject.FindWithTag("Boss").transform.position;
-        Vector2 direction = (((Vector2) bossPosition) - ((Vector2) position)).normalized;
-        return (Vector2) bossPosition - (direction * bossDistance);
+    public static Vector2 CalculateDirectedBossPosition(Vector3 position, float bossDistance){       
+        return GameObject.FindWithTag("Boss").transform.position;
     }
 }
 

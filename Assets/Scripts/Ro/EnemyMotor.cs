@@ -111,11 +111,12 @@ public class EnemyMotor : MonoBehaviour
     }
 
     private void HandleDirectedBossMovement(){
-        if(HelperFunctions.IsAtPosition(rb.position, nextDestination, accuracy)){
+        if(HelperFunctions.IsAtPosition(rb.position, nextDestination, bossDistance)){
             nextDestination = MovementPatternCalculation.CalculateDirectedBossPosition(rb.position, bossDistance);
+        } else {
+             Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
+             rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
         }
-        Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
-        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction); 
     }
 
     void OnDrawGizmos()
