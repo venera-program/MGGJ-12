@@ -64,14 +64,15 @@ public class GroupController : MonoBehaviour{
                                 (yPos * ring.radius) + transform.position.y + ring.offset.y);
             GameObject projectile;
             if(ring.movementAngle == MovementAngle.Fixed){
-                projectile = Instantiate(ProjectileResources.instance.unDirected, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
+                projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.undirected);
             } else if (ring.movementAngle == MovementAngle.TowardsPlayer){
-                projectile = Instantiate(ProjectileResources.instance.directed, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
+                projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.directed);
             } else {
                 Debug.LogError("How did you get here?");
-                projectile = Instantiate(ProjectileResources.instance.defaultProjectile, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
+                projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.def);
             }
-            
+
+            projectile.transform.position = projectilePosition;
             Projectile proj = projectile.GetComponent<Projectile>();
             float movementAngle = HelperFunctions.CaluclateProjectileMovementAngle(i, ring, projectilePosition);
             proj.ConstructProjectile(ring.speed, movementAngle);
@@ -88,15 +89,15 @@ public class GroupController : MonoBehaviour{
 
             GameObject projectile;
             if(stack.movementAngle == MovementAngle.Fixed){
-                projectile = Instantiate(ProjectileResources.instance.unDirected, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
+                projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.undirected);
             } else if (stack.movementAngle == MovementAngle.TowardsPlayer){
-                projectile = Instantiate(ProjectileResources.instance.directed, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
+                projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.directed);
             } else {
                 Debug.LogError("How did you get here?");
-                projectile = Instantiate(ProjectileResources.instance.defaultProjectile, projectilePosition, Quaternion.identity, ProjectilePool.instance.transform);
+                projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.def);
             }
+            projectile.transform.position = projectilePosition;
             Projectile proj = projectile.GetComponent<Projectile>();
-            // projectile.GetComponent<SpriteRenderer>().sprite = ProjectileResources.instance.Directed;
             float angle = HelperFunctions.CaluclateProjectileMovementAngle(i, stack, projectilePosition);
             proj.ConstructProjectile(stack.speed + (stack.speed * stack.speedMultiplier * (i+1)), angle);
         }

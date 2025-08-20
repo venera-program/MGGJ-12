@@ -947,6 +947,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77aab59f6816977498fa25a453461775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directed: 100
+  directed2: 100
+  undirected: 100
+  undirected2: 100
+  angle: 60
+  forward: 60
 --- !u!224 &697647657 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5734813022505143167, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
@@ -1148,7 +1154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_TagString
@@ -1363,7 +1369,7 @@ PrefabInstance:
       objectReference: {fileID: 581431823}
     - target: {fileID: 2943927926388689837, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: speed
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2943927926388689837, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: bossDistance
@@ -1371,11 +1377,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943927926388689837, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: movementType
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].pattern
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].endingAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].spawnInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].startingAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].projectileCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[1].speedMultiplier
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5004531323896569116, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5163661052504183307, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_Constraints
@@ -1447,7 +1489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6459863884734824543, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 168.7
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 6459863884734824543, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

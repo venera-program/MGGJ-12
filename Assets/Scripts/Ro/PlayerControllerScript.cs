@@ -61,12 +61,12 @@ public class PlayerControllerScript : MonoBehaviour
                     transform.position.y + yPos + shootingPattern[i].offset.y, 0f);
                GameObject projectile;
                if(Mathf.Approximately(shootingPattern[i].startingAngle, 90f)){
-                    projectile = ProjectileResources.instance.forward;
+                    projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.forward);
                } else {
-                    projectile = ProjectileResources.instance.angle;
+                    projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.angle);
                }
-               GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity, ProjectilePool.instance.transform);
-               Projectile script = project.GetComponent<Projectile>();
+               projectile.transform.position = finalPosition;
+               Projectile script = projectile.GetComponent<Projectile>();
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
           }
    }
