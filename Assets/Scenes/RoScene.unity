@@ -1203,7 +1203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943927926388689837, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: movementType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3779638660088311412, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: Patterns.Array.data[0].groups.Array.size
@@ -1311,11 +1311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6459863884734824543, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -152.8
+      value: -283
       objectReference: {fileID: 0}
     - target: {fileID: 6459863884734824543, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 36
+      value: -41
       objectReference: {fileID: 0}
     - target: {fileID: 6459863884734824543, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1446,6 +1446,14 @@ PrefabInstance:
     - target: {fileID: 1593946622682467135, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593946622682467135, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406638058494189244, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
+      propertyPath: movementType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5772204821851788622, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
       propertyPath: m_Pivot.x
