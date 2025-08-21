@@ -245,7 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6627ba7f2d6bbfb418b6baac741612cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
 --- !u!1 &50674650
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +578,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -1346,6 +1345,14 @@ PrefabInstance:
       propertyPath: projectilePool
       value: 
       objectReference: {fileID: 601592006}
+    - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: projectileTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: projectileSpawnInterval
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5326903385958603332, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: m_Name
       value: MC
