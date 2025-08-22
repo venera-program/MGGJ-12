@@ -1,14 +1,12 @@
-using System;
 using UnityEngine;
-using UnityEngine.Audio;
-using Utils;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace MGGJ25.Shared
 {
-    public class AudioManager : Singleton<AudioManager>
+    public class AudioManager : MonoBehaviour
     {
+        public static AudioManager Instance { get; private set; }
+
         [SerializeField] private AudioSource musicAudioSource;
         [SerializeField] private AudioSource sfxAudioSource;
         [SerializeField] private GameObject audioSourcePrefab; // Prefab with an AudioSource component
@@ -27,9 +25,19 @@ namespace MGGJ25.Shared
         [SerializeField] private AudioClip enemybulletSound;
         [SerializeField] private AudioClip enemydiesSound;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Debug.Log("Destroying Duplicate AudioManager.", gameObject);
+                Destroy(this);
+                return;
+            }
+
             InitializeAudioSourcePool();
         }
 
@@ -75,7 +83,7 @@ namespace MGGJ25.Shared
             {
                 if (source.clip == clip) return;
             }
-            
+
             AudioSource audioSource = GetAvailableAudioSource();
             audioSource.clip = clip;
             audioSource.Play();
@@ -99,7 +107,7 @@ namespace MGGJ25.Shared
         public void PlayMusic(AudioClip clip)
         {
             if (musicAudioSource.clip == clip) return;
-            
+
             musicAudioSource.clip = clip;
             musicAudioSource.Play();
         }
