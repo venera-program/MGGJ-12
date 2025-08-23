@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 3429204145414770413}
   - component: {fileID: 7677172775939015910}
   - component: {fileID: 2943927926388689837}
+  - component: {fileID: 4162402741096787245}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -245,11 +246,27 @@ MonoBehaviour:
   speed: 3
   accuracy: 0.25
   isMoving: 1
+  bossDistance: 0
   topBorder: 10
   bottomBorder: 10
   leftBorder: 10
   rightBorder: 10
   editmode: 0
+--- !u!114 &4162402741096787245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279419871392914990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1921bf8d6dc3140b1072aa58ccf52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  tagsToPayAttentionTo:
+  - Player
 --- !u!1 &5004531323896569116
 GameObject:
   m_ObjectHideFlags: 0
