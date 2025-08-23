@@ -14,11 +14,22 @@ public class PatternController : MonoBehaviour
 
     void Awake(){
         groupSpawner = GetComponent<GroupController>();
+        transform.parent.GetComponent<Health>().healthChange.AddListener(ProgressPattern);
     }
 
     // percentage of health
     void Start(){
-        groupSpawner.StartGroup(Patterns[0].groups);
+        groupSpawner.StartGroup(Patterns[index].groups);
+    }
+    
+    private void ProgressPattern(float currHealth, float maxHealth){
+        if(Patterns[index].HPValueEnd >= ((currHealth/maxHealth) * 100f)){
+            index++;
+            if(index >= Patterns.Length){
+                index = 0;
+            }
+            groupSpawner.StartGroup(Patterns[index].groups);
+        }
     }
 
 }
@@ -42,6 +53,7 @@ public struct Group {
 [Serializable]
 public struct Pattern{
     public Group[] groups;
+    [Tooltip("Percentage. Determines when the current pattern ends")]
     public float HPValueEnd;
 }
 
