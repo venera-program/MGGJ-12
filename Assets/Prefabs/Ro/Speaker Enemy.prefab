@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 941465561, guid: 960ef556a318c2a429b3e1438e6f3005, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 2943927926388689837}
   - component: {fileID: 4162402741096787245}
   m_Layer: 3
-  m_Name: Enemy
+  m_Name: Speaker Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
