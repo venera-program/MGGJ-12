@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1608303645122955882}
   - component: {fileID: 4732534521973173705}
   m_Layer: 3
-  m_Name: 1Directed
+  m_Name: Directed2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
   isMoving: 0
   speed: 0
   movementAngle: 0
+  projectileType: 6
 --- !u!114 &3982173722709148540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70681456ddf2ffe45ad387cdefb3a632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 1
   tagsToPayAttentionTo:
   - Player
 --- !u!222 &5758418267957689657

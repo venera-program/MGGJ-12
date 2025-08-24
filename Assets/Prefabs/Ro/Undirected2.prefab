@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7098292480934234352}
   - component: {fileID: 6173286942048671504}
   m_Layer: 3
-  m_Name: 1Undirected
+  m_Name: Undirected2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
   isMoving: 0
   speed: 0
   movementAngle: 0
+  projectileType: 6
 --- !u!58 &4386462897018689099
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -102,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70681456ddf2ffe45ad387cdefb3a632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 1
   tagsToPayAttentionTo:
   - Player
 --- !u!222 &7098292480934234352

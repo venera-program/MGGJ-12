@@ -89,6 +89,8 @@ GameObject:
   - component: {fileID: 5163661052504183307}
   - component: {fileID: 3429204145414770413}
   - component: {fileID: 7677172775939015910}
+  - component: {fileID: 2943927926388689837}
+  - component: {fileID: 4162402741096787245}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -227,6 +229,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2279419871392914990}
   m_CullTransparentMesh: 1
+--- !u!114 &2943927926388689837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279419871392914990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25086b1cf70770342b72f3cd92cafbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementType: 1
+  movementDistance: 6
+  speed: 3
+  accuracy: 0.25
+  isMoving: 1
+  bossDistance: 0
+  topBorder: 10
+  bottomBorder: 10
+  leftBorder: 10
+  rightBorder: 10
+  editmode: 0
+--- !u!114 &4162402741096787245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279419871392914990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1921bf8d6dc3140b1072aa58ccf52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  tagsToPayAttentionTo:
+  - Player
 --- !u!1 &5004531323896569116
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
+  decimalPlaces: 2
 --- !u!114 &3779638660088311412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,21 +336,9 @@ MonoBehaviour:
       projectileCount: 5
       startingAngle: 0
       endingAngle: 360
-      spawnInterval: 2
-      delay: 0.25
-      radius: 1
-      offset: {x: 0, y: 0}
-      movementAngle: 0
-      positionAngle: 0
-      speed: 1
-      speedMultiplier: 0.25
-    - pattern: 0
-      projectileCount: 5
-      startingAngle: 0
-      endingAngle: 360
       spawnInterval: 1
-      delay: 0.5
-      radius: 1
+      delay: 0
+      radius: 0.5
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0

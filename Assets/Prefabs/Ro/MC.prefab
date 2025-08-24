@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 125638979158693703}
   - component: {fileID: 2333738256646880877}
   - component: {fileID: 1819429441353780576}
+  - component: {fileID: 1613561666920444574}
   m_Layer: 6
   m_Name: MC
   m_TagString: Player
@@ -166,7 +167,7 @@ MonoBehaviour:
   minSpeed: 0
   accel: 99
   deccel: 25
-  projectilePool: {fileID: 0}
+  projectileSpawnInterval: 0
 --- !u!114 &1819429441353780576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +185,21 @@ MonoBehaviour:
   healthChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1613561666920444574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326903385958603332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1921bf8d6dc3140b1072aa58ccf52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 99999
+  tagsToPayAttentionTo:
+  - Enemy
 --- !u!1 &5893133243923111796
 GameObject:
   m_ObjectHideFlags: 0
