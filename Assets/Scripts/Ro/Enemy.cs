@@ -1,4 +1,5 @@
 using UnityEngine;
+using MGGJ25.Shared;
 
 [RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     {
         if (currHealth <= 0)
         {
+            AudioManager.Instance.PlayEnemyDies_SFX();
             PlayerData.UpdateScore(score);
             Destroy(gameObject);
         }

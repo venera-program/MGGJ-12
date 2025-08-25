@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
+using MGGJ25.Shared;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControllerScript : MonoBehaviour
@@ -105,5 +106,6 @@ public class PlayerControllerScript : MonoBehaviour
                Projectile script = projectile.GetComponent<Projectile>();
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
           }
+          AudioManager.Instance.PlayPlayerBullet_SFX();
    }
 }

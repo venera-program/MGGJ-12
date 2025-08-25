@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MGGJ25.Shared;
 
 public class ProjectilePool : MonoBehaviour
 {
@@ -81,6 +82,8 @@ public class ProjectilePool : MonoBehaviour
 
     public GameObject ActivateProjectile(ProjectileType type){
         GameObject project;
+        AudioManager.Instance.PlayEnemyBullet_SFX();
+
         switch (type){
             case(ProjectileType.directed):
                 project = directedPool.Count > 0 ? directedPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
