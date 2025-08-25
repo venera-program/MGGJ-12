@@ -8,8 +8,8 @@ public class ProjectileResources : ScriptableObject {
     [Header("Enemy Projectiles")]
     public GameObject directed;
     public GameObject directed2;
-    public GameObject unDirected;
-    public GameObject unDirected2;
+    public GameObject undirected;
+    public GameObject undirected2;
     [Header("Player Projectiles")]
     public GameObject forward;
     public GameObject angle;

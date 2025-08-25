@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControllerScript : MonoBehaviour
@@ -18,7 +19,12 @@ public class PlayerControllerScript : MonoBehaviour
    public float accel;
    public float deccel;
 
-   public Transform projectilePool;
+   private float projectileTimer = 0f;
+
+   [SerializeField]
+   private float projectileSpawnInterval;
+   private bool startProjectSpawnTimer = false;
+   private bool startGeneratingProject = false;
 
    
    void Awake(){
@@ -31,12 +37,27 @@ public class PlayerControllerScript : MonoBehaviour
         controller = new PlayerController();
         rb = GetComponent<Rigidbody2D>();
         controller.Enable();
-        controller.Main.Shoot.performed += Shoot;
+        controller.Main.Shoot.started += Shoot;
+        controller.Main.Shoot.canceled += StopShoot;
+        projectileTimer = projectileSpawnInterval;
    }
 
    void OnDisable(){
-     controller.Main.Shoot.performed -= Shoot;
+     controller.Main.Shoot.started -= Shoot;
+     controller.Main.Shoot.canceled -= StopShoot;
      controller.Disable();
+   }
+
+   void Update(){
+          if (startProjectSpawnTimer){
+               projectileTimer += Time.deltaTime;
+               if (startGeneratingProject){
+                    if (projectileTimer > projectileSpawnInterval){
+                         projectileTimer = 0f;
+                         GeneratePlayerProjectiles();
+                    }
+               }
+          }   
    }
 
    void FixedUpdate(){
@@ -55,7 +76,20 @@ public class PlayerControllerScript : MonoBehaviour
    }
 
    private void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext cont){
-          for(int i = 0 ; i < shootingPattern.Length ; i++){
+     startProjectSpawnTimer = true;
+     if (cont.interaction is HoldInteraction) {
+          startGeneratingProject = true;
+     }
+   }
+
+   private void StopShoot(UnityEngine.InputSystem.InputAction.CallbackContext cont){
+     if(cont.interaction is HoldInteraction){
+          startGeneratingProject = false;
+     }
+   }
+
+   private void GeneratePlayerProjectiles(){
+      for(int i = 0 ; i < shootingPattern.Length ; i++){
                float rad = shootingPattern[i].startingAngle * Mathf.Deg2Rad;
                float xPos = Mathf.Cos(rad) * shootingPattern[i].radius;
                float yPos = Mathf.Sin(rad) * shootingPattern[i].radius;
@@ -63,12 +97,12 @@ public class PlayerControllerScript : MonoBehaviour
                     transform.position.y + yPos + shootingPattern[i].offset.y, 0f);
                GameObject projectile;
                if(Mathf.Approximately(shootingPattern[i].startingAngle, 90f)){
-                    projectile = ProjectileResources.instance.forward;
+                    projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.forward);
                } else {
-                    projectile = ProjectileResources.instance.angle;
+                    projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.angle);
                }
-               GameObject project = Instantiate(projectile, finalPosition, Quaternion.identity, projectilePool);
-               Projectile script = project.GetComponent<Projectile>();
+               projectile.transform.position = finalPosition;
+               Projectile script = projectile.GetComponent<Projectile>();
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
           }
    }
