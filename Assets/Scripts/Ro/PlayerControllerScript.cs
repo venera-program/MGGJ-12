@@ -104,6 +104,7 @@ public class PlayerControllerScript : MonoBehaviour
                }
                projectile.transform.position = finalPosition;
                Projectile script = projectile.GetComponent<Projectile>();
+               Debug.Log(shootingPattern[i].startingAngle);
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
           }
           AudioManager.Instance.PlayPlayerBullet_SFX();

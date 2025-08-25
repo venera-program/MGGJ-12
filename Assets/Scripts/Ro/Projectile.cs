@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     public float speed = 0f;
     public float movementAngle = 0f;
     public ProjectileType projectileType = ProjectileType.def;
-    
+    public Transform image;
 
     public void Update(){
         if(isMoving){
@@ -20,7 +20,13 @@ public class Projectile : MonoBehaviour
     public void ConstructProjectile(float speed, float movementAngle){
         this.speed = speed;
         transform.rotation = Quaternion.identity;
+        image.rotation = Quaternion.identity;
         transform.Rotate(new Vector3(0f,0f,movementAngle), Space.World);
+        if(projectileType != ProjectileType.angle){ 
+            // this is done because all the sprite art face 90 degrees by default, but the angle sprite faces 0
+             image.Rotate(new Vector3(0f, 0f, -90f), Space.Self);
+        }
+        
         StartMoving();
     }
     
