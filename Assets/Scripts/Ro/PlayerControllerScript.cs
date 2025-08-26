@@ -1,105 +1,147 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
 using MGGJ25.Shared;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Health), typeof(Collider2D))]
 public class PlayerControllerScript : MonoBehaviour
 {
-   public PlayerController controller;
-   public static PlayerControllerScript instance;
-   private Vector2 direction = Vector2.zero;
-   private Rigidbody2D rb; 
-   [Range(0f,30f)]
-   public float speed = 5;
+     private const float RESPAWN_DELAY = 0.2f;
+     private const int I_FRAMES = 120;
 
-   public Group[] shootingPattern;
-   public float maxSpeed;
-   public float minSpeed;
-   public float accel;
-   public float deccel;
+     public static PlayerControllerScript instance;
 
-   private float projectileTimer = 0f;
+     public Vector2 PlayerInputRaw { get => direction; set => direction = value; }
 
-   [SerializeField]
-   private float projectileSpawnInterval;
-   private bool startProjectSpawnTimer = false;
-   private bool startGeneratingProject = false;
+     public PlayerController controller;
+     [Range(0f, 30f)] public float speed = 5;
+     public Group[] shootingPattern;
+     public float maxSpeed;
+     public float minSpeed;
+     public float accel;
+     public float deccel;
+     [SerializeField] private float projectileSpawnInterval;
 
-   
-   void Awake(){
-        if(instance != null && instance != this){
-            Destroy(this);
-        } else {
-            instance = this;
-        }
+     private Vector2 direction = Vector2.zero;
+     private Rigidbody2D rb;
+     private float projectileTimer = 0f;
+     private bool startProjectSpawnTimer = false;
+     private bool startGeneratingProject = false;
 
-        controller = new PlayerController();
-        rb = GetComponent<Rigidbody2D>();
-        controller.Enable();
-        controller.Main.Shoot.started += Shoot;
-        controller.Main.Shoot.canceled += StopShoot;
-        projectileTimer = projectileSpawnInterval;
-   }
+     void Awake()
+     {
+          if (instance != null && instance != this)
+          {
+               Destroy(this);
+          }
+          instance = this;
 
-   void OnDisable(){
-     controller.Main.Shoot.started -= Shoot;
-     controller.Main.Shoot.canceled -= StopShoot;
-     controller.Disable();
-   }
+          rb = GetComponent<Rigidbody2D>();
 
-   void Update(){
-          if (startProjectSpawnTimer){
+          controller = new PlayerController();
+     }
+
+     private void OnEnable()
+     {
+          controller.Enable();
+          controller.Main.Shoot.started += Shoot;
+          controller.Main.Shoot.canceled += StopShoot;
+          GetComponent<Health>().healthChange.AddListener(OnHit);
+     }
+
+     private void Start()
+     {
+          projectileTimer = projectileSpawnInterval;
+     }
+
+     void OnDisable()
+     {
+          controller.Main.Shoot.started -= Shoot;
+          controller.Main.Shoot.canceled -= StopShoot;
+          controller.Disable();
+          GetComponent<Health>().healthChange.RemoveListener(OnHit);
+     }
+
+     void Update()
+     {
+          if (!controller.Main.Shoot.enabled)
+          {
+               return;
+          }
+
+          if (startProjectSpawnTimer)
+          {
                projectileTimer += Time.deltaTime;
-               if (startGeneratingProject){
-                    if (projectileTimer > projectileSpawnInterval){
+
+               if (startGeneratingProject)
+               {
+                    if (projectileTimer > projectileSpawnInterval)
+                    {
                          projectileTimer = 0f;
                          GeneratePlayerProjectiles();
                     }
                }
-          }   
-   }
-
-   void FixedUpdate(){
-        direction = controller.Main.Move.ReadValue<Vector2>();
-        Move(direction);
-   }    
-
-   private void Move(Vector2 direction){
-          float velocity = 0f;
-          if (direction == Vector2.zero){
-               velocity = Mathf.Clamp(speed - Time.fixedDeltaTime * deccel, minSpeed, maxSpeed); 
-          } else {
-               velocity = Mathf.Clamp(Time.fixedDeltaTime * accel + speed, minSpeed, maxSpeed); 
           }
-        rb.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position );
-   }
-
-   private void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext cont){
-     startProjectSpawnTimer = true;
-     if (cont.interaction is HoldInteraction) {
-          startGeneratingProject = true;
      }
-   }
 
-   private void StopShoot(UnityEngine.InputSystem.InputAction.CallbackContext cont){
-     if(cont.interaction is HoldInteraction){
-          startGeneratingProject = false;
+     void FixedUpdate()
+     {
+          if (!controller.Main.Move.enabled)
+          {
+               return;
+          }
+
+          direction = controller.Main.Move.ReadValue<Vector2>();
+          Move(direction);
      }
-   }
 
-   private void GeneratePlayerProjectiles(){
-      for(int i = 0 ; i < shootingPattern.Length ; i++){
+     private void Move(Vector2 direction)
+     {
+          float velocity = 0f;
+          if (direction == Vector2.zero)
+          {
+               velocity = Mathf.Clamp(speed - Time.fixedDeltaTime * deccel, minSpeed, maxSpeed);
+          }
+          else
+          {
+               velocity = Mathf.Clamp(Time.fixedDeltaTime * accel + speed, minSpeed, maxSpeed);
+          }
+          rb.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position);
+     }
+
+     private void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+     {
+          startProjectSpawnTimer = true;
+          if (cont.interaction is HoldInteraction)
+          {
+               startGeneratingProject = true;
+          }
+     }
+
+     private void StopShoot(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+     {
+          if (cont.interaction is HoldInteraction)
+          {
+               startGeneratingProject = false;
+          }
+     }
+
+     private void GeneratePlayerProjectiles()
+     {
+          for (int i = 0; i < shootingPattern.Length; i++)
+          {
                float rad = shootingPattern[i].startingAngle * Mathf.Deg2Rad;
                float xPos = Mathf.Cos(rad) * shootingPattern[i].radius;
                float yPos = Mathf.Sin(rad) * shootingPattern[i].radius;
-               Vector3 finalPosition = new Vector3(transform.position.x + xPos + shootingPattern[i].offset.x, 
+               Vector3 finalPosition = new Vector3(transform.position.x + xPos + shootingPattern[i].offset.x,
                     transform.position.y + yPos + shootingPattern[i].offset.y, 0f);
                GameObject projectile;
-               if(Mathf.Approximately(shootingPattern[i].startingAngle, 90f)){
+               if (Mathf.Approximately(shootingPattern[i].startingAngle, 90f))
+               {
                     projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.forward);
-               } else {
+               }
+               else
+               {
                     projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.angle);
                }
                projectile.transform.position = finalPosition;
@@ -108,5 +150,35 @@ public class PlayerControllerScript : MonoBehaviour
                script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
           }
           AudioManager.Instance.PlayPlayerBullet_SFX();
-   }
+     }
+
+     private void OnHit(float currHealth, float maxHealth)
+     {
+          if (currHealth < maxHealth)
+          {
+               StartCoroutine(RespawnPlayer());
+          }
+     }
+
+     private IEnumerator RespawnPlayer()
+     {
+          controller.Main.Move.Disable();
+          controller.Main.Shoot.Disable();
+          controller.Main.Skill.Disable();
+
+          // Reset logic states
+          Move(Vector2.zero);
+          startGeneratingProject = false;
+
+          var collider = GetComponent<Collider2D>();
+          collider.enabled = false;
+          yield return new WaitForSeconds(RESPAWN_DELAY);
+          collider.enabled = true;
+
+          controller.Main.Move.Enable();
+          controller.Main.Shoot.Enable();
+          controller.Main.Skill.Enable();
+
+          GetComponent<Health>().TriggerIFrames(I_FRAMES);
+     }
 }
