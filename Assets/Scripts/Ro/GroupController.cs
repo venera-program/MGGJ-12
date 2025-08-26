@@ -65,7 +65,7 @@ public class GroupController : MonoBehaviour{
             GameObject projectile;
             if(ring.movementAngle == MovementAngle.Fixed){
                 projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.undirected);
-            } else if (ring.movementAngle == MovementAngle.TowardsPlayer){
+            } else if (ring.movementAngle == MovementAngle.TowardsPlayerDistorted || ring.movementAngle == MovementAngle.TowardsPlayerRigid){
                 projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.directed);
             } else {
                 Debug.LogError("How did you get here?");
@@ -74,7 +74,7 @@ public class GroupController : MonoBehaviour{
 
             projectile.transform.position = projectilePosition;
             Projectile proj = projectile.GetComponent<Projectile>();
-            float movementAngle = HelperFunctions.CaluclateProjectileMovementAngle(i, ring, projectilePosition);
+            float movementAngle = HelperFunctions.CaluclateProjectileMovementAngle(i, ring, projectilePosition, transform.position);
             proj.ConstructProjectile(ring.speed, movementAngle);
         }
     }
@@ -90,7 +90,7 @@ public class GroupController : MonoBehaviour{
             GameObject projectile;
             if(stack.movementAngle == MovementAngle.Fixed){
                 projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.undirected);
-            } else if (stack.movementAngle == MovementAngle.TowardsPlayer){
+            } else if (stack.movementAngle == MovementAngle.TowardsPlayerDistorted || stack.movementAngle == MovementAngle.TowardsPlayerRigid){
                 projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.directed);
             } else {
                 Debug.LogError("How did you get here?");
@@ -98,7 +98,7 @@ public class GroupController : MonoBehaviour{
             }
             projectile.transform.position = projectilePosition;
             Projectile proj = projectile.GetComponent<Projectile>();
-            float angle = HelperFunctions.CaluclateProjectileMovementAngle(i, stack, projectilePosition);
+            float angle = HelperFunctions.CaluclateProjectileMovementAngle(i, stack, projectilePosition, transform.position);
             proj.ConstructProjectile(stack.speed + (stack.speed * stack.speedMultiplier * (i+1)), angle);
         }
     }
@@ -109,7 +109,8 @@ public class GroupController : MonoBehaviour{
 
 public enum MovementAngle {
     Fixed, 
-    TowardsPlayer,
+    TowardsPlayerDistorted,
+    TowardsPlayerRigid
 }
 
 [Serializable]
