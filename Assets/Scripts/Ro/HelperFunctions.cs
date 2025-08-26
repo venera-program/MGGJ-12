@@ -126,12 +126,12 @@ public class HelperFunctions {
     }
 
     // returns angle in degrees for rotation
-    public static float CaluclateProjectileMovementAngle(int index, Group group, Vector3 position){
+    public static float CaluclateProjectileMovementAngle(int index, Group group, Vector3 position, Vector3 center){
         switch(group.pattern){
             case(GroupType.Ring):
-                return CalculateRingMovementAngle(index, group, position);
+                return CalculateRingMovementAngle(index, group, position, center);
             case(GroupType.Spread):
-                return CalculateRingMovementAngle(index, group, position);
+                return CalculateRingMovementAngle(index, group, position, center);
             case(GroupType.Stack):
                 return CalculateStackMovementAngle(index, group, position);
             default:
@@ -139,14 +139,19 @@ public class HelperFunctions {
         }
     }
 
-    private static float CalculateRingMovementAngle(int i, Group ring, Vector3 position){
+    private static float CalculateRingMovementAngle(int i, Group ring, Vector3 position, Vector3 center){
         // return the angle that the projectile should be rotated towards
 
         if(ring.movementAngle == MovementAngle.Fixed){
             return CalculateRingPositionAngle(i, ring) * Mathf.Rad2Deg;
-        } else if (ring.movementAngle == MovementAngle.TowardsPlayer){
+        } else if (ring.movementAngle == MovementAngle.TowardsPlayerDistorted){
             Vector3 playerPosition = PlayerControllerScript.instance.transform.position; 
             Vector3 angleDiff = playerPosition - position;
+            float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
+            return angle;
+        } else if (ring.movementAngle == MovementAngle.TowardsPlayerRigid){
+            Vector3 playerPosition = PlayerControllerScript.instance.transform.position;
+            Vector3 angleDiff = playerPosition - center;
             float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
             return angle;
         }
@@ -160,7 +165,7 @@ public class HelperFunctions {
     private static float CalculateStackMovementAngle(int i, Group stack, Vector3 position){
        if(stack.movementAngle == MovementAngle.Fixed){
         return CalculateStackPositionAngle(i, stack) * Mathf.Rad2Deg;
-        } else if (stack.movementAngle == MovementAngle.TowardsPlayer){
+        } else if (stack.movementAngle == MovementAngle.TowardsPlayerDistorted){
             Vector3 playerPosition = PlayerControllerScript.instance.transform.position; 
             Vector3 angleDiff = playerPosition - position;
             float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
