@@ -1230,7 +1230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2943927926388689837, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: image
@@ -1508,7 +1508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2406638058494189244, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
       propertyPath: movementType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3885665823089984680, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
       propertyPath: maxHealth
@@ -1548,6 +1548,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4453795185706335077, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
       propertyPath: Patterns.Array.data[2].groups.Array.data[1].speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453795185706335077, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}
+      propertyPath: Patterns.Array.data[0].groups.Array.data[0].radius
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4453795185706335077, guid: 0936c6489ee25d04faacc8fd8619d742, type: 3}

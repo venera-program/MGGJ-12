@@ -21,7 +21,7 @@ public class EnemyMotor : MonoBehaviour
 
     [Header("For Following Player Only")] 
     [Tooltip("Amount of time in seconds before the enemy updates their target position to where the player currently is")]
-    public float updateTargetInterval;
+    public float updateTargetInterval = .1f;
     private float updateTargetTimer = 0f;
 
     [Header("For Following Boss Only")]
@@ -48,6 +48,7 @@ public class EnemyMotor : MonoBehaviour
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
         imagebounds = GetComponentInChildren<Image>().sprite.rect;
+       
     }
 
     void Start(){
