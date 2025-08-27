@@ -6,14 +6,20 @@ using MGGJ25.Shared;
 [RequireComponent(typeof(Rigidbody2D), typeof(Health), typeof(Collider2D))]
 public class PlayerControllerScript : MonoBehaviour
 {
-     private const float RESPAWN_DELAY = 0.2f;
+     private const float RESPAWN_DELAY = 0.5f;
      private const int I_FRAMES = 120;
+     private const string IS_MOVING = "isMoving";
+     private const string MOVING_LEFT = "movingLeft";
+     private const string WAS_HIT = "wasHit";
 
      public static PlayerControllerScript instance;
 
      public Vector2 PlayerInputRaw { get => direction; set => direction = value; }
 
      public PlayerController controller;
+
+     public Animator animator;
+
      [Range(0f, 30f)] public float speed = 5;
      public Group[] shootingPattern;
      public float maxSpeed;
@@ -22,6 +28,7 @@ public class PlayerControllerScript : MonoBehaviour
      public float deccel;
      [SerializeField] private float projectileSpawnInterval;
 
+     private Vector2 _spawnPoint;
      private Vector2 direction = Vector2.zero;
      private Rigidbody2D rb;
      private float projectileTimer = 0f;
@@ -39,6 +46,7 @@ public class PlayerControllerScript : MonoBehaviour
           rb = GetComponent<Rigidbody2D>();
 
           controller = new PlayerController();
+          _spawnPoint = transform.position;
      }
 
      private void OnEnable()
@@ -46,6 +54,7 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Enable();
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
+          controller.Main.Move.performed += UpdateMovementAnimations;
           GetComponent<Health>().healthChange.AddListener(OnHit);
      }
 
@@ -58,6 +67,7 @@ public class PlayerControllerScript : MonoBehaviour
      {
           controller.Main.Shoot.started -= Shoot;
           controller.Main.Shoot.canceled -= StopShoot;
+          controller.Main.Move.performed -= UpdateMovementAnimations;
           controller.Disable();
           GetComponent<Health>().healthChange.RemoveListener(OnHit);
      }
@@ -152,6 +162,12 @@ public class PlayerControllerScript : MonoBehaviour
           AudioManager.Instance.PlayPlayerBullet_SFX();
      }
 
+     private void UpdateMovementAnimations(UnityEngine.InputSystem.InputAction.CallbackContext _)
+     {
+          animator.SetBool(IS_MOVING, PlayerInputRaw != Vector2.zero);
+          animator.SetBool(MOVING_LEFT, PlayerInputRaw.x < 0);
+     }
+
      private void OnHit(float currHealth, float maxHealth)
      {
           if (currHealth < maxHealth)
@@ -162,6 +178,7 @@ public class PlayerControllerScript : MonoBehaviour
 
      private IEnumerator RespawnPlayer()
      {
+          animator.SetBool(WAS_HIT, true);
           controller.Main.Move.Disable();
           controller.Main.Shoot.Disable();
           controller.Main.Skill.Disable();
@@ -172,7 +189,10 @@ public class PlayerControllerScript : MonoBehaviour
 
           var collider = GetComponent<Collider2D>();
           collider.enabled = false;
+
           yield return new WaitForSeconds(RESPAWN_DELAY);
+
+          transform.position = _spawnPoint;
           collider.enabled = true;
 
           controller.Main.Move.Enable();
