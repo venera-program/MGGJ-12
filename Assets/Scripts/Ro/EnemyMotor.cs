@@ -45,10 +45,15 @@ public class EnemyMotor : MonoBehaviour
     [Header("For debugging purposes")]
     public bool editmode = false;
 
+    //for Animating enemy sprites
+    [Header("For animation purposes")]
+    private Animator animator;
+    private bool flipped;
+
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
         imagebounds = GetComponentInChildren<Image>().sprite.rect;
-       
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Start(){
@@ -71,6 +76,11 @@ public class EnemyMotor : MonoBehaviour
     void FixedUpdate(){
         if (isMoving){
             StartMoving(movementType);
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
     }
 
@@ -98,7 +108,9 @@ public class EnemyMotor : MonoBehaviour
             nextDestination = MovementPatternCalculation.CalculateFloatyPosition(rb.position, movementDistance, topBorder, bottomBorder, leftBorder, rightBorder);
         }
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
-        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction); 
+        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
+        flipped = direction.x < 0;
+        this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
     }
 
     private void HandleDirectedScreenMovement(){
@@ -106,7 +118,9 @@ public class EnemyMotor : MonoBehaviour
            isMoving = false;
         }
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
-        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);  
+        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
+        flipped = direction.x < 0;
+        this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
     }
 
     private void HandleDirectedPlayerMovement(){
@@ -116,7 +130,9 @@ public class EnemyMotor : MonoBehaviour
             nextDestination = MovementPatternCalculation.CalculateDirectedPlayerPosition(rb.position);
         }
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
-        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction); 
+        rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
+        flipped = direction.x < 0;
+        this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
     }
 
     private void HandleDirectedBossMovement(){
@@ -125,7 +141,10 @@ public class EnemyMotor : MonoBehaviour
         } else {
              Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
              rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
+            flipped = direction.x < 0;
+            this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
         }
+        
     }
 
     void OnDrawGizmos()

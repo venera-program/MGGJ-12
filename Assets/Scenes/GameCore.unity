@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speaker Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2943927926388689837, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: movementType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6459863884734824543, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -404,6 +408,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       insertIndex: -1
       addedObject: {fileID: 183539289}
+    - targetCorrespondingSourceObject: {fileID: 2205784866938529333, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 431057890}
   m_SourcePrefab: {fileID: 100100000, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
 --- !u!224 &183539287 stripped
 RectTransform:
@@ -426,6 +433,32 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &431057886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2205784866938529333, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+  m_PrefabInstance: {fileID: 183539286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &431057890
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431057886}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 186f7338643761f49b66d5669b7410ed, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -832,6 +865,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5893133243923111796, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
   m_PrefabInstance: {fileID: 1715324290}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1323396749 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 38709306850146832, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+  m_PrefabInstance: {fileID: 1715324290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1323396752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,6 +883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthTracker: {fileID: 1715324293}
+  animator: {fileID: 0}
 --- !u!1 &1486441692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,6 +1046,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 17122334}
     m_Modifications:
+    - target: {fileID: 38709306850146832, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1323396749}
     - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: projectilePool
       value: 

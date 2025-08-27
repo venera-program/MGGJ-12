@@ -5,10 +5,12 @@ using MGGJ25.Shared;
 public class Enemy : MonoBehaviour
 {
     public float score;
+    private Animator animator;
 
     void Awake()
     {
         GetComponent<Health>().healthChange.AddListener(OnDeath);
+        animator = this.GetComponentInChildren<Animator>();
     }
 
     public void OnDeath(float currHealth, float maxHealth)
@@ -17,6 +19,7 @@ public class Enemy : MonoBehaviour
         {
             AudioManager.Instance.PlayEnemyDies_SFX();
             PlayerData.UpdateScore(score);
+            animator.SetBool("isDead", true);
             Destroy(gameObject);
         }
     }
