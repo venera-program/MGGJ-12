@@ -17,6 +17,12 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (_IFrameRoutine != null)
+        {
+            Debug.Log("trying to take damage when immune", this);
+            return;
+        }
+
         currHealth = Mathf.Clamp(currHealth - damage, 0f, maxHealth);
         Debug.Log($"{transform.name} took {damage} damage");
         healthChange.Invoke(currHealth, maxHealth);
@@ -39,7 +45,6 @@ public class Health : MonoBehaviour
         if (_IFrameRoutine != null)
         {
             StopCoroutine(_IFrameRoutine);
-            return;
         }
 
         _IFrameRoutine = StartCoroutine(CountIFrames(frameCount));
