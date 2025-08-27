@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
             AudioManager.Instance.PlayEnemyDies_SFX();
             PlayerData.UpdateScore(score);
             animator.SetBool("isDead", true);
-            Destroy(gameObject);
+            Destroy(gameObject, 1);
         }
     }
 }

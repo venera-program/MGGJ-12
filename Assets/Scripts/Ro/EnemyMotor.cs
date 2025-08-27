@@ -48,6 +48,7 @@ public class EnemyMotor : MonoBehaviour
     //for Animating enemy sprites
     [Header("For animation purposes")]
     private Animator animator;
+    private const string moving = "isMoving";
     private bool flipped;
 
     void Awake(){
@@ -76,7 +77,8 @@ public class EnemyMotor : MonoBehaviour
     void FixedUpdate(){
         if (isMoving){
             StartMoving(movementType);
-            animator.SetBool("isMoving", true);
+            animator.SetBool(moving, true);
+            Debug.Log("isMoving is " + isMoving);
         }
         else
         {
