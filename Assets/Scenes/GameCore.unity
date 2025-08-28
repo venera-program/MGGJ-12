@@ -648,7 +648,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
@@ -770,30 +770,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 17122334}
     m_Modifications:
-    - target: {fileID: 560976280787052214, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 560976280787052214, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 560976280787052214, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 560976280787052214, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 560976280787052214, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 560976280787052214, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2391881709216869835, guid: de54d478c4e52544fb288e750573bafe, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -825,18 +801,6 @@ PrefabInstance:
     - target: {fileID: 2391881709216869835, guid: de54d478c4e52544fb288e750573bafe, type: 3}
       propertyPath: m_SizeDelta.y
       value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 2391881709216869835, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2391881709216869835, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2391881709216869835, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2391881709216869835, guid: de54d478c4e52544fb288e750573bafe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -886,14 +850,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6269392519761503097, guid: de54d478c4e52544fb288e750573bafe, type: 3}
+      propertyPath: deathDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7436991148767966138, guid: de54d478c4e52544fb288e750573bafe, type: 3}
       propertyPath: m_Name
       value: Chair Enemy Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 7909427598693467902, guid: de54d478c4e52544fb288e750573bafe, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1081613083, guid: 67a4d507c3e886148be1621eed0eb551, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -946,6 +910,14 @@ PrefabInstance:
     - target: {fileID: 1802887116257054782, guid: 6b08ceeda000b2443906743b24a65e9d, type: 3}
       propertyPath: m_Name
       value: frogBoss Enemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2968434056473641213, guid: 6b08ceeda000b2443906743b24a65e9d, type: 3}
+      propertyPath: deathDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318308591178067489, guid: 6b08ceeda000b2443906743b24a65e9d, type: 3}
+      propertyPath: pukeTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6845770459226082895, guid: 6b08ceeda000b2443906743b24a65e9d, type: 3}
       propertyPath: m_Pivot.x
@@ -1342,6 +1314,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1645540886}
+    - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: projectileSpawnInterval
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5326903385958603332, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: m_Name
       value: MC

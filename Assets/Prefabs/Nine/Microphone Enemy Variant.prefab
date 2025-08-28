@@ -32,6 +32,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microphone Enemy Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3429204145414770413, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: deathDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6459863884734824543, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

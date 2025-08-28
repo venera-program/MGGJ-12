@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float score;
     private Animator animator;
+    [SerializeField] private float deathDelay;
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class Enemy : MonoBehaviour
             AudioManager.Instance.PlayEnemyDies_SFX();
             PlayerData.UpdateScore(score);
             animator.SetBool("isDead", true);
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject, deathDelay);
         }
     }
 }
