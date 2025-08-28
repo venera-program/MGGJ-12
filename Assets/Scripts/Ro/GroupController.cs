@@ -11,13 +11,21 @@ public class GroupController : MonoBehaviour{
     public float timer;
     private bool startSpawning = false;
     public int decimalPlaces = 2;
+    private GameObject parent;
+    private Animator animator;
     
+    void Awake() {
+        parent = transform.parent.gameObject;
+        animator = parent.GetComponentInChildren<Animator>();
+    }
 
     void Update(){
-    
+        
         if(startSpawning){
-           timer += Time.deltaTime; 
+           timer += Time.deltaTime;
+            animator.SetBool("isAttacking", true);
            for (int i = 0 ; i < groups.Length ; i++){
+                
                 float truncTime = HelperFunctions.RoundToDecimal(timer, decimalPlaces); // be able to divide to spawn 
                 if(truncTime != spawnedThisSecond[i]){ // statement used so that spawning doesn't happen multiple times per parts of a second
                 bool isDivisible = ((truncTime - groups[i].delay) % groups[i].spawnInterval) == 0;
@@ -27,10 +35,11 @@ public class GroupController : MonoBehaviour{
                 } else if (isDivisible){
                     StartSpawning(groups[i]);
                     spawnedThisSecond[i] = truncTime;
-                }
+                    }
                 }
            }
         }
+        
     }
 
     public void StartGroup(Group[] currGroup){

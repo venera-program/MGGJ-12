@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9178156490880830242}
   - component: {fileID: 3003554938428793411}
   - component: {fileID: 1536939381314890602}
+  - component: {fileID: 2262782340023788329}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -75,6 +76,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &2262782340023788329
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205784866938529333}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 186f7338643761f49b66d5669b7410ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2279419871392914990
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,17 +263,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25086b1cf70770342b72f3cd92cafbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 1
+  movementType: 0
   movementDistance: 6
   speed: 3
   accuracy: 0.25
   isMoving: 1
+  updateTargetInterval: 0.1
   bossDistance: 0
   topBorder: 10
   bottomBorder: 10
   leftBorder: 10
   rightBorder: 10
   editmode: 0
+  animator: {fileID: 0}
 --- !u!114 &4162402741096787245
 MonoBehaviour:
   m_ObjectHideFlags: 0
