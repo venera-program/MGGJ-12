@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Chair_Override
+  m_Controller: {fileID: 9100000, guid: 186f7338643761f49b66d5669b7410ed, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6771d3f54b75ba644aeb92b84c8247aa, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 54cf5756ab21dff468d7b53845b5be7e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6644051930e5d694ab36aeff7c9a195c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1f55500cae6faf44bb5e9539f1f2ba5c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8b17cc6409838dc4ca49698abb53b832, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cec5976680dc07a41bfaae319593cd0e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b1e62c9bc9168a34093cb8d9525c1ff8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b1e62c9bc9168a34093cb8d9525c1ff8, type: 2}
