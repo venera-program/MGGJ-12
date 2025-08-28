@@ -13,19 +13,19 @@ public class GroupController : MonoBehaviour{
     public int decimalPlaces = 2;
     private GameObject parent;
     private Animator animator;
+    private EnemyAnimation script;
     
     void Awake() {
         parent = transform.parent.gameObject;
         animator = parent.GetComponentInChildren<Animator>();
+        script = parent.GetComponentInChildren<EnemyAnimation>();
     }
 
     void Update(){
         
         if(startSpawning){
-           timer += Time.deltaTime;
-            animator.SetBool("isAttacking", true);
+           timer += Time.deltaTime; 
            for (int i = 0 ; i < groups.Length ; i++){
-                
                 float truncTime = HelperFunctions.RoundToDecimal(timer, decimalPlaces); // be able to divide to spawn 
                 if(truncTime != spawnedThisSecond[i]){ // statement used so that spawning doesn't happen multiple times per parts of a second
                 bool isDivisible = ((truncTime - groups[i].delay) % groups[i].spawnInterval) == 0;
@@ -49,6 +49,7 @@ public class GroupController : MonoBehaviour{
     }
 
     private void StartSpawning(Group currGroup){
+        script.pukeBullets();
         switch(currGroup.pattern){
             case GroupType.Ring:
                 SpawnRing(currGroup);

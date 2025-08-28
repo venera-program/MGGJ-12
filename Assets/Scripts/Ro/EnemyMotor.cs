@@ -78,12 +78,6 @@ public class EnemyMotor : MonoBehaviour
     void FixedUpdate(){
         if (isMoving){
             StartMoving(movementType);
-            animator.SetBool("isMoving", true);
-            //Debug.Log("isMoving is " + isMoving);
-        }
-        else
-        {
-            animator.SetBool("isMoving", false);
         }
     }
 

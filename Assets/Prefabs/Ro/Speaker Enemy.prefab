@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3003554938428793411}
   - component: {fileID: 1536939381314890602}
   - component: {fileID: 2262782340023788329}
+  - component: {fileID: 5722220731474223153}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.23113209, b: 0.23113209, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -97,6 +98,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5722220731474223153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205784866938529333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4266de167062e7547826bbf03ae393f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pukeTime: 0.25
 --- !u!1 &2279419871392914990
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +289,6 @@ MonoBehaviour:
   leftBorder: 10
   rightBorder: 10
   editmode: 0
-  animator: {fileID: 0}
 --- !u!114 &4162402741096787245
 MonoBehaviour:
   m_ObjectHideFlags: 0

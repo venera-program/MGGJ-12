@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ba5ba71be62fe4f904f3f48aaa4e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 38709306850146832}
   speed: 5
   shootingPattern:
   - pattern: 2
