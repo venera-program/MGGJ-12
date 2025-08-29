@@ -52,7 +52,7 @@ public class PlayerControllerScript : MonoBehaviour
 
           controller = new PlayerController();
           
-          Debug.Log("First spawn point is " + _spawnPoint);
+          //Debug.Log("First spawn point is " + _spawnPoint);
           animator = GetComponentInChildren<Animator>();
           playerImage = GetComponentInChildren<Image>();
      }
@@ -188,6 +188,8 @@ public class PlayerControllerScript : MonoBehaviour
      private IEnumerator RespawnPlayer()
      {
           
+          var collider = GetComponent<Collider2D>();
+          collider.enabled = false;
           controller.Main.Move.Disable();
           controller.Main.Shoot.Disable();
           controller.Main.Skill.Disable();
@@ -196,14 +198,13 @@ public class PlayerControllerScript : MonoBehaviour
           Move(Vector2.zero);
           startGeneratingProject = false;
 
-          var collider = GetComponent<Collider2D>();
-          collider.enabled = false;
+          
 
           yield return new WaitForSeconds(RESPAWN_DELAY);
 
           animator.SetBool("wasHit", false);
           transform.position = spawnPoint.position;
-          Debug.Log("The new position is " + transform.position);
+          //Debug.Log("The new position is " + transform.position);
           collider.enabled = true;
 
           controller.Main.Move.Enable();
