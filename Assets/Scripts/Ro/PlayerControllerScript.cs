@@ -198,8 +198,6 @@ public class PlayerControllerScript : MonoBehaviour
           Move(Vector2.zero);
           startGeneratingProject = false;
 
-          
-
           yield return new WaitForSeconds(RESPAWN_DELAY);
 
           animator.SetBool("wasHit", false);
