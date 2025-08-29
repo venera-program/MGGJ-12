@@ -1,18 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelInfo : MonoBehaviour
+public class LevelInfo : ScriptableObject
 {
-    [Header("Stage Assets")]
-    public Sprite newBackgroundTexture;
-    public Image backgroundImageObj;
+    public Sprite NewBackgroundTexture { get => _newBackgroundTexture; set => _newBackgroundTexture = value; }
+    public TextAsset SpawnInfoCSV { get => _spawnInfoCSV; set => _spawnInfoCSV = value; }
 
-    // [Header("Spawner Info")]
-
-    // [Header("Cutscene Info")]
-
-    public void Initialize()
-    {
-        backgroundImageObj.sprite = newBackgroundTexture;
-    }
+    [SerializeField] private Sprite _newBackgroundTexture;
+    [SerializeField] private TextAsset _spawnInfoCSV;
 }
