@@ -1,0 +1,5 @@
+4 "animations":
+vertical/standstill: frames 1 through 5
+moving left: frames 6 through 10
+moving right, frames 11 through 15
+attacking = frames 16 through 20
