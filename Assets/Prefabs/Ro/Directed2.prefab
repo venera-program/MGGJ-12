@@ -86,12 +86,10 @@ GameObject:
   - component: {fileID: 8865739111139268409}
   - component: {fileID: 4694462971773266574}
   - component: {fileID: 3982173722709148540}
-  - component: {fileID: 5758418267957689657}
-  - component: {fileID: 1608303645122955882}
   - component: {fileID: 4732534521973173705}
   m_Layer: 3
   m_Name: Directed2
-  m_TagString: Untagged
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +131,7 @@ MonoBehaviour:
   movementAngle: 0
   projectileType: 6
   image: {fileID: 2995156539737698701}
+  collider: {fileID: 4732534521973173705}
 --- !u!114 &3982173722709148540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,44 +147,8 @@ MonoBehaviour:
   damage: 1
   tagsToPayAttentionTo:
   - Player
---- !u!222 &5758418267957689657
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031599074028236495}
-  m_CullTransparentMesh: 1
---- !u!114 &1608303645122955882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031599074028236495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3fd9f378dfd87dc4995850c16b5366ae, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  isOnCollision: 0
+  isOnTrigger: 1
 --- !u!58 &4732534521973173705
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -215,7 +178,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

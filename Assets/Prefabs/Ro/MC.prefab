@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2333738256646880877}
   - component: {fileID: 1819429441353780576}
   - component: {fileID: 1613561666920444574}
+  - component: {fileID: 1931045949946830536}
   m_Layer: 6
   m_Name: MC
   m_TagString: Player
@@ -168,7 +169,7 @@ MonoBehaviour:
   minSpeed: 0
   accel: 99
   deccel: 25
-  projectileSpawnInterval: 0
+  projectileSpawnInterval: 0.2
 --- !u!114 &1819429441353780576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,11 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1ec1d4917027e4b935bf299eb2e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 5
   currHealth: 0
   healthChange:
     m_PersistentCalls:
       m_Calls: []
+  isInvincible: 0
 --- !u!114 &1613561666920444574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +203,27 @@ MonoBehaviour:
   damage: 99999
   tagsToPayAttentionTo:
   - Enemy
+  isOnCollision: 1
+  isOnTrigger: 0
+--- !u!114 &1931045949946830536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326903385958603332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d7c9049e3898946b3f91efe124b4f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grazeAmount: 0
+  maxGrazeAmount: 100
+  updateGrazeValue:
+    m_PersistentCalls:
+      m_Calls: []
+  grazeRadius: 0.5
+  turnOnGizmos: 0
 --- !u!1 &5893133243923111796
 GameObject:
   m_ObjectHideFlags: 0

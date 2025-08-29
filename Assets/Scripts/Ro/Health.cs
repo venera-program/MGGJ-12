@@ -6,9 +6,12 @@ public class Health : MonoBehaviour
 {
     public float maxHealth;
     public float currHealth;
-    public UnityEvent<float, float> healthChange = new();
+    public UnityEvent<float, float> healthChange = new UnityEvent<float, float>();
 
     private Coroutine _IFrameRoutine;
+
+    [Header("For Debugging Purposes")]
+    [SerializeField] private bool isInvincible;
 
     void Awake()
     {
@@ -22,6 +25,7 @@ public class Health : MonoBehaviour
             Debug.Log("trying to take damage when immune", this);
             return;
         }
+        if(isInvincible) return; 
 
         currHealth = Mathf.Clamp(currHealth - damage, 0f, maxHealth);
         Debug.Log($"{transform.name} took {damage} damage");

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8865739111139268409}
   - component: {fileID: 4694462971773266574}
   - component: {fileID: 3982173722709148540}
-  - component: {fileID: 3535063676526931319}
+  - component: {fileID: 806948414534256978}
   m_Layer: 6
   m_Name: Angle
   m_TagString: Untagged
@@ -56,6 +56,7 @@ MonoBehaviour:
   movementAngle: 0
   projectileType: 6
   image: {fileID: 6094794613161113282}
+  collider: {fileID: 806948414534256978}
 --- !u!114 &3982173722709148540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +73,9 @@ MonoBehaviour:
   tagsToPayAttentionTo:
   - Enemy
   - Boss
---- !u!61 &3535063676526931319
+  isOnCollision: 0
+  isOnTrigger: 1
+--- !u!61 &806948414534256978
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,7 +91,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 1
+  m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -101,7 +104,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

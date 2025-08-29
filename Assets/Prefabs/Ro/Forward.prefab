@@ -86,9 +86,7 @@ GameObject:
   - component: {fileID: 8865739111139268409}
   - component: {fileID: 4694462971773266574}
   - component: {fileID: 3982173722709148540}
-  - component: {fileID: 6540659251864038295}
-  - component: {fileID: 3055652724201804413}
-  - component: {fileID: -2021140117964131073}
+  - component: {fileID: 1535514761468297760}
   m_Layer: 6
   m_Name: Forward
   m_TagString: Untagged
@@ -133,6 +131,7 @@ MonoBehaviour:
   movementAngle: 0
   projectileType: 6
   image: {fileID: 765621689448931927}
+  collider: {fileID: 1535514761468297760}
 --- !u!114 &3982173722709148540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,45 +148,9 @@ MonoBehaviour:
   tagsToPayAttentionTo:
   - Enemy
   - Boss
---- !u!222 &6540659251864038295
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031599074028236495}
-  m_CullTransparentMesh: 1
---- !u!114 &3055652724201804413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031599074028236495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76a33c1f9e822224a9cc38068660dfe9, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!61 &-2021140117964131073
+  isOnCollision: 0
+  isOnTrigger: 1
+--- !u!61 &1535514761468297760
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,7 +166,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 1
+  m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -216,7 +179,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
