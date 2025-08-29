@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 using MGGJ25.Shared;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Health), typeof(Collider2D))]
@@ -9,8 +10,10 @@ public class PlayerControllerScript : MonoBehaviour
      private const float RESPAWN_DELAY = 0.5f;
      private const int I_FRAMES = 120;
      private const string IS_MOVING = "isMoving";
-     private const string MOVING_LEFT = "movingLeft";
      private const string WAS_HIT = "wasHit";
+     private bool flipped;
+
+    public Transform spawnPoint;
 
      public static PlayerControllerScript instance;
 
@@ -18,7 +21,9 @@ public class PlayerControllerScript : MonoBehaviour
 
      public PlayerController controller;
 
-     public Animator animator;
+     private Animator animator;
+     private Image playerImage;
+
 
      [Range(0f, 30f)] public float speed = 5;
      public Group[] shootingPattern;
@@ -46,7 +51,10 @@ public class PlayerControllerScript : MonoBehaviour
           rb = GetComponent<Rigidbody2D>();
 
           controller = new PlayerController();
-          _spawnPoint = transform.position;
+          
+          //Debug.Log("First spawn point is " + _spawnPoint);
+          animator = GetComponentInChildren<Animator>();
+          playerImage = GetComponentInChildren<Image>();
      }
 
      private void OnEnable()
@@ -54,20 +62,21 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Enable();
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
-          controller.Main.Move.performed += UpdateMovementAnimations;
+          //controller.Main.Move.performed += UpdateMovementAnimations;
           GetComponent<Health>().healthChange.AddListener(OnHit);
      }
 
      private void Start()
      {
           projectileTimer = projectileSpawnInterval;
+          _spawnPoint = transform.position;
      }
 
      void OnDisable()
      {
           controller.Main.Shoot.started -= Shoot;
           controller.Main.Shoot.canceled -= StopShoot;
-          controller.Main.Move.performed -= UpdateMovementAnimations;
+          //controller.Main.Move.performed -= UpdateMovementAnimations;
           controller.Disable();
           GetComponent<Health>().healthChange.RemoveListener(OnHit);
      }
@@ -117,6 +126,9 @@ public class PlayerControllerScript : MonoBehaviour
                velocity = Mathf.Clamp(Time.fixedDeltaTime * accel + speed, minSpeed, maxSpeed);
           }
           rb.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position);
+          animator.SetBool(IS_MOVING, PlayerInputRaw != Vector2.zero);
+          flipped = direction.x < 0;
+          playerImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
      }
 
      private void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext cont)
@@ -162,23 +174,22 @@ public class PlayerControllerScript : MonoBehaviour
           AudioManager.Instance.PlayPlayerBullet_SFX();
      }
 
-     private void UpdateMovementAnimations(UnityEngine.InputSystem.InputAction.CallbackContext _)
-     {
-          animator.SetBool(IS_MOVING, PlayerInputRaw != Vector2.zero);
-          animator.SetBool(MOVING_LEFT, PlayerInputRaw.x < 0);
-     }
+ 
 
      private void OnHit(float currHealth, float maxHealth)
      {
           if (currHealth < maxHealth)
           {
+               animator.SetBool("wasHit",true);
                StartCoroutine(RespawnPlayer());
           }
      }
 
      private IEnumerator RespawnPlayer()
      {
-          animator.SetBool(WAS_HIT, true);
+          
+          var collider = GetComponent<Collider2D>();
+          collider.enabled = false;
           controller.Main.Move.Disable();
           controller.Main.Shoot.Disable();
           controller.Main.Skill.Disable();
@@ -187,12 +198,11 @@ public class PlayerControllerScript : MonoBehaviour
           Move(Vector2.zero);
           startGeneratingProject = false;
 
-          var collider = GetComponent<Collider2D>();
-          collider.enabled = false;
-
           yield return new WaitForSeconds(RESPAWN_DELAY);
 
-          transform.position = _spawnPoint;
+          animator.SetBool("wasHit", false);
+          transform.position = spawnPoint.position;
+          //Debug.Log("The new position is " + transform.position);
           collider.enabled = true;
 
           controller.Main.Move.Enable();
