@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public static Action<int> OnLevelChange = _ => { };
+    public static Action<sbyte> OnLevelChange = _ => { };
 
-    public static byte CurrentLevel
-    {
-        get => _currentLevel;
-        private set
-        {
-            _currentLevel = value;
-            OnLevelChange.Invoke(_currentLevel);
-        }
-    }
-    private static byte _currentLevel;
+    public static sbyte CurrentLevelIndex { get; private set; }
 
     public LevelInfo[] levels = { };
 
@@ -30,18 +21,18 @@ public class LevelManager : MonoBehaviour
     /// Loads the level by its number.
     /// </summary>
     /// <param name="levelNumber">The number corresponding the level. LevelNumber = 0 is the main menu.</param>
-    public void LoadLevel(byte levelNumber)
+    public void LoadLevel(sbyte levelNumber)
     {
-        CurrentLevel = levelNumber;
+        CurrentLevelIndex = levelNumber;
+        OnLevelChange.Invoke(CurrentLevelIndex);
 
-        // Level 0 is the main menu.
-        if (CurrentLevel == 0)
+        // Level -1 is the main menu.
+        if (CurrentLevelIndex == -1)
         {
             // Enable main menu stuff
             return;
         }
 
-        levels[CurrentLevel].Initialize();
         _levelThread = StartCoroutine(ExecuteLevel());
     }
 
@@ -56,19 +47,20 @@ public class LevelManager : MonoBehaviour
         // TODO: UI Initialization
         //  This is the "switching from dialogue UI to gameplay UI or w/e
 
-        // TODO: Enemy spawning
+        Enemy_Spawner.LoadProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
+        Enemy_Spawner.StartProcess();
 
         // TODO: Wait for level to be over
-        // var levelComplete = false;
-        // while (!levelComplete)
-        // {
-        //     yield return null;
-        //     levelComplete = true;
-        // }
+        var levelComplete = false;
+        while (!levelComplete)
+        {
+            yield return new WaitForSeconds(20);
+            levelComplete = true;
+        }
 
         // TODO: LevelComplete Dialogue
 
         // -- For now, load the main level when everything is done
-        LoadLevel(0);
+        LoadLevel(-1);
     }
 }
