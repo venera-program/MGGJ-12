@@ -65,9 +65,10 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Enable();
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
-          controller.Main.Skill.started += SkillUse;
+          controller.Main.Skill.started += StartSkillUse;
 
           GetComponent<Health>().healthChange.AddListener(OnHit);
+          Graze.instance.endSkillTimer.AddListener(EndSkillUse);
      }
 
      private void Start()
@@ -80,10 +81,11 @@ public class PlayerControllerScript : MonoBehaviour
      {
           controller.Main.Shoot.started -= Shoot;
           controller.Main.Shoot.canceled -= StopShoot;
-          controller.Main.Skill.started -= SkillUse; 
+          controller.Main.Skill.started -= StartSkillUse; 
 
           controller.Disable();
           GetComponent<Health>().healthChange.RemoveListener(OnHit);
+          Graze.instance.endSkillTimer.RemoveListener(EndSkillUse);
      }
 
      void Update()
@@ -158,7 +160,7 @@ public class PlayerControllerScript : MonoBehaviour
           }
      }
 
-     private void SkillUse(UnityEngine.InputSystem.InputAction.CallbackContext cont){
+     private void StartSkillUse(UnityEngine.InputSystem.InputAction.CallbackContext cont){
           if (!Graze.instance.IsGrazeFull()) return; 
           if(!skillActivated){
                Graze.instance.StartSkillTimer();
@@ -166,7 +168,7 @@ public class PlayerControllerScript : MonoBehaviour
           }
      }
 
-     public void EndSkillUse(){
+     private void EndSkillUse(){
           skillActivated = false;
           specialProjectileCount = 0;
      }

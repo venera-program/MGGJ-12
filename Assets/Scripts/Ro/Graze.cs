@@ -8,6 +8,7 @@ public class Graze : MonoBehaviour{
    [SerializeField] private int grazeAmount;
    public int maxGrazeAmount;
    public UnityEvent<int, int> updateGrazeValue = new UnityEvent<int, int>();
+   public UnityEvent endSkillTimer = new UnityEvent();
     // key == ID of gameObject
     // value == # of times the projectile has touched the area.
    private Dictionary<int, int> projectileContact = new Dictionary<int,int>();
@@ -72,14 +73,16 @@ public class Graze : MonoBehaviour{
             startTimer = false;
             skillTimer = 0f;
             ClearGrazeCount();
-            PlayerControllerScript.instance.EndSkillUse();
+            endSkillTimer.Invoke();
         } else {
-            float ev = curve.Evaluate(skillTimer/skillDuration);
-            float value = Mathf.Lerp(0f, (float)maxGrazeAmount, ev);
-            updateGrazeValue.Invoke((int)value, maxGrazeAmount);
+            GrazeBarCountDown(skillTimer, skillDuration);
         }
    }
-
+    private void GrazeBarCountDown(float time, float maxTime){
+        float ev = curve.Evaluate(time/maxTime);
+        float value = Mathf.Lerp(0f, (float)maxGrazeAmount, ev);
+        updateGrazeValue.Invoke((int)value, maxGrazeAmount);
+    }
    public void ClearGrazeCount(){
         projectileContact.Clear();
         grazeAmount = 0;
