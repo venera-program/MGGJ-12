@@ -26,7 +26,8 @@ public class PlayerControllerScript : MonoBehaviour
 
 
      [Range(0f, 30f)] public float speed = 5;
-     public Group[] shootingPattern;
+     public Group[] regularShootingPattern;
+     public Group[] specialShootingPattern;
      public float maxSpeed;
      public float minSpeed;
      public float accel;
@@ -39,6 +40,9 @@ public class PlayerControllerScript : MonoBehaviour
      private float projectileTimer = 0f;
      private bool startProjectSpawnTimer = false;
      private bool startGeneratingProject = false;
+     private bool skillActivated = false;
+     [SerializeField] private int specialProjectileAmount = 50;
+     private int specialProjectileCount = 0;
 
      void Awake()
      {
@@ -52,7 +56,6 @@ public class PlayerControllerScript : MonoBehaviour
 
           controller = new PlayerController();
           
-          //Debug.Log("First spawn point is " + _spawnPoint);
           animator = GetComponentInChildren<Animator>();
           playerImage = GetComponentInChildren<Image>();
      }
@@ -62,7 +65,8 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Enable();
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
-          //controller.Main.Move.performed += UpdateMovementAnimations;
+          controller.Main.Skill.started += SkillUse;
+
           GetComponent<Health>().healthChange.AddListener(OnHit);
      }
 
@@ -76,7 +80,8 @@ public class PlayerControllerScript : MonoBehaviour
      {
           controller.Main.Shoot.started -= Shoot;
           controller.Main.Shoot.canceled -= StopShoot;
-          //controller.Main.Move.performed -= UpdateMovementAnimations;
+          controller.Main.Skill.started -= SkillUse; 
+
           controller.Disable();
           GetComponent<Health>().healthChange.RemoveListener(OnHit);
      }
@@ -97,7 +102,12 @@ public class PlayerControllerScript : MonoBehaviour
                     if (projectileTimer > projectileSpawnInterval)
                     {
                          projectileTimer = 0f;
-                         GeneratePlayerProjectiles();
+                         if(!skillActivated){
+                              GeneratePlayerProjectiles();
+                         } else {
+                              GeneratePlayerSpecialProjectiles();
+                         }
+                         
                     }
                }
           }
@@ -148,17 +158,28 @@ public class PlayerControllerScript : MonoBehaviour
           }
      }
 
-     private void GeneratePlayerProjectiles()
-     {
-          for (int i = 0; i < shootingPattern.Length; i++)
-          {
-               float rad = shootingPattern[i].startingAngle * Mathf.Deg2Rad;
-               float xPos = Mathf.Cos(rad) * shootingPattern[i].radius;
-               float yPos = Mathf.Sin(rad) * shootingPattern[i].radius;
-               Vector3 finalPosition = new Vector3(transform.position.x + xPos + shootingPattern[i].offset.x,
-                    transform.position.y + yPos + shootingPattern[i].offset.y, 0f);
+     private void SkillUse(UnityEngine.InputSystem.InputAction.CallbackContext cont){
+          if (!Graze.instance.IsGrazeFull()) return; 
+          if(!skillActivated){
+               Graze.instance.StartSkillTimer();
+               skillActivated = true;
+          }
+     }
+
+     public void EndSkillUse(){
+          skillActivated = false;
+          specialProjectileCount = 0;
+     }
+
+     private void GeneratePlayerProjectiles(){
+          for (int i = 0; i < regularShootingPattern.Length; i++){
+               float rad = regularShootingPattern[i].startingAngle * Mathf.Deg2Rad;
+               float xPos = Mathf.Cos(rad) * regularShootingPattern[i].radius;
+               float yPos = Mathf.Sin(rad) * regularShootingPattern[i].radius;
+               Vector3 finalPosition = new Vector3(transform.position.x + xPos + regularShootingPattern[i].offset.x,
+                    transform.position.y + yPos + regularShootingPattern[i].offset.y, 0f);
                GameObject projectile;
-               if (Mathf.Approximately(shootingPattern[i].startingAngle, 90f))
+               if (Mathf.Approximately(regularShootingPattern[i].startingAngle, 90f))
                {
                     projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.forward);
                }
@@ -168,11 +189,34 @@ public class PlayerControllerScript : MonoBehaviour
                }
                projectile.transform.position = finalPosition;
                Projectile script = projectile.GetComponent<Projectile>();
-               script.ConstructProjectile(shootingPattern[i].speed, shootingPattern[i].startingAngle);
+               script.ConstructProjectile(regularShootingPattern[i].speed, regularShootingPattern[i].startingAngle);
           }
           AudioManager.Instance.PlayPlayerBullet_SFX();
      }
 
+     private void GeneratePlayerSpecialProjectiles(){
+          if(specialProjectileCount < specialProjectileAmount){
+               for(int i = 0; i < specialShootingPattern.Length ; i++){
+                    specialProjectileCount++;
+                    float rad = specialShootingPattern[i].startingAngle * Mathf.Deg2Rad;
+                    float xPos = Mathf.Cos(rad) * specialShootingPattern[i].radius;
+                    float yPos = Mathf.Sin(rad) * specialShootingPattern[i].radius;
+                    Vector3 finalPosition = new Vector3(transform.position.x + xPos + specialShootingPattern[i].offset.x,
+                    transform.position.y + yPos + specialShootingPattern[i].offset.y, 0f);
+                    GameObject projectile;
+                    if (Mathf.Approximately(specialShootingPattern[i].startingAngle, 90f)){
+                         projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.specialForward);
+                    }
+                    else{
+                         projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.specialAngle);
+                    }
+                    projectile.transform.position = finalPosition;
+                    Projectile script = projectile.GetComponent<Projectile>();
+                    script.ConstructProjectile(specialShootingPattern[i].speed, specialShootingPattern[i].startingAngle);
+               }
+          }
+          
+     }
  
 
      private void OnHit(float currHealth, float maxHealth)

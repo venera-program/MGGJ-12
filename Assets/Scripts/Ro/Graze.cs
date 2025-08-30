@@ -14,6 +14,15 @@ public class Graze : MonoBehaviour{
 
    [Header("Graze Radius")]
     public float grazeRadius = 5f;
+
+    [Header("Skill Duration")]
+    [SerializeField] private float skillDuration = 1f;
+    private float skillTimer = 0f;
+    private bool startTimer = false;
+
+    [Header("SkillBar Draining Effect")]
+    [SerializeField] private AnimationCurve curve;
+
     [Header("For Debugging Purposes")]
     public bool turnOnGizmos = false;
     private List<Vector3> hits = new List<Vector3>();
@@ -29,15 +38,52 @@ public class Graze : MonoBehaviour{
         }
     }
 
-   public void AddGrazeCount(int instanceID, Vector3 position){
-    if(!projectileContact.ContainsKey(instanceID)){
-        projectileContact.Add(instanceID, 1);
-        grazeAmount = Mathf.Clamp(grazeAmount + 1, 0, maxGrazeAmount);
-        updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
-        hits.Add(position);
-    } else {
-         return;
+    void Update(){
+        if(startTimer){
+            SkillTimer();
+        }
     }
+
+   public void AddGrazeCount(int instanceID, Vector3 position){
+    if(!startTimer){
+        if(!projectileContact.ContainsKey(instanceID)){
+            projectileContact.Add(instanceID, 1);
+            grazeAmount = Mathf.Clamp(grazeAmount + 1, 0, maxGrazeAmount);
+            updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
+            hits.Add(position);
+        } else {
+            return;
+        }
+    }
+    
+   }
+
+   public bool IsGrazeFull(){
+    return grazeAmount >= maxGrazeAmount;
+   }
+
+   public void StartSkillTimer(){
+        startTimer = true;
+   }
+
+   private void SkillTimer(){
+        skillTimer += Time.deltaTime;
+        if(skillTimer >= skillDuration){
+            startTimer = false;
+            skillTimer = 0f;
+            ClearGrazeCount();
+            PlayerControllerScript.instance.EndSkillUse();
+        } else {
+            float ev = curve.Evaluate(skillTimer/skillDuration);
+            float value = Mathf.Lerp(0f, (float)maxGrazeAmount, ev);
+            updateGrazeValue.Invoke((int)value, maxGrazeAmount);
+        }
+   }
+
+   public void ClearGrazeCount(){
+        projectileContact.Clear();
+        grazeAmount = 0;
+        updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
    }
 
    public void RemoveGrazeCount(int instanceID){

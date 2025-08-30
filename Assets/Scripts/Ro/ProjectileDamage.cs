@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 public class ProjectileDamage : DealDamage
 {
+    [SerializeField] private Projectile script;
         public override void OnContact(){
-            Destroy(gameObject);
+             ProjectilePool.instance.DeactivateProjectile(script);
         }
 }

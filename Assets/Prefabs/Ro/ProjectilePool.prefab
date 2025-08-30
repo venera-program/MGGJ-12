@@ -54,3 +54,5 @@ MonoBehaviour:
   undirected2: 100
   angle: 60
   forward: 60
+  specialAngle: 60
+  specialForward: 60
