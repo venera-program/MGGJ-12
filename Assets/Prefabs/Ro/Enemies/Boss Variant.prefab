@@ -141,6 +141,10 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4346077215001989561, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      propertyPath: hurtSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 67bbe76ae672f594b8acb1f0825e42cb, type: 3}
+    - target: {fileID: 4346077215001989561, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}

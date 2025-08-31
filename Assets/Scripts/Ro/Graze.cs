@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MGGJ25.Shared;
 public class Graze : MonoBehaviour{
    public static Graze instance;
    [Header("Graze Meter")]
@@ -51,10 +52,13 @@ public class Graze : MonoBehaviour{
             projectileContact.Add(instanceID, 1);
             grazeAmount = Mathf.Clamp(grazeAmount + 1, 0, maxGrazeAmount);
             updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
+            AudioManager.Instance.PlayPlayerGraze_SFX();
             hits.Add(position);
         } else {
             return;
         }
+
+        if(IsGrazeFull()) AudioManager.Instance.PlayPlayerGrazeFull_SFX();
     }
     
    }

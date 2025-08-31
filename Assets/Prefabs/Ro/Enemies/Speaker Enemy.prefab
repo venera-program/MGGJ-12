@@ -172,6 +172,7 @@ MonoBehaviour:
   healthChange:
     m_PersistentCalls:
       m_Calls: []
+  hurtSFX: {fileID: 8300000, guid: 67bbe76ae672f594b8acb1f0825e42cb, type: 3}
   isInvincible: 0
 --- !u!61 &4579309023688813213
 BoxCollider2D:

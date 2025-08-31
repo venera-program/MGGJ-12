@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using MGGJ25.Shared;
 
 public class Health : MonoBehaviour
 {
     public float maxHealth;
     public float currHealth;
     public UnityEvent<float, float> healthChange = new UnityEvent<float, float>();
+    [SerializeField] private AudioClip hurtSFX;
 
     private Coroutine _IFrameRoutine;
 
@@ -30,6 +32,7 @@ public class Health : MonoBehaviour
         currHealth = Mathf.Clamp(currHealth - damage, 0f, maxHealth);
         Debug.Log($"{transform.name} took {damage} damage");
         healthChange.Invoke(currHealth, maxHealth);
+        // AudioManager.Instance.PlaySfx(hurtSFX);
     }
 
     public void Heal(float health)

@@ -249,6 +249,7 @@ MonoBehaviour:
   healthChange:
     m_PersistentCalls:
       m_Calls: []
+  hurtSFX: {fileID: 8300000, guid: 582c752c14a424745919eeadfb91f8ca, type: 3}
   isInvincible: 0
 --- !u!114 &1613561666920444574
 MonoBehaviour:
@@ -282,6 +283,9 @@ MonoBehaviour:
   grazeAmount: 0
   maxGrazeAmount: 100
   updateGrazeValue:
+    m_PersistentCalls:
+      m_Calls: []
+  endSkillTimer:
     m_PersistentCalls:
       m_Calls: []
   grazeRadius: 0.5

@@ -149,6 +149,11 @@ public class PlayerControllerScript : MonoBehaviour
           if (cont.interaction is HoldInteraction)
           {
                startGeneratingProject = true;
+               if(!skillActivated){
+                    AudioManager.Instance.PlayPlayerBullet_SFX();
+               } else {
+                    AudioManager.Instance.PlayPlayerSpecial_SFX();
+               }
           }
      }
 
@@ -156,6 +161,11 @@ public class PlayerControllerScript : MonoBehaviour
      {
           if (cont.interaction is HoldInteraction)
           {
+               if(!skillActivated){
+                    AudioManager.Instance.StopPlayerBullet_SFX();
+               } else {
+                    AudioManager.Instance.StopPlayerSpecial_SFX();
+               }
                startGeneratingProject = false;
           }
      }
@@ -169,6 +179,10 @@ public class PlayerControllerScript : MonoBehaviour
      }
 
      private void EndSkillUse(){
+          AudioManager.Instance.StopPlayerSpecial_SFX();
+          if(startGeneratingProject){
+               AudioManager.Instance.PlayPlayerBullet_SFX();
+          }
           skillActivated = false;
           specialProjectileCount = 0;
      }
@@ -193,7 +207,6 @@ public class PlayerControllerScript : MonoBehaviour
                Projectile script = projectile.GetComponent<Projectile>();
                script.ConstructProjectile(regularShootingPattern[i].speed, regularShootingPattern[i].startingAngle);
           }
-          AudioManager.Instance.PlayPlayerBullet_SFX();
      }
 
      private void GeneratePlayerSpecialProjectiles(){
@@ -225,6 +238,7 @@ public class PlayerControllerScript : MonoBehaviour
      {
           if (currHealth < maxHealth)
           {
+               AudioManager.Instance.PlayPlayerDies_SFX();
                animator.SetBool("wasHit",true);
                StartCoroutine(RespawnPlayer());
           }
