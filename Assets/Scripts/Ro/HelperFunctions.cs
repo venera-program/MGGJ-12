@@ -6,13 +6,17 @@ using Random = UnityEngine.Random;
 
 public class HelperFunctions {
     // top/bottom/left/right are ALL in world units are in Pixels
+    private static Camera main;
     public static bool IsOnScreen(Vector2 position, float topBorder = 0f, float bottomBorder = 0f, float leftBorder = 0f, float rightBorder = 0f){ // can modify this to take in borders
-        Rect CameraRect = Camera.main.pixelRect;
+        if(!main){
+            main = Camera.main;
+        }
+        Rect CameraRect = main.pixelRect;
 
-        Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
-        Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
-        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
-        Vector3 bottomRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
+        Vector3 topLeft = main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, main.nearClipPlane));
+        Vector3 topRight = main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + CameraRect.height - topBorder, main.nearClipPlane));
+        Vector3 bottomLeft = main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + bottomBorder, main.nearClipPlane));
+        Vector3 bottomRight = main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, main.nearClipPlane));
     
         bool betweenX = (position.x >= topLeft.x) && (position.x <= topRight.x);
         bool betweenY = (position.y <= topRight.y) && (position.y >= bottomRight.y);
@@ -32,11 +36,14 @@ public class HelperFunctions {
     /// <summary> Returns topleft, top right, bottom left, bottom right screen corners</summary>
 
     public static Vector3[] ScreenCorners(float topBorder = 0f, float bottomBorder = 0f, float leftBorder = 0f, float rightBorder = 0f){
-        Rect CameraRect = Camera.main.pixelRect;
-        Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
-        Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + CameraRect.height - topBorder, Camera.main.nearClipPlane));
-        Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
-        Vector3 bottomRight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, Camera.main.nearClipPlane));
+         if(!main){
+            main = Camera.main;
+        }
+        Rect CameraRect = main.pixelRect;
+        Vector3 topLeft = main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, main.nearClipPlane));
+        Vector3 topRight = main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + CameraRect.height - topBorder, main.nearClipPlane));
+        Vector3 bottomLeft = main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + bottomBorder, main.nearClipPlane));
+        Vector3 bottomRight = main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, main.nearClipPlane));
 
         return new Vector3[]{topLeft, topRight, bottomLeft, bottomRight};
     }
@@ -177,6 +184,13 @@ public class HelperFunctions {
     public static float RoundToDecimal(float number, int decimalPlaces){
         float multiplicant = Mathf.Pow(10, (float)decimalPlaces);
         return (Mathf.Floor(number * multiplicant))/multiplicant;
+    }
+
+    public static bool IsContact(Vector2 mainCenter, Vector2 closestOtherColliderPoint, float mainRadius){
+        // this if statement is needed because when a collider is deactivated, the "closest" point passed in ends up being the center;
+        if(mainCenter == closestOtherColliderPoint) return false; 
+        bool isInContact =  ((mainCenter - closestOtherColliderPoint).sqrMagnitude) <= (mainRadius * mainRadius);
+        return isInContact;
     }
 
 }

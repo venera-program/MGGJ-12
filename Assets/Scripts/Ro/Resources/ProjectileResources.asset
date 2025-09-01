@@ -18,4 +18,6 @@ MonoBehaviour:
   undirected2: {fileID: 6031599074028236495, guid: 7066bb4b445555d4fa078f8c7feded17, type: 3}
   forward: {fileID: 6031599074028236495, guid: 6eab10302fed4114782b71c759a067e1, type: 3}
   angle: {fileID: 6031599074028236495, guid: 631bef5eb95e8494b85be793258bde7c, type: 3}
+  specialForward: {fileID: 6031599074028236495, guid: d40698ac736cd6f4fb6330c847582664, type: 3}
+  specialAngle: {fileID: 6031599074028236495, guid: d2505221e9d82534e97ed7bb87818ef0, type: 3}
   defaultProjectile: {fileID: 6031599074028236495, guid: 50b063c7f3295214dbdb5b7883c94ea3, type: 3}

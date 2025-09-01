@@ -10,11 +10,15 @@ public class Projectile : MonoBehaviour
     public float movementAngle = 0f;
     public ProjectileType projectileType = ProjectileType.def;
     public Transform image;
+    [SerializeField] private Collider2D collider;
 
     public void Update(){
         if(isMoving){
             Move(speed);
             CheckIfOutOfBounds();
+            if(gameObject.tag == "EnemyProjectile"){
+                CheckIfGraze();
+            }
         }
     }
     public void ConstructProjectile(float speed, float movementAngle){
@@ -41,7 +45,16 @@ public class Projectile : MonoBehaviour
     private void CheckIfOutOfBounds(){
         if(!HelperFunctions.IsOnScreen(transform.position)){
             isMoving = false;
+            if(tag == "EnemyProjectile"){
+                Graze.instance.RemoveGrazeCount(gameObject.GetInstanceID());
+            }
             ProjectilePool.instance.DeactivateProjectile(this);
+        }
+    }
+
+    private void CheckIfGraze(){
+        if(HelperFunctions.IsContact(Graze.instance.transform.position, collider.ClosestPoint(Graze.instance.transform.position), Graze.instance.grazeRadius)){
+            Graze.instance.AddGrazeCount(gameObject.GetInstanceID(), transform.position);
         }
     }
 }

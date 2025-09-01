@@ -11,10 +11,18 @@ public class GroupController : MonoBehaviour{
     public float timer;
     private bool startSpawning = false;
     public int decimalPlaces = 2;
+    private GameObject parent;
+    private Animator animator;
+    private EnemyAnimation script;
     
+    void Awake() {
+        parent = transform.parent.gameObject;
+        animator = parent.GetComponentInChildren<Animator>();
+        script = parent.GetComponentInChildren<EnemyAnimation>();
+    }
 
     void Update(){
-    
+        
         if(startSpawning){
            timer += Time.deltaTime; 
            for (int i = 0 ; i < groups.Length ; i++){
@@ -27,10 +35,11 @@ public class GroupController : MonoBehaviour{
                 } else if (isDivisible){
                     StartSpawning(groups[i]);
                     spawnedThisSecond[i] = truncTime;
-                }
+                    }
                 }
            }
         }
+        
     }
 
     public void StartGroup(Group[] currGroup){
@@ -40,6 +49,7 @@ public class GroupController : MonoBehaviour{
     }
 
     private void StartSpawning(Group currGroup){
+        script.pukeBullets();
         switch(currGroup.pattern){
             case GroupType.Ring:
                 SpawnRing(currGroup);

@@ -13,6 +13,8 @@ public class ProjectileResources : ScriptableObject {
     [Header("Player Projectiles")]
     public GameObject forward;
     public GameObject angle;
+    public GameObject specialForward;
+    public GameObject specialAngle;
 
     [Header("Default Projectiles")]
     public GameObject defaultProjectile;

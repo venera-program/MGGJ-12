@@ -93,6 +93,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -111,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9c45904ebe93594db561d9ea5e78786
-      internalID: 1479580283
+      spriteID: 6ade88d04e741db42b7d1a5ae211915d
+      internalID: -1886041634
       vertices: []
       indices: 
       edges: []
@@ -132,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77c498fe985c3444b8f27a373e0a437a
-      internalID: -1205075138
+      spriteID: 6b30aa1273d73f842a354916e38075d9
+      internalID: -850935595
       vertices: []
       indices: 
       edges: []
@@ -153,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed9316c0150c81a47b0fa32d7efdc1ba
-      internalID: -1900603253
+      spriteID: 0ce8ad2b679dc85418b0ef271dc7d81c
+      internalID: 301683682
       vertices: []
       indices: 
       edges: []
@@ -170,9 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      badger_move_right_spritesheet_0: 1479580283
-      badger_move_right_spritesheet_1: -1205075138
-      badger_move_right_spritesheet_2: -1900603253
+      badger_move_right_spritesheet_0: -1886041634
+      badger_move_right_spritesheet_1: -850935595
+      badger_move_right_spritesheet_2: 301683682
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

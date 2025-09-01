@@ -22,10 +22,14 @@ public class ProjectilePool : MonoBehaviour
     [Header("Player Projectile Count")]
     [SerializeField] private float angle;
     [SerializeField] private float forward;
+    [SerializeField] private float specialAngle;
+    [SerializeField] private float specialForward;
 
     [Header("Player Projectile Lists")]
     private Queue<GameObject> anglePool = new Queue<GameObject>();
     private Queue<GameObject> forwardPool = new Queue<GameObject>();
+    private Queue<GameObject> specialAnglePool = new Queue<GameObject>();
+    private Queue<GameObject> specialForwardPool = new Queue<GameObject>();
 
 
     void Awake(){
@@ -78,6 +82,18 @@ public class ProjectilePool : MonoBehaviour
             newProject.SetActive(false);
             forwardPool.Enqueue(newProject);
         }
+        for (int i = 0; i < specialAngle ; i++){
+            GameObject newProject = Instantiate(ProjectileResources.instance.specialAngle,transform);
+            newProject.GetComponent<Projectile>().projectileType = ProjectileType.specialAngle;
+            newProject.SetActive(false);
+            specialAnglePool.Enqueue(newProject);
+        }
+        for (int i = 0; i < specialForward ; i++){
+            GameObject newProject = Instantiate(ProjectileResources.instance.specialForward,transform);
+            newProject.GetComponent<Projectile>().projectileType = ProjectileType.specialForward;
+            newProject.SetActive(false);
+            specialForwardPool.Enqueue(newProject);
+        }
     }
 
     public GameObject ActivateProjectile(ProjectileType type){
@@ -102,6 +118,12 @@ public class ProjectilePool : MonoBehaviour
                 break;
             case(ProjectileType.forward):
                 project = forwardPool.Count > 0 ? forwardPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
+                break;
+            case(ProjectileType.specialAngle):
+                project = specialAnglePool.Count > 0 ? specialAnglePool.Dequeue() : ProjectileResources.instance.defaultProjectile;
+                break;
+            case(ProjectileType.specialForward):
+                project = specialForwardPool.Count > 0 ? specialForwardPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 break;
             default:
                 project = ProjectileResources.instance.defaultProjectile;
@@ -133,9 +155,14 @@ public class ProjectilePool : MonoBehaviour
             case(ProjectileType.forward):
                 forwardPool.Enqueue(project.gameObject);
                 break;
+            case(ProjectileType.specialAngle):
+                specialAnglePool.Enqueue(project.gameObject);
+                break;
+            case(ProjectileType.specialForward):
+                specialForwardPool.Enqueue(project.gameObject);
+                break;
         }
     }
-
 }
 
 public enum ProjectileType {
@@ -145,5 +172,7 @@ public enum ProjectileType {
     undirected2,
     forward,
     angle,
+    specialForward,
+    specialAngle, 
     def
 }
