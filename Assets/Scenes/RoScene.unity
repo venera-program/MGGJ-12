@@ -1519,6 +1519,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: skillDuration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: tags.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1779,6 +1783,14 @@ PrefabInstance:
     - target: {fileID: 1034170704099202326, guid: e512ff36c841e404cb47a1b9720d373f, type: 3}
       propertyPath: m_Name
       value: ProjectilePool
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629402580644690550, guid: e512ff36c841e404cb47a1b9720d373f, type: 3}
+      propertyPath: specialAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629402580644690550, guid: e512ff36c841e404cb47a1b9720d373f, type: 3}
+      propertyPath: specialForward
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7799064820302663203, guid: e512ff36c841e404cb47a1b9720d373f, type: 3}
       propertyPath: m_Pivot.x

@@ -163,6 +163,29 @@ public class ProjectilePool : MonoBehaviour
                 break;
         }
     }
+
+    public int GetAvailableProjectileCount(ProjectileType type){
+        switch (type){
+            case(ProjectileType.directed):
+                return directedPool.Count;
+            case(ProjectileType.directed2):
+                return directed2Pool.Count;
+            case(ProjectileType.undirected):
+                return undirectedPool.Count;
+            case(ProjectileType.undirected2):
+                return undirected2Pool.Count;
+            case(ProjectileType.angle):
+                return anglePool.Count;
+            case(ProjectileType.forward):
+                return forwardPool.Count;
+            case(ProjectileType.specialAngle):
+                return specialAnglePool.Count;
+            case(ProjectileType.specialForward):
+                return specialForwardPool.Count;
+            default: 
+                return 0;
+        }
+    }
 }
 
 public enum ProjectileType {

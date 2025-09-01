@@ -42,8 +42,6 @@ public class PlayerControllerScript : MonoBehaviour
      private bool startProjectSpawnTimer = false;
      private bool startGeneratingProject = false;
      private bool skillActivated = false;
-     [SerializeField] private int specialProjectileAmount = 50;
-     private int specialProjectileCount = 0;
 
      void Awake()
      {
@@ -186,7 +184,6 @@ public class PlayerControllerScript : MonoBehaviour
                AudioManager.Instance.PlayPlayerBullet_SFX();
           }
           skillActivated = false;
-          specialProjectileCount = 0;
      }
 
      private void GeneratePlayerProjectiles(){
@@ -212,9 +209,11 @@ public class PlayerControllerScript : MonoBehaviour
      }
 
      private void GeneratePlayerSpecialProjectiles(){
-          if(specialProjectileCount < specialProjectileAmount){
+          bool enoughSpecialAngle = ProjectilePool.instance.GetAvailableProjectileCount(ProjectileType.specialAngle) > specialShootingPattern.Length - 1;
+          bool enoughSpecialForward = ProjectilePool.instance.GetAvailableProjectileCount(ProjectileType.specialForward) > 1;
+          if(!enoughSpecialAngle || !enoughSpecialForward) return;
+
                for(int i = 0; i < specialShootingPattern.Length ; i++){
-                    specialProjectileCount++;
                     float rad = specialShootingPattern[i].startingAngle * Mathf.Deg2Rad;
                     float xPos = Mathf.Cos(rad) * specialShootingPattern[i].radius;
                     float yPos = Mathf.Sin(rad) * specialShootingPattern[i].radius;
@@ -231,8 +230,6 @@ public class PlayerControllerScript : MonoBehaviour
                     Projectile script = projectile.GetComponent<Projectile>();
                     script.ConstructProjectile(specialShootingPattern[i].speed, specialShootingPattern[i].startingAngle);
                }
-          }
-          
      }
  
 
