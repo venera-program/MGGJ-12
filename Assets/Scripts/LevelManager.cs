@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,13 +9,19 @@ public class LevelManager : MonoBehaviour
 
     public static sbyte CurrentLevelIndex { get; private set; }
 
+    public GameObject CombatUI;
+    public Image BackgroundUI;
+
     public LevelInfo[] levels = { };
 
     private Coroutine _levelThread;
 
     private void OnDestroy()
     {
-        StopCoroutine(_levelThread);
+        if (_levelThread != null)
+        {
+            StopCoroutine(_levelThread);
+        }
     }
 
     /// <summary>
@@ -29,7 +36,7 @@ public class LevelManager : MonoBehaviour
         // Level -1 is the main menu.
         if (CurrentLevelIndex == -1)
         {
-            // Enable main menu stuff
+            // UI: Enable main menu
             return;
         }
 
@@ -38,29 +45,43 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator ExecuteLevel()
     {
-        yield return null;
+        CombatUI.SetActive(true);
+        BackgroundUI.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
+        BackgroundUI.enabled = true;
+        Enemy_Spawner.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
 
-        // -- You can access most info via `levels[_currentLevel]`
-
-        // TODO: LevelStart Dialogue
-
-        // TODO: UI Initialization
-        //  This is the "switching from dialogue UI to gameplay UI or w/e
-
-        Enemy_Spawner.LoadProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
-        Enemy_Spawner.StartProcess();
-
-        // TODO: Wait for level to be over
+        // Wait for level to be over
         var levelComplete = false;
         while (!levelComplete)
         {
-            yield return new WaitForSeconds(20);
+            yield return new WaitForSeconds(60); // TODO: Level completion flag (not timer)
             levelComplete = true;
         }
 
-        // TODO: LevelComplete Dialogue
+        UnloadLevel();
 
-        // -- For now, load the main level when everything is done
+        // TODO: Figure out which level to load
+        LoadMainMenu();
+    }
+
+    private void UnloadLevel()
+    {
+        BackgroundUI.enabled = false;
+        CombatUI.SetActive(false);
+        Enemy_Spawner.EndProcess();
+    }
+
+    [ContextMenu("LoadMainMenu")]
+    public void LoadMainMenu()
+    {
+        UnloadLevel();
         LoadLevel(-1);
+    }
+
+    [ContextMenu("LoadFirstLevel")]
+    public void LoadFirstLevel()
+    {
+        UnloadLevel();
+        LoadLevel(0);
     }
 }
