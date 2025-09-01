@@ -14,8 +14,13 @@ public class Graze : MonoBehaviour{
     // value == # of times the projectile has touched the area.
    private Dictionary<int, int> projectileContact = new Dictionary<int,int>();
 
+
    [Header("Graze Radius")]
     public float grazeRadius = 5f;
+   [Header("Graze Visual")]
+    [SerializeField] private Group grazePattern;
+    [SerializeField] private GameObject grazeImage;
+    [SerializeField] private Transform grazeImageParent;
 
     [Header("Skill Duration")]
     [SerializeField] private float skillDuration = 1f;
@@ -37,6 +42,15 @@ public class Graze : MonoBehaviour{
             Destroy(gameObject);
         } else {
             instance = this;
+        }
+    }
+
+    void Start(){
+        for(int i = 0; i < grazePattern.projectileCount; i++){
+            float angle = HelperFunctions.CalculateProjectilePositionAngle(i, grazePattern);
+            float x = Mathf.Cos(angle) * grazeRadius + transform.position.x;
+            float y = Mathf.Sin(angle) * grazeRadius + transform.position.y;
+            Instantiate(grazeImage, new Vector3(x,y,0f), Quaternion.identity, grazeImageParent);
         }
     }
 
