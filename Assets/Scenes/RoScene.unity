@@ -1033,41 +1033,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   decimalPlaces: 2
---- !u!1 &917767637
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 917767638}
-  m_Layer: 6
-  m_Name: Graze
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &917767638
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917767637}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 697647657}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &979966804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1710,44 +1675,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 50674654}
     m_Modifications:
     - target: {fileID: 1819429441353780576, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      propertyPath: hurtSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 582c752c14a424745919eeadfb91f8ca, type: 3}
-    - target: {fileID: 1819429441353780576, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: isInvincible
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      propertyPath: grazeImage
-      value: 
-      objectReference: {fileID: 4429349021917146388, guid: 16b5a3e5f38a13f48ac970b2ec023628, type: 3}
-    - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      propertyPath: grazeRadius
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      propertyPath: rumbleDuration
-      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: tags.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      propertyPath: grazeImageParent
-      value: 
-      objectReference: {fileID: 917767638}
-    - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: tags.Array.data[0]
       value: EnemyProjectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      propertyPath: grazePattern.startingAngle
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 1931045949946830536, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      propertyPath: grazePattern.projectileCount
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: skillTimer
@@ -1855,10 +1792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5734813022505143167, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 917767638}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
 --- !u!1001 &6208867465090145056
