@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: df8b7771cf33cf24fb57ac98b25817de
+guid: b436edc6095bd5a45a38e8c7707c5212
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 32enemy_0
+      name: badger_move_right_graze_sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfc1a6f867d91b94e9498dcd6d87f285
-      internalID: -2038835463
+      spriteID: ee3fdf7128f5a0b4cb1232351e601531
+      internalID: -1270491847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 32enemy_1
+      name: badger_move_right_graze_sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 717accef561bbe944b57ba1cd9416e8a
-      internalID: 1577550663
+      spriteID: a149926907b02e74ba6be8782ac7bfa2
+      internalID: -1142610945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 32enemy_2
+      name: badger_move_right_graze_sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -179,92 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e61677be15a5ed488360a90d0436d38
-      internalID: -2009616546
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 32enemy_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 63359fd86e312154492b484f15c49187
-      internalID: 1066839213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 32enemy_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 48d9f70b840039c418d57dceed341f66
-      internalID: 1700580023
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 32enemy_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb836496caa4b71479b32ccdaf4cf06a
-      internalID: -595220134
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 32enemy_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 684c134bcd94ed946be43f92e7b62884
-      internalID: -490393902
+      spriteID: e068c773b5fb6984abe6b0c86bfa938e
+      internalID: 1560702881
       vertices: []
       indices: 
       edges: []
@@ -280,13 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      32enemy_0: -2038835463
-      32enemy_1: 1577550663
-      32enemy_2: -2009616546
-      32enemy_3: 1066839213
-      32enemy_4: 1700580023
-      32enemy_5: -595220134
-      32enemy_6: -490393902
+      badger_move_right_graze_sheet_0: -1270491847
+      badger_move_right_graze_sheet_1: -1142610945
+      badger_move_right_graze_sheet_2: 1560702881
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
