@@ -61,8 +61,10 @@ public class Graze : MonoBehaviour{
             float y = Mathf.Sin(angle) * grazeRadius + transform.position.y;
             Instantiate(grazeImage, new Vector3(x,y,0f), Quaternion.identity, grazeImageParent);
             if(isRumbleOn){
-                Gamepad.current.SetMotorSpeeds(leftMotorSpeed, rightMotorSpeed);
-                Gamepad.current.PauseHaptics();
+                if(Gamepad.current != null){
+                    Gamepad.current.SetMotorSpeeds(leftMotorSpeed, rightMotorSpeed);
+                    Gamepad.current.PauseHaptics();
+                }
             }
         }
     }
@@ -85,7 +87,9 @@ public class Graze : MonoBehaviour{
             AudioManager.Instance.PlayPlayerGraze_SFX();
             hits.Add(position);
             startRumbleTimer = true;
-            Gamepad.current.ResumeHaptics();
+            if(Gamepad.current != null){
+                Gamepad.current.ResumeHaptics();
+            }
         } else {
             return;
         }
@@ -120,7 +124,9 @@ public class Graze : MonoBehaviour{
         if (rumbleTimer >= rumbleDuration){
             startRumbleTimer = false;
             rumbleTimer = 0f;
-            Gamepad.current.PauseHaptics();
+            if(Gamepad.current != null){
+                Gamepad.current.PauseHaptics();
+            }
         }
    }
     private void GrazeBarCountDown(float time, float maxTime){
