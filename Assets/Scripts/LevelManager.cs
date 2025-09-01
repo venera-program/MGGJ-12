@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 
     public static sbyte CurrentLevelIndex { get; private set; }
 
+    public GameObject MenuUI;
     public GameObject CombatUI;
     public Image BackgroundUI;
 
@@ -36,6 +37,7 @@ public class LevelManager : MonoBehaviour
         // Level -1 is the main menu.
         if (CurrentLevelIndex == -1)
         {
+            MenuUI.SetActive(true);
             // UI: Enable main menu
             return;
         }
@@ -67,6 +69,7 @@ public class LevelManager : MonoBehaviour
     private void UnloadLevel()
     {
         BackgroundUI.enabled = false;
+        MenuUI.SetActive(false);
         CombatUI.SetActive(false);
         Enemy_Spawner.EndProcess();
     }
