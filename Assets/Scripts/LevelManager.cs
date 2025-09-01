@@ -1,21 +1,17 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public static Action<int> OnLevelChange = _ => { };
+    public static Action<sbyte> OnLevelChange = _ => { };
 
-    public static byte CurrentLevel
-    {
-        get => _currentLevel;
-        private set
-        {
-            _currentLevel = value;
-            OnLevelChange.Invoke(_currentLevel);
-        }
-    }
-    private static byte _currentLevel;
+    public static sbyte CurrentLevelIndex { get; private set; }
+
+    public GameObject MenuUI;
+    public GameObject CombatUI;
+    public Image BackgroundUI;
 
     public LevelInfo[] levels = { };
 
@@ -23,52 +19,72 @@ public class LevelManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        StopCoroutine(_levelThread);
+        if (_levelThread != null)
+        {
+            StopCoroutine(_levelThread);
+        }
     }
 
     /// <summary>
     /// Loads the level by its number.
     /// </summary>
     /// <param name="levelNumber">The number corresponding the level. LevelNumber = 0 is the main menu.</param>
-    public void LoadLevel(byte levelNumber)
+    public void LoadLevel(sbyte levelNumber)
     {
-        CurrentLevel = levelNumber;
+        CurrentLevelIndex = levelNumber;
+        OnLevelChange.Invoke(CurrentLevelIndex);
 
-        // Level 0 is the main menu.
-        if (CurrentLevel == 0)
+        // Level -1 is the main menu.
+        if (CurrentLevelIndex == -1)
         {
-            // Enable main menu stuff
+            MenuUI.SetActive(true);
+            // UI: Enable main menu
             return;
         }
 
-        levels[CurrentLevel].Initialize();
         _levelThread = StartCoroutine(ExecuteLevel());
     }
 
     private IEnumerator ExecuteLevel()
     {
-        yield return null;
+        CombatUI.SetActive(true);
+        BackgroundUI.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
+        BackgroundUI.enabled = true;
+        Enemy_Spawner.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
 
-        // -- You can access most info via `levels[_currentLevel]`
+        // Wait for level to be over
+        var levelComplete = false;
+        while (!levelComplete)
+        {
+            yield return new WaitForSeconds(60); // TODO: Level completion flag (not timer)
+            levelComplete = true;
+        }
 
-        // TODO: LevelStart Dialogue
+        UnloadLevel();
 
-        // TODO: UI Initialization
-        //  This is the "switching from dialogue UI to gameplay UI or w/e
+        // TODO: Figure out which level to load
+        LoadMainMenu();
+    }
 
-        // TODO: Enemy spawning
+    private void UnloadLevel()
+    {
+        BackgroundUI.enabled = false;
+        MenuUI.SetActive(false);
+        CombatUI.SetActive(false);
+        Enemy_Spawner.EndProcess();
+    }
 
-        // TODO: Wait for level to be over
-        // var levelComplete = false;
-        // while (!levelComplete)
-        // {
-        //     yield return null;
-        //     levelComplete = true;
-        // }
+    [ContextMenu("LoadMainMenu")]
+    public void LoadMainMenu()
+    {
+        UnloadLevel();
+        LoadLevel(-1);
+    }
 
-        // TODO: LevelComplete Dialogue
-
-        // -- For now, load the main level when everything is done
+    [ContextMenu("LoadFirstLevel")]
+    public void LoadFirstLevel()
+    {
+        UnloadLevel();
         LoadLevel(0);
     }
 }

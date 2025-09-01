@@ -32,7 +32,7 @@ public static class PlayerData
     // Methods
     public static void UpdateScore(float additionalAmount)
     {
-        _score += additionalAmount;
+        Score += additionalAmount;
         Debug.Log($"New Score: {_score}");
     }
 }
