@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using MGGJ25.Shared;
+using UnityEngine.InputSystem;
 public class Graze : MonoBehaviour{
    public static Graze instance;
    [Header("Graze Meter")]
@@ -26,6 +27,14 @@ public class Graze : MonoBehaviour{
     [SerializeField] private float skillDuration = 1f;
     private float skillTimer = 0f;
     private bool startTimer = false;
+
+    [Header("Controller Haptics")]
+    [SerializeField] private bool isRumbleOn = true;
+    [SerializeField][Tooltip("In Seconds")] private float rumbleDuration;
+    [SerializeField] private float leftMotorSpeed;
+    [SerializeField] private float rightMotorSpeed;
+    private bool startRumbleTimer = false;
+    private float rumbleTimer = 0f;
 
     [Header("SkillBar Draining Effect")]
     [SerializeField] private AnimationCurve curve;
@@ -51,12 +60,19 @@ public class Graze : MonoBehaviour{
             float x = Mathf.Cos(angle) * grazeRadius + transform.position.x;
             float y = Mathf.Sin(angle) * grazeRadius + transform.position.y;
             Instantiate(grazeImage, new Vector3(x,y,0f), Quaternion.identity, grazeImageParent);
+            if(isRumbleOn){
+                Gamepad.current.SetMotorSpeeds(leftMotorSpeed, rightMotorSpeed);
+                Gamepad.current.PauseHaptics();
+            }
         }
     }
 
     void Update(){
         if(startTimer){
             SkillTimer();
+        }
+        if(isRumbleOn && startRumbleTimer){
+            RumbleTimer();
         }
     }
 
@@ -68,6 +84,8 @@ public class Graze : MonoBehaviour{
             updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
             AudioManager.Instance.PlayPlayerGraze_SFX();
             hits.Add(position);
+            startRumbleTimer = true;
+            Gamepad.current.ResumeHaptics();
         } else {
             return;
         }
@@ -94,6 +112,15 @@ public class Graze : MonoBehaviour{
             endSkillTimer.Invoke();
         } else {
             GrazeBarCountDown(skillTimer, skillDuration);
+        }
+   }
+
+   private void RumbleTimer(){
+        rumbleTimer += Time.deltaTime;
+        if (rumbleTimer >= rumbleDuration){
+            startRumbleTimer = false;
+            rumbleTimer = 0f;
+            Gamepad.current.PauseHaptics();
         }
    }
     private void GrazeBarCountDown(float time, float maxTime){

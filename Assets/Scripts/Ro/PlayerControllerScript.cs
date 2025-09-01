@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using MGGJ25.Shared;
 
@@ -84,6 +85,7 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Skill.started -= StartSkillUse; 
 
           controller.Disable();
+          InputSystem.PauseHaptics();
           GetComponent<Health>().healthChange.RemoveListener(OnHit);
           Graze.instance.endSkillTimer.RemoveListener(EndSkillUse);
      }
