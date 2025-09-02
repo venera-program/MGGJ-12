@@ -1085,6 +1085,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6431016342212905125, guid: 5bbb3568b8deabd43892e761e9af77b8, type: 3}
+      propertyPath: uiselectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 41cbc899a7143744486fa6fa620ac360, type: 3}
+    - target: {fileID: 6431016342212905125, guid: 5bbb3568b8deabd43892e761e9af77b8, type: 3}
+      propertyPath: uiconfirmSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0be6df1d1b71cae4d8602d4d0aa189d5, type: 3}
+    - target: {fileID: 6431016342212905125, guid: 5bbb3568b8deabd43892e761e9af77b8, type: 3}
+      propertyPath: level2MusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d6fa3da19fffe164b9c48868fd643538, type: 3}
+    - target: {fileID: 6431016342212905125, guid: 5bbb3568b8deabd43892e761e9af77b8, type: 3}
+      propertyPath: level3MusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ccde94fa9dcb8fd428eae86bc871c7ff, type: 3}
+    - target: {fileID: 6431016342212905125, guid: 5bbb3568b8deabd43892e761e9af77b8, type: 3}
+      propertyPath: playeremptySound
+      value: 
+      objectReference: {fileID: 8300000, guid: e4c89cc2ad250414382c3b0c0defe73b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

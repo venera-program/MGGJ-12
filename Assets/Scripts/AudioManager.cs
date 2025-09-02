@@ -29,8 +29,11 @@ namespace MGGJ25.Shared
         [SerializeField] private AudioClip playerspecialSound;
         [SerializeField] private AudioClip playergrazeSound;
         [SerializeField] private AudioClip playergrazefullSound;
+        [SerializeField] private AudioClip playeremptySound;
         [SerializeField] private AudioClip enemybulletSound;
         [SerializeField] private AudioClip enemydiesSound;
+        [SerializeField] private AudioClip uiselectSound;
+        [SerializeField] private AudioClip uiconfirmSound;
 
         protected void Awake()
         {
@@ -155,9 +158,13 @@ namespace MGGJ25.Shared
         public void PlayPlayerDies_SFX() => PlaySfx(playerdiesSound);
         public void PlayPlayerSpecial_SFX() => PlaySfx(playerspecialSound);
         public void PlayPlayerGraze_SFX() => PlaySfx(playergrazeSound);
-        public void PlayPlayerGrazeFull_SFX() => PlaySfx(playergrazefullSound);        
+        public void PlayPlayerGrazeFull_SFX() => PlaySfx(playergrazefullSound);
+        public void PlayPlayerEmpty_SFX() => PlaySfx(playeremptySound);     
         public void PlayEnemyBullet_SFX() => PlaySfx(enemybulletSound);
         public void PlayEnemyDies_SFX() => PlaySfx(enemydiesSound);
+        public void PlayUISelect_SFX() => PlaySfx(uiselectSound);
+        public void PlayUIConfirm_SFX() => PlaySfx(uiconfirmSound);
+
         #endregion
 
         #region Stop SFX Sounds
