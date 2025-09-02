@@ -7,9 +7,9 @@ public class Enemy_Spawner : MonoBehaviour
 {
     public const float TICK_LENGTH = 0.1f;
 
-    private static Enemy_Spawner Instance;
+    public static Enemy_Spawner Instance;
 
-    public Dictionary<int, List<SpawnInfo>> spawnInfos = new();
+    public Dictionary<int, List<SpawnInfo>> spawnInfos = new Dictionary<int, List<SpawnInfo>>();
     public GameObject[] EnemyPrefabs;
     public Transform[] EnemySpawners;
 
@@ -46,7 +46,7 @@ public class Enemy_Spawner : MonoBehaviour
 
             if (!Instance.spawnInfos.ContainsKey(tickIndex))
             {
-                Instance.spawnInfos[tickIndex] = new();
+                Instance.spawnInfos[tickIndex] = new List<SpawnInfo>();
             }
             Instance.spawnInfos[tickIndex].Add(new SpawnInfo(enemyPrefabIndex, spawnLocationIndex));
         }
@@ -58,6 +58,16 @@ public class Enemy_Spawner : MonoBehaviour
     public static void EndProcess()
     {
         Instance._spawning = false;
+    }
+
+    public void ClearEnemies(){
+        foreach(Transform t in EnemySpawners){
+            Transform[] childEnemies = t.GetComponentsInChildren<Transform>();
+            for(int i = 0; i < childEnemies.Length ; i++){
+                if(childEnemies[i] == t){continue;}
+                Destroy(childEnemies[i].gameObject);
+            }
+        }
     }
 
     private IEnumerator ProcessTicks()

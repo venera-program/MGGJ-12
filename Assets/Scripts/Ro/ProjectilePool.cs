@@ -186,6 +186,33 @@ public class ProjectilePool : MonoBehaviour
                 return 0;
         }
     }
+
+    public void ResetAllProjectiles(){
+        foreach(GameObject a in directedPool){
+            a.SetActive(false);
+        }
+        foreach(GameObject a in directed2Pool){
+            a.SetActive(false);
+        }
+        foreach(GameObject a in undirectedPool){
+            a.SetActive(false);
+        }
+        foreach(GameObject a in undirected2Pool){
+            a.SetActive(false);
+        }
+        foreach(GameObject a in anglePool){
+            a.SetActive(false);
+        }
+        foreach(GameObject a in forwardPool){
+            a.SetActive(false);
+        }
+        foreach(GameObject a in specialAnglePool){
+            a.SetActive(false);
+        }
+        foreach(GameObject a in specialForwardPool){
+            a.SetActive(false);
+        }
+    }
 }
 
 public enum ProjectileType {

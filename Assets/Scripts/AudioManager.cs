@@ -144,6 +144,18 @@ namespace MGGJ25.Shared
             musicAudioSource.Stop();
         }
 
+        public void SetMusicVolume(float volume){
+            musicAudioSource.volume = volume;
+        }
+
+        public void SetSFXVolume(float volume){
+            foreach (AudioSource source in sfxAudioSources){
+                source.volume = volume;
+            }
+
+            sfxLoopAudioSource.volume = volume;
+        }
+
         #region Music Sounds
         public void PlayLevel1_Music() => PlayMusic(level1MusicClip);
         public void PlayLevel2_Music() => PlayMusic(level2MusicClip);
