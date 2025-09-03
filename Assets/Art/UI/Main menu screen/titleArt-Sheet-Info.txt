@@ -1,0 +1,2 @@
+frame res: 240x160
+4 frames.
