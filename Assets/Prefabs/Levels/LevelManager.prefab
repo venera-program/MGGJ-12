@@ -48,6 +48,7 @@ MonoBehaviour:
   MenuUI: {fileID: 0}
   CombatUI: {fileID: 0}
   BackgroundUI: {fileID: 0}
+  BackgroundImage: {fileID: 0}
   levels:
   - {fileID: 11400000, guid: b35daa4f582782e459d34afe9f76c616, type: 2}
 --- !u!114 &6402084223330263848
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefabs:
   - {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
-  - {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+  - {fileID: 1802887116257054782, guid: 6b08ceeda000b2443906743b24a65e9d, type: 3}
   EnemySpawners:
   - {fileID: 0}
   - {fileID: 0}
