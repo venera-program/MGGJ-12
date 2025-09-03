@@ -20,6 +20,10 @@ public class LevelManager : MonoBehaviour
 
     private Coroutine _levelThread;
 
+    void Start(){
+        LoadMainMenu();
+    }
+
     private void OnDestroy()
     {
         if (_levelThread != null)
@@ -86,6 +90,9 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("LoadMainMenu")]
     public void LoadMainMenu()
     {
+        if(PlayerControllerScript.instance != null){
+            PlayerControllerScript.instance.DisablePlayerControls();
+        } 
         UnloadLevel();
         LoadLevel(-1);
     }
@@ -93,7 +100,15 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("LoadFirstLevel")]
     public void LoadFirstLevel()
     {
+        if(PlayerControllerScript.instance != null){
+            PlayerControllerScript.instance.EnablePlayerControls();
+        } 
         UnloadLevel();
         LoadLevel(0);
+    }
+
+    public void RestartLevel(){
+        UnloadLevel();
+        LoadLevel(CurrentLevelIndex);
     }
 }

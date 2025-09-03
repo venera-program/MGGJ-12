@@ -7,13 +7,13 @@ public class Enemy_Spawner : MonoBehaviour
 {
     public const float TICK_LENGTH = 0.1f;
 
-    private static Enemy_Spawner Instance;
+    public static Enemy_Spawner Instance;
 
-    public Dictionary<int, List<SpawnInfo>> spawnInfos = new();
+    public Dictionary<int, List<SpawnInfo>> spawnInfos = new Dictionary<int, List<SpawnInfo>>();
     public GameObject[] EnemyPrefabs;
     public Transform[] EnemySpawners;
 
-    private List<GameObject> _enemies = new();
+    private List<GameObject> _enemies = new List<GameObject>();
 
     private bool _spawning;
     private int _currentTick;
@@ -52,7 +52,7 @@ public class Enemy_Spawner : MonoBehaviour
 
             if (!Instance.spawnInfos.ContainsKey(tickIndex))
             {
-                Instance.spawnInfos[tickIndex] = new();
+                Instance.spawnInfos[tickIndex] = new List<SpawnInfo>();
             }
             Instance.spawnInfos[tickIndex].Add(new SpawnInfo(enemyPrefabIndex, spawnLocationIndex));
         }
