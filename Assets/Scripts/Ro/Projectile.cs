@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Projectile : MonoBehaviour
 {
@@ -12,55 +9,84 @@ public class Projectile : MonoBehaviour
     public Transform image;
     [SerializeField] private Collider2D collider;
 
-    public void Update(){
-        if(isMoving){
+    private void OnEnable()
+    {
+        LevelManager.OnLevelUnload += OnLevelUnload;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.OnLevelUnload -= OnLevelUnload;
+    }
+
+    private void OnLevelUnload()
+    {
+        ProjectilePool.instance.DeactivateProjectile(this);
+    }
+
+    public void Update()
+    {
+        if (isMoving)
+        {
             Move(speed);
             CheckIfOutOfBounds();
-            if(gameObject.tag == "EnemyProjectile"){
+            if (gameObject.tag == "EnemyProjectile")
+            {
                 CheckIfGraze();
             }
         }
     }
-    public void ConstructProjectile(float speed, float movementAngle){
+
+    public void ConstructProjectile(float speed, float movementAngle)
+    {
         this.speed = speed;
         transform.rotation = Quaternion.identity;
         image.rotation = Quaternion.identity;
-        transform.Rotate(new Vector3(0f,0f,movementAngle), Space.World);
-        if(projectileType != ProjectileType.angle){ 
+        transform.Rotate(new Vector3(0f, 0f, movementAngle), Space.World);
+        if (projectileType != ProjectileType.angle)
+        {
             // this is done because all the sprite art face 90 degrees by default, but the angle sprite faces 0
-             image.Rotate(new Vector3(0f, 0f, -90f), Space.Self);
+            image.Rotate(new Vector3(0f, 0f, -90f), Space.Self);
         }
-        
+
         StartMoving();
     }
-    
-    private void StartMoving(){
+
+    private void StartMoving()
+    {
         isMoving = true;
     }
 
-    public void Move(float movementSpeed){
+    public void Move(float movementSpeed)
+    {
         transform.position = (transform.right * movementSpeed * Time.deltaTime) + transform.position;
     }
 
-    private void CheckIfOutOfBounds(){
-        if(!HelperFunctions.IsOnScreen(transform.position)){
+    private void CheckIfOutOfBounds()
+    {
+        if (!HelperFunctions.IsOnScreen(transform.position))
+        {
             isMoving = false;
-            if(tag == "EnemyProjectile"){
+            if (CompareTag("EnemyProjectile"))
+            {
                 Graze.instance.RemoveGrazeCount(gameObject.GetInstanceID());
             }
             ProjectilePool.instance.DeactivateProjectile(this);
         }
     }
 
-    private void CheckIfGraze(){
-        if(HelperFunctions.IsContact(Graze.instance.transform.position, collider.ClosestPoint(Graze.instance.transform.position), Graze.instance.grazeRadius)){
+    private void CheckIfGraze()
+    {
+        if (HelperFunctions.IsContact(Graze.instance.transform.position, collider.ClosestPoint(Graze.instance.transform.position), Graze.instance.grazeRadius))
+        {
             Graze.instance.AddGrazeCount(gameObject.GetInstanceID(), transform.position);
         }
     }
 }
 
-public enum ProjectileSprite {
-    Directed, 
+public enum ProjectileSprite
+{
+    Directed,
     NonDirected
 }
 

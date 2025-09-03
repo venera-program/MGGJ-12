@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
             Debug.Log("trying to take damage when immune", this);
             return;
         }
-        if(isInvincible) return; 
+        if (isInvincible) return;
 
         currHealth = Mathf.Clamp(currHealth - damage, 0f, maxHealth);
         Debug.Log($"{transform.name} took {damage} damage");
@@ -44,6 +44,13 @@ public class Health : MonoBehaviour
     public void FullHeal()
     {
         currHealth = maxHealth;
+        healthChange.Invoke(currHealth, maxHealth);
+    }
+
+    [ContextMenu("FullHarm")]
+    public void FullHarm()
+    {
+        currHealth = 0;
         healthChange.Invoke(currHealth, maxHealth);
     }
 
