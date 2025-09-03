@@ -106,4 +106,9 @@ public class LevelManager : MonoBehaviour
         UnloadLevel();
         LoadLevel(0);
     }
+
+    public void RestartLevel(){
+        UnloadLevel();
+        LoadLevel(CurrentLevelIndex);
+    }
 }

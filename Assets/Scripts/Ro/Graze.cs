@@ -69,6 +69,14 @@ public class Graze : MonoBehaviour{
         }
     }
 
+    void OnEnable(){
+        LevelManager.OnLevelUnload += ClearGrazeCount;
+    }
+
+    void OnDisable(){
+        LevelManager.OnLevelUnload -= ClearGrazeCount;
+    }
+
     void Update(){
         if(startTimer){
             SkillTimer();
@@ -138,6 +146,7 @@ public class Graze : MonoBehaviour{
         projectileContact.Clear();
         grazeAmount = 0;
         updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
+        hits.Clear();
    }
 
    public void RemoveGrazeCount(int instanceID){

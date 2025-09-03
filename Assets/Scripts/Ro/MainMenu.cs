@@ -21,12 +21,10 @@ public class MainMenu : MonoBehaviour
         } else {
             instance = this;
         }
-
-        EventSystem.current.SetSelectedGameObject(firstSelectedButton);
    }
 
-   void Start(){
-
+   void OnEnable(){
+    EventSystem.current.SetSelectedGameObject(firstSelectedButton);
    }
 
    public void OpenMenu(MenuSO menu){

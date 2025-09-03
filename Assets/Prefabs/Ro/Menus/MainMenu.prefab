@@ -323,8 +323,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 156.6, y: 12.600006}
-  m_SizeDelta: {x: 166.80002, y: -14.799988}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6199687995652633504
 CanvasRenderer:
@@ -474,10 +474,10 @@ RectTransform:
   - {fileID: 1474321675393893572}
   m_Father: {fileID: 6179540088392727091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -156.6, y: -12.599998}
-  m_SizeDelta: {x: 313.2, y: 284.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1210403257512343806
 MonoBehaviour:
@@ -494,6 +494,7 @@ MonoBehaviour:
   firstSelectedButton: {fileID: 3986593507885130552}
   settingsMenu: {fileID: 5550702292638568238}
   creditsScreen: {fileID: 4125773788654656142}
+  pauseMenu: {fileID: 0}
 --- !u!114 &514519574104937197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,7 +1385,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 80.999985, y: 25.4}
+  m_AnchoredPosition: {x: 0, y: 12.4}
   m_SizeDelta: {x: 162, y: 234}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4050470122207571346
@@ -2563,8 +2564,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 156.6, y: 20}
-  m_SizeDelta: {x: 166.80002, y: 40}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &5269783025322346311
 MonoBehaviour:

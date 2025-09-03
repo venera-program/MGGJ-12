@@ -23,7 +23,4 @@ public class PauseMenu : MonoBehaviour {
         PlayerControllerScript.instance.EnablePlayerControls();
     }
 
-    public void RestartLevel(){
-        
-    }
 }

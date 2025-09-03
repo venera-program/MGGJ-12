@@ -13,7 +13,7 @@ public class Enemy_Spawner : MonoBehaviour
     public GameObject[] EnemyPrefabs;
     public Transform[] EnemySpawners;
 
-    private List<GameObject> _enemies = new();
+    private List<GameObject> _enemies = new List<GameObject>();
 
     private bool _spawning;
     private int _currentTick;
@@ -74,16 +74,6 @@ public class Enemy_Spawner : MonoBehaviour
         }
 
         Instance._spawning = false;
-    }
-
-    public void ClearEnemies(){
-        foreach(Transform t in EnemySpawners){
-            Transform[] childEnemies = t.GetComponentsInChildren<Transform>();
-            for(int i = 0; i < childEnemies.Length ; i++){
-                if(childEnemies[i] == t){continue;}
-                Destroy(childEnemies[i].gameObject);
-            }
-        }
     }
 
     private IEnumerator ProcessTicks()
