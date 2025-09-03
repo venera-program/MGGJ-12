@@ -5,21 +5,20 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public static Action<sbyte> OnLevelChange = _ => { };
+    public static Action<sbyte> OnLevelChange = (_) => { };
+    public static Action OnLevelUnload = () => { };
 
     public static sbyte CurrentLevelIndex { get; private set; }
+    public static bool BossDefeated = false;
 
     public GameObject MenuUI;
     public GameObject CombatUI;
-    public Image BackgroundUI;
+    public GameObject BackgroundUI;
+    public Image BackgroundImage;
 
     public LevelInfo[] levels = { };
 
     private Coroutine _levelThread;
-
-    void Start(){
-        LoadMainMenu();
-    }
 
     private void OnDestroy()
     {
@@ -38,11 +37,10 @@ public class LevelManager : MonoBehaviour
         CurrentLevelIndex = levelNumber;
         OnLevelChange.Invoke(CurrentLevelIndex);
 
-        // Level -1 is the main menu.
         if (CurrentLevelIndex == -1)
         {
             MenuUI.SetActive(true);
-            // UI: Enable main menu
+            // The main menu doesn't need an execution loop
             return;
         }
 
@@ -52,40 +50,42 @@ public class LevelManager : MonoBehaviour
     private IEnumerator ExecuteLevel()
     {
         CombatUI.SetActive(true);
-        BackgroundUI.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
-        BackgroundUI.enabled = true;
+        BackgroundImage.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
+        BackgroundUI.SetActive(true);
         Enemy_Spawner.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
 
-        // Wait for level to be over
-        var levelComplete = false;
-        while (!levelComplete)
+        BossDefeated = false;
+        while (!BossDefeated)
         {
-            yield return new WaitForSeconds(60); // TODO: Level completion flag (not timer)
-            levelComplete = true;
+            yield return null;
         }
 
         UnloadLevel();
 
-        // TODO: Figure out which level to load
-        LoadMainMenu();
+        // Load next level, else load main menu
+        // L 1|2|3
+        // i 0|1|2
+        if (levels.Length > CurrentLevelIndex + 1)
+        {
+            LoadLevel((sbyte)(CurrentLevelIndex + 1));
+        }
+        else
+        {
+            LoadLevel(-1);
+        }
     }
 
     private void UnloadLevel()
     {
-        BackgroundUI.enabled = false;
+        BackgroundUI.SetActive(false);
         MenuUI.SetActive(false);
         CombatUI.SetActive(false);
-        Enemy_Spawner.EndProcess();
-        if(Enemy_Spawner.Instance != null){
-            Enemy_Spawner.Instance.ClearEnemies();
-        }
+        OnLevelUnload.Invoke();
     }
 
     [ContextMenu("LoadMainMenu")]
     public void LoadMainMenu()
     {
-        if(PlayerControllerScript.instance != null){
-            PlayerControllerScript.instance.DisablePlayerControls();}
         UnloadLevel();
         LoadLevel(-1);
     }
@@ -93,18 +93,7 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("LoadFirstLevel")]
     public void LoadFirstLevel()
     {
-        if(PlayerControllerScript.instance != null){
-            PlayerControllerScript.instance.EnablePlayerControls();
-        }
         UnloadLevel();
         LoadLevel(0);
-    }
-
-    public void RestartLevel(){
-        if(PlayerControllerScript.instance != null){
-            PlayerControllerScript.instance.EnablePlayerControls();
-        }
-        UnloadLevel();
-        LoadLevel(CurrentLevelIndex);
     }
 }

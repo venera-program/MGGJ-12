@@ -13,6 +13,8 @@ public class Enemy_Spawner : MonoBehaviour
     public GameObject[] EnemyPrefabs;
     public Transform[] EnemySpawners;
 
+    private List<GameObject> _enemies = new();
+
     private bool _spawning;
     private int _currentTick;
 
@@ -31,10 +33,14 @@ public class Enemy_Spawner : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        LevelManager.OnLevelUnload += EndProcess;
     }
 
     public static void StartProcessFromAsset(TextAsset spawnInfoCSV)
     {
+        Instance.spawnInfos.Clear();
+
         string[] lines = spawnInfoCSV.text.Split('\n');
         for (int i = 0; i < lines.Length; i++)
         {
@@ -57,6 +63,16 @@ public class Enemy_Spawner : MonoBehaviour
 
     public static void EndProcess()
     {
+        GameObject obj;
+        for (int i = 0; i < Instance._enemies.Count; i++)
+        {
+            obj = Instance._enemies[i];
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+
         Instance._spawning = false;
     }
 
@@ -80,7 +96,7 @@ public class Enemy_Spawner : MonoBehaviour
             {
                 foreach (var enemyInfo in spawnInfos[_currentTick])
                 {
-                    Instantiate(EnemyPrefabs[enemyInfo.EnemyPrefabIndex], EnemySpawners[enemyInfo.SpawnerIndex]);
+                    _enemies.Add(Instantiate(EnemyPrefabs[enemyInfo.EnemyPrefabIndex], EnemySpawners[enemyInfo.SpawnerIndex]));
                 }
             }
             yield return new WaitForSeconds(TICK_LENGTH); // Wait tick length
