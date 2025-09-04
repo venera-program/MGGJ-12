@@ -92,6 +92,7 @@ public class LevelManager : MonoBehaviour
     {
         if(PlayerControllerScript.instance != null){
             PlayerControllerScript.instance.DisablePlayerControls();
+            Debug.Log("Freezing Game");
         } 
         UnloadLevel();
         LoadLevel(-1);

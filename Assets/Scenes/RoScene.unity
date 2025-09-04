@@ -993,14 +993,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5023016236455937912, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 5114239239087767315, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5826966324915016435, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 526154170}
+    - target: {fileID: 6610860904893156662, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+      propertyPath: m_Offset.y
+      value: 7.273376
+      objectReference: {fileID: 0}
     - target: {fileID: 7284003835481235654, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1141,8 +1145,8 @@ SceneRoots:
   - {fileID: 309046989}
   - {fileID: 21391204}
   - {fileID: 287143445}
-  - {fileID: 8840260330752582450}
   - {fileID: 21081545}
   - {fileID: 979966804}
   - {fileID: 526154170}
   - {fileID: 868772896}
+  - {fileID: 8840260330752582450}
