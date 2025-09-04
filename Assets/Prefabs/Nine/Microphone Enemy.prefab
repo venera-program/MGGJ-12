@@ -374,7 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Patterns:
   - groups:
-    - pattern: 0
+    - pattern: 2
       projectileCount: 5
       startingAngle: 0
       endingAngle: 360
