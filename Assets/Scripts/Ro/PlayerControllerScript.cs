@@ -65,6 +65,9 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
           controller.Main.Skill.started += StartSkillUse;
+          controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
+
+          controller.UI.Cancel.started += MainMenu.instance.BackButton;
 
           GetComponent<Health>().healthChange.AddListener(OnHit);
           Graze.instance.endSkillTimer.AddListener(EndSkillUse);
@@ -81,6 +84,9 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Shoot.started -= Shoot;
           controller.Main.Shoot.canceled -= StopShoot;
           controller.Main.Skill.started -= StartSkillUse; 
+          controller.Main.Escape.performed -= MainMenu.instance.OpenPauseMenu;
+
+          controller.UI.Cancel.started -= MainMenu.instance.BackButton;
 
           controller.Disable();
           InputSystem.PauseHaptics();
@@ -230,6 +236,15 @@ public class PlayerControllerScript : MonoBehaviour
                     Projectile script = projectile.GetComponent<Projectile>();
                     script.ConstructProjectile(specialShootingPattern[i].speed, specialShootingPattern[i].startingAngle);
                }
+     }
+
+     public void EnablePlayerControls(){
+          controller.Main.Enable();
+     }
+
+     public void DisablePlayerControls(){
+          controller.Main.Disable();
+          InputSystem.PauseHaptics();
      }
  
 

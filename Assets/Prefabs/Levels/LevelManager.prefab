@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2718579805764562059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6970030116083853098}
+  - component: {fileID: 4688758759550188642}
+  - component: {fileID: 6402084223330263848}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6970030116083853098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718579805764562059}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4688758759550188642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718579805764562059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7c33ff89daac946ab0307df20b8428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MenuUI: {fileID: 0}
+  CombatUI: {fileID: 0}
+  BackgroundUI: {fileID: 0}
+  BackgroundImage: {fileID: 0}
+  levels:
+  - {fileID: 11400000, guid: b35daa4f582782e459d34afe9f76c616, type: 2}
+--- !u!114 &6402084223330263848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718579805764562059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bef144471daac04d85673a9ddba721f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPrefabs:
+  - {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+  - {fileID: 1802887116257054782, guid: 6b08ceeda000b2443906743b24a65e9d, type: 3}
+  EnemySpawners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
