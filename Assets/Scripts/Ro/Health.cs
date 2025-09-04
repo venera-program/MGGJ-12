@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
 
     void Awake()
     {
-        currHealth = maxHealth;
+        FullHeal();
     }
 
     public void TakeDamage(float damage)

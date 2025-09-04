@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
 
     private Coroutine _levelThread;
 
+    public float levelLoadDelay;
+
     void Start(){
         LoadMainMenu();
     }
@@ -64,6 +66,8 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(levelLoadDelay);
+
         UnloadLevel();
 
         // Load next level, else load main menu
@@ -75,7 +79,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            LoadLevel(-1);
+            LoadMainMenu();
         }
     }
 

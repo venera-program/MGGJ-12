@@ -82,6 +82,7 @@ public class PlayerControllerScript : MonoBehaviour
           Graze.instance.endSkillTimer.AddListener(EndSkillUse);
           LevelManager.OnLevelChange += HealMC;
           LevelManager.OnLevelUnload += ResetMC;
+          LevelManager.OnLevelUnload += PlayerData.ClearScore;
      }
 
      private void Start()
@@ -119,6 +120,7 @@ public class PlayerControllerScript : MonoBehaviour
           controller.UI.Cancel.started -= MainMenu.instance.BackButton;
           LevelManager.OnLevelChange -= HealMC;
           LevelManager.OnLevelUnload -= ResetMC;
+          LevelManager.OnLevelUnload -= PlayerData.ClearScore;
 
           controller.Disable();
           InputSystem.PauseHaptics();
