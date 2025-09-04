@@ -21,6 +21,7 @@ namespace MGGJ25.Shared
         [SerializeField] private AudioClip level1MusicClip;
         [SerializeField] private AudioClip level2MusicClip;
         [SerializeField] private AudioClip level3MusicClip;
+        [SerializeField] private AudioClip volumetempClip;
 
 
         [Header("SFX Clips")]
@@ -163,6 +164,7 @@ namespace MGGJ25.Shared
         public void PlayLevel1_Music() => PlayMusic(level1MusicClip);
         public void PlayLevel2_Music() => PlayMusic(level2MusicClip);
         public void PlayLevel3_Music() => PlayMusic(level3MusicClip);
+        public void PlayVolume_Temp() => PlayMusic(volumetempClip);
         #endregion
 
         #region SFX Sounds
@@ -182,6 +184,7 @@ namespace MGGJ25.Shared
         #region Stop SFX Sounds
         public void StopPlayerBullet_SFX() => StopSfx(playerbulletSound);
         public void StopPlayerSpecial_SFX() => StopSfx(playerspecialSound);
+        public void StopVolume_Temp() => StopSfx(volumetempClip);
         #endregion
     }
 }
