@@ -13,8 +13,8 @@ public class PlayerControllerScript : MonoBehaviour
      private const string IS_MOVING = "isMoving";
      private const string WAS_HIT = "wasHit";
      private bool flipped;
-
-    public Transform spawnPoint;
+    
+     public Transform spawnPoint;
 
      public static PlayerControllerScript instance;
 
@@ -24,6 +24,7 @@ public class PlayerControllerScript : MonoBehaviour
 
      private Animator animator;
      private Image playerImage;
+     private PlayerSkill script;
 
 
      [Range(0f, 30f)] public float speed = 5;
@@ -43,6 +44,10 @@ public class PlayerControllerScript : MonoBehaviour
      private bool startGeneratingProject = false;
      private bool skillActivated = false;
 
+     private Collider2D collider;
+
+     private bool canMove = true;
+
      void Awake()
      {
           if (instance != null && instance != this)
@@ -52,11 +57,13 @@ public class PlayerControllerScript : MonoBehaviour
           instance = this;
 
           rb = GetComponent<Rigidbody2D>();
+          collider = GetComponent<Collider2D>();
 
           controller = new PlayerController();
           
           animator = GetComponentInChildren<Animator>();
           playerImage = GetComponentInChildren<Image>();
+          script = GetComponent<PlayerSkill>();
      }
 
      private void OnEnable()
@@ -65,18 +72,42 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
           controller.Main.Skill.started += StartSkillUse;
-          controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
+        if (MainMenu.instance != null)
+        {
+            controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
 
-          controller.UI.Cancel.started += MainMenu.instance.BackButton;
-
+            controller.UI.Cancel.started += MainMenu.instance.BackButton;
+        }
           GetComponent<Health>().healthChange.AddListener(OnHit);
           Graze.instance.endSkillTimer.AddListener(EndSkillUse);
+          LevelManager.OnLevelChange += HealMC;
+          LevelManager.OnLevelUnload += ResetMC;
+          LevelManager.OnLevelUnload += PlayerData.ClearScore;
      }
 
      private void Start()
      {
           projectileTimer = projectileSpawnInterval;
           _spawnPoint = transform.position;
+     }
+
+     private void HealMC(sbyte currentLevel){
+          if (currentLevel == 0){
+               GetComponent<Health>().FullHeal();
+          }
+     }
+
+     private void ResetMC(){
+          StopCoroutine(RespawnPlayer());
+          Move(Vector2.zero);
+          startGeneratingProject = false;
+          animator.SetBool("wasHit", false);
+          transform.position = spawnPoint.position;
+          collider.enabled = true;
+          controller.Main.Move.Enable();
+          controller.Main.Shoot.Enable();
+          controller.Main.Skill.Enable();
+          GetComponent<Health>().StopIFrames();
      }
 
      void OnDisable()
@@ -87,6 +118,9 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Escape.performed -= MainMenu.instance.OpenPauseMenu;
 
           controller.UI.Cancel.started -= MainMenu.instance.BackButton;
+          LevelManager.OnLevelChange -= HealMC;
+          LevelManager.OnLevelUnload -= ResetMC;
+          LevelManager.OnLevelUnload -= PlayerData.ClearScore;
 
           controller.Disable();
           InputSystem.PauseHaptics();
@@ -123,7 +157,7 @@ public class PlayerControllerScript : MonoBehaviour
 
      void FixedUpdate()
      {
-          if (!controller.Main.Move.enabled)
+          if (!canMove)
           {
                return;
           }
@@ -181,15 +215,19 @@ public class PlayerControllerScript : MonoBehaviour
           if(!skillActivated){
                Graze.instance.StartSkillTimer();
                skillActivated = true;
+               script.switchToSkillAnimation();
           }
      }
 
      private void EndSkillUse(){
           AudioManager.Instance.StopPlayerSpecial_SFX();
+          Debug.Log("You have reached the endskilluse method, please leave a message after the tone.");
+          script.skillIsOver();
           if(startGeneratingProject){
                AudioManager.Instance.PlayPlayerBullet_SFX();
           }
           skillActivated = false;
+          
      }
 
      private void GeneratePlayerProjectiles(){
@@ -240,9 +278,19 @@ public class PlayerControllerScript : MonoBehaviour
 
      public void EnablePlayerControls(){
           controller.Main.Enable();
+          canMove = true;
+          controller.Main.Shoot.started += Shoot;
+          controller.Main.Shoot.canceled += StopShoot;
+          controller.Main.Skill.started += StartSkillUse;
+          controller.Main.Escape.Enable();
      }
 
      public void DisablePlayerControls(){
+          controller.Main.Shoot.started -= Shoot;
+          controller.Main.Shoot.canceled -= StopShoot;
+          controller.Main.Skill.started -= StartSkillUse;
+          controller.Main.Escape.Disable();
+          canMove = false;
           controller.Main.Disable();
           InputSystem.PauseHaptics();
      }

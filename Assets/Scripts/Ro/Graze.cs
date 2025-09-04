@@ -71,10 +71,12 @@ public class Graze : MonoBehaviour{
 
     void OnEnable(){
         LevelManager.OnLevelUnload += ClearGrazeCount;
+        LevelManager.OnLevelUnload += ResetGrazeCountUI;
     }
 
     void OnDisable(){
         LevelManager.OnLevelUnload -= ClearGrazeCount;
+        LevelManager.OnLevelUnload -= ResetGrazeCountUI;
     }
 
     void Update(){
@@ -92,6 +94,7 @@ public class Graze : MonoBehaviour{
             projectileContact.Add(instanceID, 1);
             grazeAmount = Mathf.Clamp(grazeAmount + 1, 0, maxGrazeAmount);
             updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
+            PlayerData.UpdateGraze(1);
             AudioManager.Instance.PlayPlayerGraze_SFX();
             hits.Add(position);
             startRumbleTimer = true;
@@ -147,6 +150,10 @@ public class Graze : MonoBehaviour{
         grazeAmount = 0;
         updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
         hits.Clear();
+   }
+
+   public void ResetGrazeCountUI(){
+        PlayerData.ClearGraze();
    }
 
    public void RemoveGrazeCount(int instanceID){

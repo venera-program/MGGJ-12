@@ -22,8 +22,8 @@ public class Enemy : MonoBehaviour
         {
             collider.enabled = false;
             AudioManager.Instance.PlayEnemyDies_SFX();
+            animator.Play("Dead");
             PlayerData.UpdateScore(score);
-            animator.SetBool("isDead", true);
             Destroy(gameObject, deathDelay);
         }
     }

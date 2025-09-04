@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(TMPro.TMP_Text))]
 public class Score_UI : MonoBehaviour

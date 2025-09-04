@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
 
     void Awake()
     {
-        currHealth = maxHealth;
+        FullHeal();
     }
 
     public void TakeDamage(float damage)
@@ -54,14 +54,27 @@ public class Health : MonoBehaviour
         healthChange.Invoke(currHealth, maxHealth);
     }
 
+    public float GetCurrHealth(){
+        return currHealth;
+    }
+
+    public float GetMaxHealth(){
+        return maxHealth;
+    }
+
     public void TriggerIFrames(int frameCount)
     {
-        if (_IFrameRoutine != null)
-        {
-            StopCoroutine(_IFrameRoutine);
-        }
+        StopIFrames();
 
         _IFrameRoutine = StartCoroutine(CountIFrames(frameCount));
+    }
+
+    public void StopIFrames(){
+       if (_IFrameRoutine != null)
+        {
+            StopCoroutine(_IFrameRoutine);
+            _IFrameRoutine = null;
+        }
     }
 
     public IEnumerator CountIFrames(int _TargetIFrame)
