@@ -1046,6 +1046,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -44.25
       objectReference: {fileID: 0}
+    - target: {fileID: 1167819937338352466, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+      propertyPath: specialForward
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1406781302907734016, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -1393,6 +1397,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 701226241416894387, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8840260330752582453}
+    - targetCorrespondingSourceObject: {fileID: 6169881281943736812, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8840260330752582456}
   m_SourcePrefab: {fileID: 100100000, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
 --- !u!114 &8840260330752582451 stripped
 MonoBehaviour:
@@ -1425,6 +1432,35 @@ MonoBehaviour:
   bossHealthSlider: {fileID: 8840260330752582451}
   sliderObject: {fileID: 907633448}
   turnOffDelay: 1
+--- !u!1 &8840260330752582454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6169881281943736812, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+  m_PrefabInstance: {fileID: 8840260330752582450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8840260330752582455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7560462537628192579, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+  m_PrefabInstance: {fileID: 8840260330752582450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840260330752582454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8840260330752582456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840260330752582454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935568350bf824148b6dc5b1341872b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialAttackTest: {fileID: 8840260330752582455}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
