@@ -73,6 +73,7 @@ public class Health : MonoBehaviour
        if (_IFrameRoutine != null)
         {
             StopCoroutine(_IFrameRoutine);
+            _IFrameRoutine = null;
         }
     }
 

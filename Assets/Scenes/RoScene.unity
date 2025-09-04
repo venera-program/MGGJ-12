@@ -661,6 +661,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 97963636}
     - target: {fileID: 6402084223330263848, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
+      propertyPath: EnemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 5819460166187031149, guid: e271b5f4c7717a44a80110a43950c2ca, type: 3}
+    - target: {fileID: 6402084223330263848, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
       propertyPath: EnemySpawners.Array.data[0]
       value: 
       objectReference: {fileID: 1709336788}
@@ -957,6 +961,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1576127161}
+    - target: {fileID: 2380254980421232348, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+      propertyPath: mainAnimator
+      value: 
+      objectReference: {fileID: 9100000, guid: a036fa57bae96724d852e4bd45af7b0c, type: 2}
+    - target: {fileID: 2380254980421232348, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+      propertyPath: skillOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: ae9da1398aeb2f34c91077287cc215a8, type: 2}
+    - target: {fileID: 2380254980421232348, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
+      propertyPath: flickerOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 4f23dce7d999b764b8a600f689ed20eb, type: 2}
     - target: {fileID: 2629139871654295535, guid: 599fcac0fecad5d40bed9841758fa935, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
