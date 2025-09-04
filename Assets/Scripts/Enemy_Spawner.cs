@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [DisallowMultipleComponent]
 public class Enemy_Spawner : MonoBehaviour
@@ -17,7 +18,7 @@ public class Enemy_Spawner : MonoBehaviour
 
     private bool _spawning;
     private int _currentTick;
-
+    public UnityEvent bossSpawned = new UnityEvent();
     public class SpawnInfo
     {
         public SpawnInfo(byte enemyPrefabIndex, byte spawnLocationIndex)
@@ -86,7 +87,11 @@ public class Enemy_Spawner : MonoBehaviour
             {
                 foreach (var enemyInfo in spawnInfos[_currentTick])
                 {
-                    _enemies.Add(Instantiate(EnemyPrefabs[enemyInfo.EnemyPrefabIndex], EnemySpawners[enemyInfo.SpawnerIndex]));
+                    GameObject enemy = Instantiate(EnemyPrefabs[enemyInfo.EnemyPrefabIndex], EnemySpawners[enemyInfo.SpawnerIndex]);
+                    _enemies.Add(enemy);
+                    if(enemy.tag == "Boss"){
+                        bossSpawned.Invoke();
+                    }
                 }
             }
             yield return new WaitForSeconds(TICK_LENGTH); // Wait tick length

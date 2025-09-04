@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MGGJ25.Shared;
+using UnityEngine.Events;
 
 public class ProjectilePool : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class ProjectilePool : MonoBehaviour
     private Queue<GameObject> specialAnglePool = new Queue<GameObject>();
     private Queue<GameObject> specialForwardPool = new Queue<GameObject>();
 
+    [Header("Special Attack Event")]
+    public UnityEvent<int> specialAttackCount = new UnityEvent<int>();
 
     void Awake(){
         if (instance != null && instance != this){
@@ -38,6 +41,7 @@ public class ProjectilePool : MonoBehaviour
         } else {
             instance = this;
         }
+        specialAngle = specialForward * 4;
         GenerateEnemyProjectilePools();
         GeneratePlayerProjectilePools();
     }
@@ -121,9 +125,11 @@ public class ProjectilePool : MonoBehaviour
                 break;
             case(ProjectileType.specialAngle):
                 project = specialAnglePool.Count > 0 ? specialAnglePool.Dequeue() : ProjectileResources.instance.defaultProjectile;
+                specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
             case(ProjectileType.specialForward):
                 project = specialForwardPool.Count > 0 ? specialForwardPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
+                specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
             default:
                 project = ProjectileResources.instance.defaultProjectile;
@@ -157,9 +163,11 @@ public class ProjectilePool : MonoBehaviour
                 break;
             case(ProjectileType.specialAngle):
                 specialAnglePool.Enqueue(project.gameObject);
+                specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
             case(ProjectileType.specialForward):
                 specialForwardPool.Enqueue(project.gameObject);
+                specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
         }
     }
@@ -212,6 +220,7 @@ public class ProjectilePool : MonoBehaviour
         foreach(GameObject a in specialForwardPool){
             a.SetActive(false);
         }
+        specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
     }
 }
 
