@@ -54,14 +54,26 @@ public class Health : MonoBehaviour
         healthChange.Invoke(currHealth, maxHealth);
     }
 
+    public float GetCurrHealth(){
+        return currHealth;
+    }
+
+    public float GetMaxHealth(){
+        return maxHealth;
+    }
+
     public void TriggerIFrames(int frameCount)
     {
-        if (_IFrameRoutine != null)
+        StopIFrames();
+
+        _IFrameRoutine = StartCoroutine(CountIFrames(frameCount));
+    }
+
+    public void StopIFrames(){
+       if (_IFrameRoutine != null)
         {
             StopCoroutine(_IFrameRoutine);
         }
-
-        _IFrameRoutine = StartCoroutine(CountIFrames(frameCount));
     }
 
     public IEnumerator CountIFrames(int _TargetIFrame)
