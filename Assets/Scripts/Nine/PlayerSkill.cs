@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSkillAnimationScript : MonoBehaviour
+public class PlayerSkill : MonoBehaviour
 {
     private Animator animator;
     private Animator _default;
@@ -17,7 +17,7 @@ public class PlayerSkillAnimationScript : MonoBehaviour
     }
 
     // Player Controller script will call this function to switch to our skill override
-    private void switchToSkillAnimation()
+    public void switchToSkillAnimation()
     {
         animator = skillOverride;
         StartCoroutine(skillIsEnding(flickerDelay));
@@ -31,7 +31,7 @@ public class PlayerSkillAnimationScript : MonoBehaviour
     }
 
     //Player Controller Script will call this when the skill is over to switch back to our MC_Animation_Controller
-    private void skillIsOver()
+    public void skillIsOver()
     {
         animator = mainAnimator;
     }
