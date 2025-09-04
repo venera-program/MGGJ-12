@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 
 public class PlayerSkill : MonoBehaviour
 {
     private Animator animator;
     private Animator _default;
-    [SerializeField] private Animator mainAnimator;
-    [SerializeField] private Animator skillOverride;
-    [SerializeField] private Animator flickerOverride;
+    [SerializeField] private AnimatorController mainAnimator;
+    [SerializeField] private AnimatorOverrideController skillOverride;
+    [SerializeField] private AnimatorOverrideController flickerOverride;
     [SerializeField] private float flickerDelay;
 
     void Awake()
     {
-        animator = mainAnimator;
+        animator = GetComponentInChildren<Animator>();
+        animator.runtimeAnimatorController = mainAnimator;
     }
 
     // Player Controller script will call this function to switch to our skill override
     public void switchToSkillAnimation()
     {
-        animator = skillOverride;
+        animator.runtimeAnimatorController = skillOverride;
         StartCoroutine(skillIsEnding(flickerDelay));
     }
 
@@ -27,12 +29,13 @@ public class PlayerSkill : MonoBehaviour
     private IEnumerator skillIsEnding(float waitForIt)
     {
         yield return new WaitForSeconds(waitForIt);
-        animator = flickerOverride;
+        animator.runtimeAnimatorController = flickerOverride;
     }
 
     //Player Controller Script will call this when the skill is over to switch back to our MC_Animation_Controller
     public void skillIsOver()
     {
-        animator = mainAnimator;
+        animator.runtimeAnimatorController = mainAnimator;
+        Debug.Log("the skill definitely should have stopped by now");
     }
 }

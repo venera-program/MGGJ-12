@@ -13,8 +13,8 @@ public class PlayerControllerScript : MonoBehaviour
      private const string IS_MOVING = "isMoving";
      private const string WAS_HIT = "wasHit";
      private bool flipped;
-
-    public Transform spawnPoint;
+    
+     public Transform spawnPoint;
 
      public static PlayerControllerScript instance;
 
@@ -24,6 +24,7 @@ public class PlayerControllerScript : MonoBehaviour
 
      private Animator animator;
      private Image playerImage;
+     private PlayerSkill script;
 
 
      [Range(0f, 30f)] public float speed = 5;
@@ -62,6 +63,7 @@ public class PlayerControllerScript : MonoBehaviour
           
           animator = GetComponentInChildren<Animator>();
           playerImage = GetComponentInChildren<Image>();
+          script = GetComponent<PlayerSkill>();
      }
 
      private void OnEnable()
@@ -70,10 +72,12 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
           controller.Main.Skill.started += StartSkillUse;
-          controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
+        if (MainMenu.instance != null)
+        {
+            controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
 
-          controller.UI.Cancel.started += MainMenu.instance.BackButton;
-
+            controller.UI.Cancel.started += MainMenu.instance.BackButton;
+        }
           GetComponent<Health>().healthChange.AddListener(OnHit);
           Graze.instance.endSkillTimer.AddListener(EndSkillUse);
           LevelManager.OnLevelChange += HealMC;
@@ -209,15 +213,19 @@ public class PlayerControllerScript : MonoBehaviour
           if(!skillActivated){
                Graze.instance.StartSkillTimer();
                skillActivated = true;
+               script.switchToSkillAnimation();
           }
      }
 
      private void EndSkillUse(){
           AudioManager.Instance.StopPlayerSpecial_SFX();
+          Debug.Log("You have reached the endskilluse method, please leave a message after the tone.");
+          script.skillIsOver();
           if(startGeneratingProject){
                AudioManager.Instance.PlayPlayerBullet_SFX();
           }
           skillActivated = false;
+          
      }
 
      private void GeneratePlayerProjectiles(){
