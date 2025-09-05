@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 130255011379081337}
   - component: {fileID: 3959046815094066849}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 240, y: 0.6000061}
-  m_SizeDelta: {x: 480, y: -180.79999}
+  m_SizeDelta: {x: 132.57, y: -180.8}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!61 &3959046815094066849
 BoxCollider2D:
@@ -68,7 +68,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 32.844032, y: 0}
+  m_Offset: {x: 5.847023, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -79,7 +79,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 165.68802, y: 300}
+  m_Size: {x: 111.694046, y: 300}
   m_EdgeRadius: 0
 --- !u!1 &1609021219198598796
 GameObject:
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1950367892457816574}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6964102401375511055}
   - component: {fileID: 8440769401818192086}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7617389261803817853}
   - component: {fileID: 6444895851237205694}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6083633983530420962}
   - component: {fileID: 8705894066439388753}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 7.7733765}
+  m_Offset: {x: 0, y: 7.273376}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

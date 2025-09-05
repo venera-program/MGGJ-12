@@ -138,7 +138,6 @@ namespace MGGJ25.Shared
         public void PlayMusic(AudioClip clip)
         {
             if (musicAudioSource.clip == clip) return;
-
             musicAudioSource.clip = clip;
             musicAudioSource.Play();
         }
