@@ -161,10 +161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25086b1cf70770342b72f3cd92cafbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 2
-  movementDistance: 6
+  movementType: 0
+  movementDistance: 8.5
   speed: 2.5
-  accuracy: 0.25
+  accuracy: 0.5
   isMoving: 1
   updateTargetInterval: 0.7
   bossDistance: 1
@@ -374,16 +374,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Patterns:
   - groups:
-    - pattern: 0
-      projectileCount: 5
+    - pattern: 1
+      projectileCount: 4
       startingAngle: 0
-      endingAngle: 360
-      spawnInterval: 1
+      endingAngle: 320
+      spawnInterval: 1.25
       delay: 0
-      radius: 0.5
+      radius: 0.4
       offset: {x: 0, y: 0}
-      movementAngle: 0
+      movementAngle: 1
       positionAngle: 0
-      speed: 1
+      speed: 0.88
       speedMultiplier: 0.25
     HPValueEnd: 0

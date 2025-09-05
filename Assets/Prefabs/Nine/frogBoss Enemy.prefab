@@ -274,11 +274,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 2
-  movementDistance: 6
-  speed: 2.5
+  movementDistance: 3
+  speed: 1.75
   accuracy: 0.25
   isMoving: 1
-  updateTargetInterval: 0.7
+  updateTargetInterval: 0.5
   bossDistance: 1
   topBorder: 10
   bottomBorder: 10
@@ -387,16 +387,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Patterns:
   - groups:
-    - pattern: 0
-      projectileCount: 5
+    - pattern: 2
+      projectileCount: 3
       startingAngle: 0
       endingAngle: 360
-      spawnInterval: 1
+      spawnInterval: 3
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
-      movementAngle: 0
+      movementAngle: 2
       positionAngle: 0
-      speed: 1
+      speed: 4
       speedMultiplier: 0.25
     HPValueEnd: 0
