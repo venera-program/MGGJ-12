@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public static sbyte CurrentLevelIndex { get; private set; }
     public static bool BossDefeated = false;
 
+    public static Action OnGameWin = () => { };
+
     public GameObject MenuUI;
     public GameObject CombatUI;
     public GameObject BackgroundUI;
@@ -21,6 +23,7 @@ public class LevelManager : MonoBehaviour
     private Coroutine _levelThread;
 
     public float levelLoadDelay;
+    public float winScreenDelay;
 
     void Start(){
         LoadMainMenu();
@@ -66,20 +69,22 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
 
+        if(levels.Length <= CurrentLevelIndex + 1){
+            yield return new WaitForSeconds(winScreenDelay);
+            Debug.Log("should be opening the win screen");
+            OnGameWin.Invoke();
+        }
+
         yield return new WaitForSeconds(levelLoadDelay);
 
-        UnloadLevel();
 
         // Load next level, else load main menu
         // L 1|2|3
         // i 0|1|2
         if (levels.Length > CurrentLevelIndex + 1)
         {
+            UnloadLevel();
             LoadLevel((sbyte)(CurrentLevelIndex + 1));
-        }
-        else
-        {
-            LoadMainMenu();
         }
     }
 
