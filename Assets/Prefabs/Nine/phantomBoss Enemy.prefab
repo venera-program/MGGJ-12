@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1ec1d4917027e4b935bf299eb2e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 2100
   currHealth: 0
   healthChange:
     m_PersistentCalls:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 5
-  deathDelay: 1
+  deathDelay: 0.5
 --- !u!114 &621155689032829765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,4 +386,56 @@ MonoBehaviour:
       positionAngle: 0
       speed: 0.88
       speedMultiplier: 0.25
-    HPValueEnd: 0
+    HPValueEnd: 1400
+  - groups:
+    - pattern: 0
+      projectileCount: 5
+      startingAngle: 50
+      endingAngle: 360
+      spawnInterval: 1.5
+      delay: 0
+      radius: 1
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 0.5
+      speedMultiplier: 0.25
+    - pattern: 0
+      projectileCount: 5
+      startingAngle: 0
+      endingAngle: 360
+      spawnInterval: 1.5
+      delay: 1.5
+      radius: 1.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 0.5
+      speedMultiplier: 0.25
+    HPValueEnd: 700
+  - groups:
+    - pattern: 2
+      projectileCount: 5
+      startingAngle: 0
+      endingAngle: 320
+      spawnInterval: 1.5
+      delay: 0
+      radius: 1
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 0.5
+      speedMultiplier: 0.25
+    - pattern: 2
+      projectileCount: 5
+      startingAngle: 0
+      endingAngle: 160
+      spawnInterval: 1.5
+      delay: 1.5
+      radius: 1
+      offset: {x: 0, y: 0}
+      movementAngle: 1
+      positionAngle: 0
+      speed: 0.5
+      speedMultiplier: 0.25
+    HPValueEnd: 600

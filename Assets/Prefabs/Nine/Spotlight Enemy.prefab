@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 5
-  deathDelay: 1
+  deathDelay: 0.5
 --- !u!222 &7677172775939015910
 CanvasRenderer:
   m_ObjectHideFlags: 0
