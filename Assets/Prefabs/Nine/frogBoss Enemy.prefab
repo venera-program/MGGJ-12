@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1ec1d4917027e4b935bf299eb2e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 2000
   currHealth: 0
   healthChange:
     m_PersistentCalls:
@@ -228,7 +228,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5819460166187031149}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 5
-  deathDelay: 1
+  deathDelay: 0.5
 --- !u!114 &621155689032829765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,10 +275,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementType: 2
   movementDistance: 6
-  speed: 2.5
+  speed: 1.75
   accuracy: 0.25
   isMoving: 1
-  updateTargetInterval: 0.7
+  updateTargetInterval: 0.9
   bossDistance: 1
   topBorder: 10
   bottomBorder: 10
@@ -387,16 +387,198 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Patterns:
   - groups:
-    - pattern: 0
-      projectileCount: 5
-      startingAngle: 0
-      endingAngle: 360
-      spawnInterval: 1
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 45
+      endingAngle: 0
+      spawnInterval: 3
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 1
-      speedMultiplier: 0.25
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 135
+      endingAngle: 0
+      spawnInterval: 3
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 225
+      endingAngle: 0
+      spawnInterval: 3
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 315
+      endingAngle: 0
+      spawnInterval: 3
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    HPValueEnd: 50
+  - groups:
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 0
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 30
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 60
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 2
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 90
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 3
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 120
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 4
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 150
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 5
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 180
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 6
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 210
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 7
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 240
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 8
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 270
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 9
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 300
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 10
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 330
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 11
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
     HPValueEnd: 0

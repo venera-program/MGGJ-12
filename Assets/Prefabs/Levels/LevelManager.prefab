@@ -50,7 +50,10 @@ MonoBehaviour:
   BackgroundUI: {fileID: 0}
   BackgroundImage: {fileID: 0}
   levels:
-  - {fileID: 11400000, guid: b35daa4f582782e459d34afe9f76c616, type: 2}
+  - {fileID: 11400000, guid: 8ace208b56e356a4b8fb2e2651587226, type: 2}
+  - {fileID: 11400000, guid: 4d281a3537b83fa4a9efcc6d8f0fe0d2, type: 2}
+  - {fileID: 11400000, guid: 1bbdf8368e4292b4695832fba3999091, type: 2}
+  levelLoadDelay: 0
 --- !u!114 &6402084223330263848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +68,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyPrefabs:
   - {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
-  - {fileID: 1802887116257054782, guid: 6b08ceeda000b2443906743b24a65e9d, type: 3}
+  - {fileID: 2279419871392914990, guid: 44373a4c5116a304b8378689a005e824, type: 3}
+  - {fileID: 2279419871392914990, guid: dde594a46dd0fbb41b5d5b106756ed67, type: 3}
+  - {fileID: 2279419871392914990, guid: b3cd6901e0a890441afce7268e7d1f6b, type: 3}
+  - {fileID: 5819460166187031149, guid: e271b5f4c7717a44a80110a43950c2ca, type: 3}
+  - {fileID: 5819460166187031149, guid: 647d4d8daf457ba43a817c72548cf03f, type: 3}
+  - {fileID: 5819460166187031149, guid: bcf2bc48df7de8e478dcf146f7ae9433, type: 3}
   EnemySpawners:
   - {fileID: 0}
   - {fileID: 0}
@@ -77,3 +85,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  bossSpawned:
+    m_PersistentCalls:
+      m_Calls: []

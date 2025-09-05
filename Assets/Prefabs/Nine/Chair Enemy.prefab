@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1ec1d4917027e4b935bf299eb2e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 20
   currHealth: 0
   healthChange:
     m_PersistentCalls:
@@ -206,7 +206,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11755371, y: 0}
+  m_Offset: {x: 1.0592651, y: 0.9151764}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -217,7 +217,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.13147, y: 16.131409}
+  m_Size: {x: 18.014893, y: 17.961761}
   m_EdgeRadius: 0
 --- !u!50 &5163661052504183307
 Rigidbody2D:
@@ -227,7 +227,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2279419871392914990}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 5
-  deathDelay: 1
+  deathDelay: 0.5
 --- !u!222 &7677172775939015910
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -281,11 +281,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 2
-  movementDistance: 6
-  speed: 2.5
+  movementDistance: 4
+  speed: 3
   accuracy: 0.25
   isMoving: 1
-  updateTargetInterval: 0.7
+  updateTargetInterval: 1
   bossDistance: 1
   topBorder: 10
   bottomBorder: 10
@@ -375,10 +375,10 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 0
-      projectileCount: 5
+      projectileCount: 0
       startingAngle: 0
       endingAngle: 360
-      spawnInterval: 1
+      spawnInterval: 0.5
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}

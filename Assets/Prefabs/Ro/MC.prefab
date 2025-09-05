@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grazeAmount: 0
-  maxGrazeAmount: 100
+  maxGrazeAmount: 75
   updateGrazeValue:
     m_PersistentCalls:
       m_Calls: []

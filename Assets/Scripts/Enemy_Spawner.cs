@@ -95,6 +95,7 @@ public class Enemy_Spawner : MonoBehaviour
                 }
             }
             yield return new WaitForSeconds(TICK_LENGTH); // Wait tick length
+            Debug.Log("Current Tick is: " + _currentTick);
             _currentTick++;
         }
     }
