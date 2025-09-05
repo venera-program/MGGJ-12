@@ -508,10 +508,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b957788dada1b84885c16c40486c547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXSlider: {fileID: 5203471663218485408}
-  defaultSFXVolume: 0.5
-  musicSlider: {fileID: 7541603752592790498}
-  defaultMusicVolume: 0.5
+  settingsMenu: {fileID: 0}
+  mixer: {fileID: 0}
+  sfxVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
 --- !u!1 &2583800294678014708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2655,8 +2655,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3790305485164295658}
-  - {fileID: 8755377233595368126}
   - {fileID: 2155404992421626285}
+  - {fileID: 8755377233595368126}
   - {fileID: 3480215364389067040}
   m_Father: {fileID: 7573986704587371329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
