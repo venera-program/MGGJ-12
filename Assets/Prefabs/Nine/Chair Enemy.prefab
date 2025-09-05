@@ -206,7 +206,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11755371, y: 0}
+  m_Offset: {x: 1.0592651, y: 0.9151764}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -217,7 +217,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.13147, y: 16.131409}
+  m_Size: {x: 18.014893, y: 17.961761}
   m_EdgeRadius: 0
 --- !u!50 &5163661052504183307
 Rigidbody2D:
@@ -282,10 +282,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementType: 2
   movementDistance: 6
-  speed: 2.5
+  speed: 3
   accuracy: 0.25
   isMoving: 1
-  updateTargetInterval: 0.7
+  updateTargetInterval: 1
   bossDistance: 1
   topBorder: 10
   bottomBorder: 10
@@ -375,10 +375,10 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 0
-      projectileCount: 5
+      projectileCount: 0
       startingAngle: 0
       endingAngle: 360
-      spawnInterval: 1
+      spawnInterval: 0.5
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}

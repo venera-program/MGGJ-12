@@ -280,9 +280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25086b1cf70770342b72f3cd92cafbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 2
+  movementType: 1
   movementDistance: 6
-  speed: 2.5
+  speed: 1.5
   accuracy: 0.25
   isMoving: 1
   updateTargetInterval: 0.7
@@ -375,15 +375,15 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 2
-      projectileCount: 5
+      projectileCount: 10
       startingAngle: 0
-      endingAngle: 360
-      spawnInterval: 1
+      endingAngle: 270
+      spawnInterval: 2
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
-      movementAngle: 0
+      movementAngle: 1
       positionAngle: 0
-      speed: 1
+      speed: 1.5
       speedMultiplier: 0.25
     HPValueEnd: 0
