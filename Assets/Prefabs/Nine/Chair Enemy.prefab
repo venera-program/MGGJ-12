@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1ec1d4917027e4b935bf299eb2e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 20
   currHealth: 0
   healthChange:
     m_PersistentCalls:
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 5
-  deathDelay: 1
+  deathDelay: 0.5
 --- !u!222 &7677172775939015910
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 2
-  movementDistance: 6
+  movementDistance: 4
   speed: 3
   accuracy: 0.25
   isMoving: 1

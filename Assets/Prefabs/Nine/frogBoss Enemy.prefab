@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1ec1d4917027e4b935bf299eb2e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 2000
   currHealth: 0
   healthChange:
     m_PersistentCalls:
@@ -274,11 +274,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 2
-  movementDistance: 3
+  movementDistance: 6
   speed: 1.75
   accuracy: 0.25
   isMoving: 1
-  updateTargetInterval: 0.5
+  updateTargetInterval: 0.9
   bossDistance: 1
   topBorder: 10
   bottomBorder: 10
@@ -395,7 +395,21 @@ MonoBehaviour:
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
-      movementAngle: 2
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0.25
+    HPValueEnd: 1000
+  - groups:
+    - pattern: 2
+      projectileCount: 1
+      startingAngle: 0
+      endingAngle: 360
+      spawnInterval: 3
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
       positionAngle: 0
       speed: 4
       speedMultiplier: 0.25
