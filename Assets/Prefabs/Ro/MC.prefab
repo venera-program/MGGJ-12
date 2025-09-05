@@ -35,107 +35,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2263697838879871121
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2979458895774726223}
-  - component: {fileID: 4362071087267801618}
-  - component: {fileID: 3459069469700792499}
-  m_Layer: 0
-  m_Name: Flicker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2979458895774726223
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2263697838879871121}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5734813022505143167}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4362071087267801618
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2263697838879871121}
-  m_CullTransparentMesh: 1
---- !u!95 &3459069469700792499
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2263697838879871121}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 4f23dce7d999b764b8a600f689ed20eb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!1 &2705681999484777413
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2692974421315034298}
-  m_Layer: 6
-  m_Name: Graze
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2692974421315034298
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705681999484777413}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5734813022505143167}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5326903385958603332
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,10 +71,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3785258755256403893}
-  - {fileID: 6363104484804670383}
-  - {fileID: 2979458895774726223}
   - {fileID: 8139255383415248560}
-  - {fileID: 2692974421315034298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -267,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ba5ba71be62fe4f904f3f48aaa4e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 1155854537251554803, guid: 89193f6668280b04baba0b3fe9d8ae4d, type: 3}
+  spawnPoint: {fileID: 0}
   speed: 5
   regularShootingPattern:
   - pattern: 2
@@ -390,7 +286,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hurtSFX: {fileID: 8300000, guid: 582c752c14a424745919eeadfb91f8ca, type: 3}
-  isInvincible: 0
+  isInvincible: 1
 --- !u!114 &1613561666920444574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,17 +317,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grazeAmount: 0
-  maxGrazeAmount: 75
+  maxGrazeAmount: 50
   updateGrazeValue:
     m_PersistentCalls:
       m_Calls: []
   endSkillTimer:
     m_PersistentCalls:
       m_Calls: []
-  grazeRadius: 0.25
+  grazeRadius: 1
   grazePattern:
     pattern: 0
-    projectileCount: 10
+    projectileCount: 20
     startingAngle: 360
     endingAngle: 0
     spawnInterval: 0
@@ -443,8 +339,8 @@ MonoBehaviour:
     speed: 0
     speedMultiplier: 0
   grazeImage: {fileID: 4429349021917146388, guid: 16b5a3e5f38a13f48ac970b2ec023628, type: 3}
-  grazeImageParent: {fileID: 2692974421315034298}
-  skillDuration: 3
+  grazeImageParent: {fileID: 8139255383415248560}
+  skillDuration: 20
   isRumbleOn: 1
   rumbleDuration: 0.1
   leftMotorSpeed: 0
@@ -486,9 +382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578e343afc165d04aa9056736128d6f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainAnimator: {fileID: 38709306850146832}
-  skillOverride: {fileID: 5141642175442551597}
-  flickerOverride: {fileID: 3459069469700792499}
+  mainAnimator: {fileID: 9100000, guid: a036fa57bae96724d852e4bd45af7b0c, type: 2}
+  skillOverride: {fileID: 22100000, guid: ae9da1398aeb2f34c91077287cc215a8, type: 2}
+  flickerOverride: {fileID: 22100000, guid: 4f23dce7d999b764b8a600f689ed20eb, type: 2}
   flickerDelay: 15
 --- !u!1 &5893133243923111796
 GameObject:
@@ -577,72 +473,6 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a036fa57bae96724d852e4bd45af7b0c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!1 &8084550166737514479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6363104484804670383}
-  - component: {fileID: 3824929156682168343}
-  - component: {fileID: 5141642175442551597}
-  m_Layer: 0
-  m_Name: Skill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6363104484804670383
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8084550166737514479}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5734813022505143167}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3824929156682168343
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8084550166737514479}
-  m_CullTransparentMesh: 1
---- !u!95 &5141642175442551597
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8084550166737514479}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: ae9da1398aeb2f34c91077287cc215a8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

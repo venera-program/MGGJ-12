@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using MGGJ25.Shared;
 
 public class LevelManager : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class LevelManager : MonoBehaviour
 
         if (CurrentLevelIndex == -1)
         {
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.StopAllSfx();
             MenuUI.SetActive(true);
             // The main menu doesn't need an execution loop
             return;
@@ -60,6 +63,11 @@ public class LevelManager : MonoBehaviour
     {
         CombatUI.SetActive(true);
         BackgroundImage.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
+        if(AudioManager.Instance != null){
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.StopAllSfx();
+            AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].bgMusic);
+        }
         BackgroundUI.SetActive(true);
         Enemy_Spawner.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
 
