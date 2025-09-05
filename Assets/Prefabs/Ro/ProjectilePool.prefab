@@ -54,5 +54,8 @@ MonoBehaviour:
   undirected2: 100
   angle: 60
   forward: 60
-  specialAngle: 60
-  specialForward: 60
+  specialAngle: 30
+  specialForward: 10
+  specialAttackCount:
+    m_PersistentCalls:
+      m_Calls: []
