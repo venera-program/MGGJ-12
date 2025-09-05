@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1ec1d4917027e4b935bf299eb2e0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 1800
   currHealth: 0
   healthChange:
     m_PersistentCalls:
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5819460166187031149}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 5
-  deathDelay: 1
+  deathDelay: 0.5
 --- !u!114 &621155689032829765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25086b1cf70770342b72f3cd92cafbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 2
+  movementType: 0
   movementDistance: 6
-  speed: 2.5
+  speed: 1
   accuracy: 0.25
   isMoving: 1
   updateTargetInterval: 0.7
@@ -172,8 +172,8 @@ MonoBehaviour:
   topBorder: 10
   bottomBorder: 10
   leftBorder: 10
-  rightBorder: 10
-  editmode: 0
+  rightBorder: 428
+  editmode: 1
 --- !u!222 &7679941787921176685
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -388,15 +388,43 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 0
-      projectileCount: 5
+      projectileCount: 9
       startingAngle: 0
       endingAngle: 360
-      spawnInterval: 1
+      spawnInterval: 1.75
       delay: 0
-      radius: 0.5
+      radius: 0.4
       offset: {x: 0, y: 0}
-      movementAngle: 0
+      movementAngle: 2
       positionAngle: 0
-      speed: 1
+      speed: 1.75
+      speedMultiplier: 0.25
+    HPValueEnd: 66
+  - groups:
+    - pattern: 0
+      projectileCount: 12
+      startingAngle: 0
+      endingAngle: 360
+      spawnInterval: 1.5
+      delay: 0
+      radius: 0.6
+      offset: {x: 0, y: 0}
+      movementAngle: 2
+      positionAngle: 0
+      speed: 2
+      speedMultiplier: 0.25
+    HPValueEnd: 33
+  - groups:
+    - pattern: 0
+      projectileCount: 16
+      startingAngle: 0
+      endingAngle: 360
+      spawnInterval: 1.5
+      delay: 0
+      radius: 0.8
+      offset: {x: 0, y: 0}
+      movementAngle: 2
+      positionAngle: 0
+      speed: 2
       speedMultiplier: 0.25
     HPValueEnd: 0

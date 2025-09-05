@@ -112,7 +112,7 @@ public class EnemyMotor : MonoBehaviour
 
     private void HandleDirectedScreenMovement(){
         if(HelperFunctions.IsAtPosition(rb.position, nextDestination, accuracy)){
-           isMoving = false;
+            Destroy(gameObject);
         }
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
         rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);

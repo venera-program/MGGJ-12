@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70681456ddf2ffe45ad387cdefb3a632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   tagsToPayAttentionTo:
   - Enemy
   - Boss

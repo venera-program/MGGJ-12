@@ -227,7 +227,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2279419871392914990}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementType: 2
   movementDistance: 6
-  speed: 2.5
+  speed: 2
   accuracy: 0.25
   isMoving: 1
   updateTargetInterval: 0.7
@@ -375,10 +375,10 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 0
-      projectileCount: 5
+      projectileCount: 6
       startingAngle: 0
       endingAngle: 360
-      spawnInterval: 1
+      spawnInterval: 2
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
