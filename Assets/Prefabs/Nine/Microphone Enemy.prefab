@@ -376,14 +376,26 @@ MonoBehaviour:
   - groups:
     - pattern: 2
       projectileCount: 10
-      startingAngle: 0
-      endingAngle: 270
+      startingAngle: 90
+      endingAngle: 0
       spawnInterval: 2
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
-      movementAngle: 1
+      movementAngle: 0
       positionAngle: 0
-      speed: 1.5
+      speed: 0.5
+      speedMultiplier: 0.25
+    - pattern: 2
+      projectileCount: 10
+      startingAngle: 270
+      endingAngle: 0
+      spawnInterval: 2
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 0.5
       speedMultiplier: 0.25
     HPValueEnd: 0

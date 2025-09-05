@@ -389,8 +389,8 @@ MonoBehaviour:
   - groups:
     - pattern: 2
       projectileCount: 3
-      startingAngle: 0
-      endingAngle: 360
+      startingAngle: 45
+      endingAngle: 0
       spawnInterval: 3
       delay: 0
       radius: 0.5
@@ -398,19 +398,187 @@ MonoBehaviour:
       movementAngle: 0
       positionAngle: 0
       speed: 4
-      speedMultiplier: 0.25
-    HPValueEnd: 1000
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 135
+      endingAngle: 0
+      spawnInterval: 3
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 225
+      endingAngle: 0
+      spawnInterval: 3
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 315
+      endingAngle: 0
+      spawnInterval: 3
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    HPValueEnd: 50
   - groups:
     - pattern: 2
-      projectileCount: 1
+      projectileCount: 3
       startingAngle: 0
-      endingAngle: 360
-      spawnInterval: 3
+      endingAngle: 0
+      spawnInterval: 2.5
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
       speed: 4
-      speedMultiplier: 0.25
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 30
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 60
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 2
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 90
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 3
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 120
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 4
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 150
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 5
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 180
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 6
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 210
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 7
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 240
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 8
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 270
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 9
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 300
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 10
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 330
+      endingAngle: 0
+      spawnInterval: 2.5
+      delay: 11
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0
     HPValueEnd: 0

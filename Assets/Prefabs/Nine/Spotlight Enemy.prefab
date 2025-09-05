@@ -179,8 +179,8 @@ MonoBehaviour:
   topBorder: 10
   bottomBorder: 10
   leftBorder: 10
-  rightBorder: 10
-  editmode: 0
+  rightBorder: 428
+  editmode: 1
 --- !u!114 &4162402741096787245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,12 +266,72 @@ MonoBehaviour:
     - pattern: 1
       projectileCount: 3
       startingAngle: 0
-      endingAngle: 200
-      spawnInterval: 0.5
+      endingAngle: 60
+      spawnInterval: 1.75
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
-      movementAngle: 0
+      movementAngle: 2
+      positionAngle: 1
+      speed: 0.25
+      speedMultiplier: 0.25
+    - pattern: 1
+      projectileCount: 3
+      startingAngle: 120
+      endingAngle: 180
+      spawnInterval: 1.75
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 2
+      positionAngle: 1
+      speed: 0.25
+      speedMultiplier: 0.25
+    - pattern: 1
+      projectileCount: 3
+      startingAngle: 240
+      endingAngle: 300
+      spawnInterval: 1.75
+      delay: 0
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 2
+      positionAngle: 1
+      speed: 0.25
+      speedMultiplier: 0.25
+    - pattern: 1
+      projectileCount: 3
+      startingAngle: 60
+      endingAngle: 120
+      spawnInterval: 1.75
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 2
+      positionAngle: 1
+      speed: 0.25
+      speedMultiplier: 0.25
+    - pattern: 1
+      projectileCount: 3
+      startingAngle: 180
+      endingAngle: 240
+      spawnInterval: 1.75
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 2
+      positionAngle: 1
+      speed: 0.25
+      speedMultiplier: 0.25
+    - pattern: 1
+      projectileCount: 3
+      startingAngle: 300
+      endingAngle: 360
+      spawnInterval: 1.75
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 2
       positionAngle: 1
       speed: 0.25
       speedMultiplier: 0.25

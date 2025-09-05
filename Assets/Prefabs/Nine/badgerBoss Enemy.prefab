@@ -172,8 +172,8 @@ MonoBehaviour:
   topBorder: 10
   bottomBorder: 10
   leftBorder: 10
-  rightBorder: 10
-  editmode: 0
+  rightBorder: 428
+  editmode: 1
 --- !u!222 &7679941787921176685
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
       positionAngle: 0
       speed: 1.75
       speedMultiplier: 0.25
-    HPValueEnd: 1200
+    HPValueEnd: 66
   - groups:
     - pattern: 0
       projectileCount: 12
@@ -413,7 +413,7 @@ MonoBehaviour:
       positionAngle: 0
       speed: 2
       speedMultiplier: 0.25
-    HPValueEnd: 600
+    HPValueEnd: 33
   - groups:
     - pattern: 0
       projectileCount: 16
