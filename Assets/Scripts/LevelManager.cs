@@ -81,10 +81,12 @@ public class LevelManager : MonoBehaviour
 
         if(levels.Length <= CurrentLevelIndex + 1){
             yield return new WaitForSeconds(winScreenDelay);
-            Debug.Log("should be opening the win screen");
             OnGameWin.Invoke();
         }
 
+        if(PlayerControllerScript.instance != null){
+            PlayerControllerScript.instance.DisablePauseButton();
+        }
         yield return new WaitForSeconds(levelLoadDelay);
 
 
@@ -94,6 +96,9 @@ public class LevelManager : MonoBehaviour
         if (levels.Length > CurrentLevelIndex + 1)
         {
             UnloadLevel();
+            if(PlayerControllerScript.instance != null){
+            PlayerControllerScript.instance.EnablePauseButton();
+            }
             LoadLevel((sbyte)(CurrentLevelIndex + 1));
         }
     }

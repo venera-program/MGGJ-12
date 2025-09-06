@@ -72,11 +72,13 @@ public class Graze : MonoBehaviour{
     void OnEnable(){
         LevelManager.OnLevelUnload += ClearGrazeCount;
         LevelManager.OnLevelUnload += ResetGrazeCountUI;
+        LevelManager.OnLevelUnload += StopSkillTimer;
     }
 
     void OnDisable(){
         LevelManager.OnLevelUnload -= ClearGrazeCount;
         LevelManager.OnLevelUnload -= ResetGrazeCountUI;
+        LevelManager.OnLevelUnload -= StopSkillTimer;
     }
 
     void Update(){
@@ -118,13 +120,17 @@ public class Graze : MonoBehaviour{
         startTimer = true;
    }
 
+   public void StopSkillTimer(){
+        startTimer = false;
+        skillTimer = 0f;
+        ClearGrazeCount();
+        endSkillTimer.Invoke();
+   }
+
    private void SkillTimer(){
         skillTimer += Time.deltaTime;
         if(skillTimer >= skillDuration){
-            startTimer = false;
-            skillTimer = 0f;
-            ClearGrazeCount();
-            endSkillTimer.Invoke();
+            StopSkillTimer();
         } else {
             GrazeBarCountDown(skillTimer, skillDuration);
         }

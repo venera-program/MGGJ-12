@@ -294,6 +294,14 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Disable();
           InputSystem.PauseHaptics();
      }
+
+     public void EnablePauseButton(){
+          controller.Main.Escape.Enable();
+     }
+
+     public void DisablePauseButton(){
+          controller.Main.Escape.Disable();
+     }
  
 
      private void OnHit(float currHealth, float maxHealth)
