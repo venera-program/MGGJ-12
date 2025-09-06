@@ -92,9 +92,7 @@ public class PlayerControllerScript : MonoBehaviour
      }
 
      private void HealMC(sbyte currentLevel){
-          if (currentLevel == 0){
-               GetComponent<Health>().FullHeal();
-          }
+          GetComponent<Health>().FullHeal();
      }
 
      private void ResetMC(){
