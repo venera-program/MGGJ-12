@@ -278,7 +278,7 @@ MonoBehaviour:
   speed: 1.75
   accuracy: 0.25
   isMoving: 1
-  updateTargetInterval: 0.9
+  updateTargetInterval: 2
   bossDistance: 1
   topBorder: 10
   bottomBorder: 10
@@ -391,40 +391,40 @@ MonoBehaviour:
       projectileCount: 3
       startingAngle: 45
       endingAngle: 0
-      spawnInterval: 3
+      spawnInterval: 2
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
       speed: 4
-      speedMultiplier: 0
+      speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
       startingAngle: 135
       endingAngle: 0
-      spawnInterval: 3
+      spawnInterval: 2
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
       speed: 4
-      speedMultiplier: 0
+      speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
       startingAngle: 225
       endingAngle: 0
-      spawnInterval: 3
+      spawnInterval: 2
       delay: 0
       radius: 0.5
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
       speed: 4
-      speedMultiplier: 0
+      speedMultiplier: 0.25
     - pattern: 2
-      projectileCount: 3
+      projectileCount: 2
       startingAngle: 315
       endingAngle: 0
       spawnInterval: 3
@@ -434,7 +434,55 @@ MonoBehaviour:
       movementAngle: 0
       positionAngle: 0
       speed: 4
-      speedMultiplier: 0
+      speedMultiplier: 0.25
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 0
+      endingAngle: 0
+      spawnInterval: 2
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0.25
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 90
+      endingAngle: 0
+      spawnInterval: 2
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0.25
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 180
+      endingAngle: 0
+      spawnInterval: 2
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0.25
+    - pattern: 2
+      projectileCount: 3
+      startingAngle: 270
+      endingAngle: 0
+      spawnInterval: 2
+      delay: 1
+      radius: 0.5
+      offset: {x: 0, y: 0}
+      movementAngle: 0
+      positionAngle: 0
+      speed: 4
+      speedMultiplier: 0.25
     HPValueEnd: 50
   - groups:
     - pattern: 2
