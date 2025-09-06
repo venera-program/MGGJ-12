@@ -49,8 +49,10 @@ public class LevelManager : MonoBehaviour
 
         if (CurrentLevelIndex == -1)
         {
-            AudioManager.Instance.StopMusic();
-            AudioManager.Instance.StopAllSfx();
+            if(AudioManager.Instance != null){
+                AudioManager.Instance.StopMusic();
+                AudioManager.Instance.StopAllSfx();
+            }
             MenuUI.SetActive(true);
             // The main menu doesn't need an execution loop
             return;
