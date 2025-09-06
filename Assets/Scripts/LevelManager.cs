@@ -57,38 +57,22 @@ public class LevelManager : MonoBehaviour
             // The main menu doesn't need an execution loop
             return;
         }
-
+        
         _levelThread = StartCoroutine(ExecuteLevel());
     }
 
     private IEnumerator ExecuteLevel()
     {
-        CombatUI.SetActive(true);
-        BackgroundImage.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
-        if(AudioManager.Instance != null){
-            AudioManager.Instance.StopClearMusic();
-            AudioManager.Instance.StopAllSfx();
-            AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].bgMusic);
-        }
-        BackgroundUI.SetActive(true);
-        Enemy_Spawner.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
-
-        BossDefeated = false;
+       
+        SetUpLevel();
         while (!BossDefeated)
         {
             yield return null;
         }
+        Debug.Log($"Boss has been defeated. Current Level Index is {CurrentLevelIndex}");
 
-        if(levels.Length <= CurrentLevelIndex + 1){
-            yield return new WaitForSeconds(winScreenDelay);
-            OnGameWin.Invoke();
-        }
-
-        if(PlayerControllerScript.instance != null){
-            PlayerControllerScript.instance.DisablePauseButton();
-        }
         yield return new WaitForSeconds(levelLoadDelay);
-
+        Debug.Log($"2. Boss has been defeated. Current Level Index is {CurrentLevelIndex}");
 
         // Load next level, else load main menu
         // L 1|2|3
@@ -97,9 +81,15 @@ public class LevelManager : MonoBehaviour
         {
             UnloadLevel();
             if(PlayerControllerScript.instance != null){
-            PlayerControllerScript.instance.EnablePauseButton();
+                PlayerControllerScript.instance.EnablePauseButton();
             }
             LoadLevel((sbyte)(CurrentLevelIndex + 1));
+        } else {
+            yield return new WaitForSeconds(winScreenDelay);
+            OnGameWin.Invoke();
+            if(PlayerControllerScript.instance != null){
+                PlayerControllerScript.instance.DisablePauseButton();
+            }
         }
     }
 
@@ -109,6 +99,19 @@ public class LevelManager : MonoBehaviour
         MenuUI.SetActive(false);
         CombatUI.SetActive(false);
         OnLevelUnload.Invoke();
+    }
+
+    private void SetUpLevel(){
+        CombatUI.SetActive(true);
+        BackgroundImage.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
+        if(AudioManager.Instance != null){
+            AudioManager.Instance.StopClearMusic();
+            AudioManager.Instance.StopAllSfx();
+            AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].bgMusic);
+        }
+        BackgroundUI.SetActive(true);
+        Enemy_Spawner.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
+        BossDefeated = false;
     }
 
     [ContextMenu("LoadMainMenu")]
