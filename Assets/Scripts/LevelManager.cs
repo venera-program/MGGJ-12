@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
         if (CurrentLevelIndex == -1)
         {
             if(AudioManager.Instance != null){
-                AudioManager.Instance.StopMusic();
+                AudioManager.Instance.StopClearMusic();
                 AudioManager.Instance.StopAllSfx();
             }
             MenuUI.SetActive(true);
@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
         CombatUI.SetActive(true);
         BackgroundImage.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
         if(AudioManager.Instance != null){
-            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.StopClearMusic();
             AudioManager.Instance.StopAllSfx();
             AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].bgMusic);
         }

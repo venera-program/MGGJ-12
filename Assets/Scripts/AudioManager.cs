@@ -147,6 +147,11 @@ namespace MGGJ25.Shared
             musicAudioSource.Stop();
         }
 
+        public void StopClearMusic(){
+            musicAudioSource.Stop();
+            musicAudioSource.clip = null;
+        }
+
         public void SetMusicVolume(float volume){
             musicAudioSource.volume = volume;
         }
