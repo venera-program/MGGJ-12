@@ -170,7 +170,7 @@ MonoBehaviour:
   updateTargetInterval: 0.7
   bossDistance: 1
   topBorder: 10
-  bottomBorder: 10
+  bottomBorder: 180
   leftBorder: 10
   rightBorder: 428
   editmode: 1
