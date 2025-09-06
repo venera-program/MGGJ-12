@@ -397,7 +397,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
@@ -409,7 +409,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
@@ -421,7 +421,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 2
@@ -433,7 +433,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
@@ -445,7 +445,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
@@ -457,7 +457,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
@@ -469,7 +469,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     - pattern: 2
       projectileCount: 3
@@ -481,7 +481,7 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       movementAngle: 0
       positionAngle: 0
-      speed: 4
+      speed: 2
       speedMultiplier: 0.25
     HPValueEnd: 50
   - groups:
