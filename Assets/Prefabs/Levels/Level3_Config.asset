@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4be51162a9eec2438b0575d19f6cf63, type: 3}
   m_Name: Level3_Config
   m_EditorClassIdentifier: 
-  _newBackgroundTexture: {fileID: 21300000, guid: 4dd69de2a70e80341a50e40ad02a5059, type: 3}
+  _newBackgroundTexture: {fileID: 21300000, guid: a9d6dc1b9140c094986832626fb9bed5, type: 3}
   _spawnInfoCSV: {fileID: 4900000, guid: 5117f7def9846484ab9d51f69c9dee29, type: 3}
   _bgMusic: {fileID: 8300000, guid: d790f4461962cef458ee6ccc11f66173, type: 3}
