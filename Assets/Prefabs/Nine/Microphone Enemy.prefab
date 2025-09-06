@@ -375,7 +375,7 @@ MonoBehaviour:
   Patterns:
   - groups:
     - pattern: 2
-      projectileCount: 10
+      projectileCount: 5
       startingAngle: 90
       endingAngle: 0
       spawnInterval: 2
@@ -387,7 +387,7 @@ MonoBehaviour:
       speed: 0.5
       speedMultiplier: 0.25
     - pattern: 2
-      projectileCount: 10
+      projectileCount: 5
       startingAngle: 270
       endingAngle: 0
       spawnInterval: 2
