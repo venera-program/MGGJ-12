@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
-
 public class PlayerSkill : MonoBehaviour
 {
     private Animator animator;
     private Animator _default;
-    [SerializeField] private AnimatorController mainAnimator;
+    [SerializeField] private AnimatorOverrideController mainAnimator;
     [SerializeField] private AnimatorOverrideController skillOverride;
     [SerializeField] private AnimatorOverrideController flickerOverride;
     [SerializeField] private float flickerDelay;

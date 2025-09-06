@@ -70,7 +70,6 @@ public class LevelManager : MonoBehaviour
             yield return null;
         }
         Debug.Log($"Boss has been defeated. Current Level Index is {CurrentLevelIndex}");
-
         yield return new WaitForSeconds(levelLoadDelay);
         Debug.Log($"2. Boss has been defeated. Current Level Index is {CurrentLevelIndex}");
 
