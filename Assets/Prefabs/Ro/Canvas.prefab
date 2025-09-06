@@ -733,6 +733,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3821026033544253451, guid: 6de3fb18d3aee564ab7bd386ca7b1143, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadMainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 7965752372358115992, guid: 6de3fb18d3aee564ab7bd386ca7b1143, type: 3}
       propertyPath: m_Name
       value: Game Over!
@@ -1179,6 +1183,10 @@ PrefabInstance:
     - target: {fileID: 1819429441353780576, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: isInvincible
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: I_SECONDS
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5326903385958603332, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: m_Name
