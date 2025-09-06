@@ -62,11 +62,10 @@ public class Health : MonoBehaviour
         return maxHealth;
     }
 
-    public void TriggerIFrames(int frameCount)
+    public void TriggerIFrames(float ISeconds)
     {
         StopIFrames();
-
-        _IFrameRoutine = StartCoroutine(CountIFrames(frameCount));
+        _IFrameRoutine = StartCoroutine(CountIFrames(ISeconds));
     }
 
     public void StopIFrames(){
@@ -77,14 +76,9 @@ public class Health : MonoBehaviour
         }
     }
 
-    public IEnumerator CountIFrames(int _TargetIFrame)
+    public IEnumerator CountIFrames(float _TargetISeconds)
     {
-        for (int i = 0; i < _TargetIFrame; i++)
-        {
-            // TODO: graphic indicating iframes active
-            yield return null;
-        }
-
+        yield return new WaitForSeconds(_TargetISeconds);
         _IFrameRoutine = null;
     }
 }

@@ -9,7 +9,7 @@ using MGGJ25.Shared;
 public class PlayerControllerScript : MonoBehaviour
 {
      private const float RESPAWN_DELAY = 0.5f;
-     private const int I_FRAMES = 120;
+     [SerializeField] private float I_SECONDS = 120;
      private const string IS_MOVING = "isMoving";
      private const string WAS_HIT = "wasHit";
      private bool flipped;
@@ -330,6 +330,6 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Shoot.Enable();
           controller.Main.Skill.Enable();
 
-          GetComponent<Health>().TriggerIFrames(I_FRAMES);
+          GetComponent<Health>().TriggerIFrames(I_SECONDS);
      }
 }
