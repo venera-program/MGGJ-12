@@ -30,6 +30,16 @@ public class BossHealthBarUI : MonoBehaviour
         Enemy_Spawner.Instance.BossSpawned.AddListener(TurnOnBossHealthBar);
     }
 
+    private void OnEnable()
+    {
+        LevelManager.OnLevelUnload += TurnOffImmediately;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.OnLevelUnload -= TurnOffImmediately;
+    }
+
     private void TurnOnBossHealthBar()
     {
         sliderObject.SetActive(true);
@@ -51,11 +61,16 @@ public class BossHealthBarUI : MonoBehaviour
         StartCoroutine(TurnOff(turnOffDelay));
     }
 
+    private void TurnOffImmediately()
+    {
+        bossHealthSlider.value = 0;
+        sliderObject.SetActive(false);
+    }
+
     private IEnumerator TurnOff(float delay)
     {
         yield return new WaitForSeconds(delay);
         bossHealthSlider.value = 0;
         sliderObject.SetActive(false);
     }
-
 }

@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
     public float levelLoadDelay;
     public float winScreenDelay;
 
-    void Start()
+    void Awake()
     {
         LoadMainMenu();
     }
@@ -106,6 +106,7 @@ public class LevelManager : MonoBehaviour
 
     private void UnloadLevel()
     {
+        Debug.Log("Unloading Level.");
         BackgroundUI.SetActive(false);
         MenuUI.SetActive(false);
         CombatUI.SetActive(false);
@@ -125,6 +126,10 @@ public class LevelManager : MonoBehaviour
         BackgroundUI.SetActive(true);
         Enemy_Spawner.Instance.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
         BossDefeated = false;
+        if (PlayerControllerScript.instance != null)
+        {
+            PlayerControllerScript.instance.EnablePlayerControls();
+        }
     }
 
     [ContextMenu("LoadMainMenu")]
@@ -142,10 +147,6 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("LoadFirstLevel")]
     public void LoadFirstLevel()
     {
-        if (PlayerControllerScript.instance != null)
-        {
-            PlayerControllerScript.instance.EnablePlayerControls();
-        }
         UnloadLevel();
         LoadLevel(0);
     }

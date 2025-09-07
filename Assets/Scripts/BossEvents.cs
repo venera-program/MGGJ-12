@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class BossEvents : MonoBehaviour
 {
-    void Awake()
+    private void OnEnable()
     {
         GetComponent<Health>().healthChange.AddListener(OnDeath);
         GetComponent<Health>().healthChange.AddListener(BossHealthBarUI.instance.UpdateBossHealthBar);
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<Health>().healthChange.RemoveListener(OnDeath);
+        GetComponent<Health>().healthChange.RemoveListener(BossHealthBarUI.instance.UpdateBossHealthBar);
     }
 
     public void OnDeath(float currHealth, float maxHealth)

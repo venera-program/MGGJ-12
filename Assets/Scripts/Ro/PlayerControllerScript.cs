@@ -102,6 +102,7 @@ public class PlayerControllerScript : MonoBehaviour
           Move(Vector2.zero);
           startGeneratingProject = false;
           animator.SetBool("wasHit", false);
+          EndSkillUse();
           transform.position = spawnPoint.position;
           collider.enabled = true;
           controller.Main.Move.Enable();
@@ -186,7 +187,7 @@ public class PlayerControllerScript : MonoBehaviour
           playerImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
      }
 
-     private void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+     private void Shoot(InputAction.CallbackContext cont)
      {
           startProjectSpawnTimer = true;
           if (cont.interaction is HoldInteraction)
@@ -203,7 +204,7 @@ public class PlayerControllerScript : MonoBehaviour
           }
      }
 
-     private void StopShoot(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+     private void StopShoot(InputAction.CallbackContext cont)
      {
           if (cont.interaction is HoldInteraction)
           {
@@ -219,14 +220,14 @@ public class PlayerControllerScript : MonoBehaviour
           }
      }
 
-     private void StartSkillUse(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+     private void StartSkillUse(InputAction.CallbackContext cont)
      {
           if (!Graze.instance.IsGrazeFull()) return;
           if (!skillActivated)
           {
                Graze.instance.StartSkillTimer();
                skillActivated = true;
-               script.switchToSkillAnimation();
+               script.SwitchToSkillAnimation();
           }
      }
 
@@ -234,13 +235,12 @@ public class PlayerControllerScript : MonoBehaviour
      {
           AudioManager.Instance.StopPlayerSpecial_SFX();
           Debug.Log("You have reached the endskilluse method, please leave a message after the tone.");
-          script.skillIsOver();
+          script.SkillIsOver();
           if (startGeneratingProject)
           {
                AudioManager.Instance.PlayPlayerBullet_SFX();
           }
           skillActivated = false;
-
      }
 
      private void GeneratePlayerProjectiles()
