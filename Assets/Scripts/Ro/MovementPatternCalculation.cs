@@ -1,14 +1,14 @@
 using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
-public class MovementPatternCalculation {
+public class MovementPatternCalculation
+{
     /// <summary>
     /// A function that calculates the next accepted position for an actor to move towards to.
     ///</summary>
-    public static Vector3 CalculateFloatyPosition(Vector3 currentPosition, float distance,  float topBorder, float bottomBorder, float leftBorder, float rightBorder){
+    public static Vector3 CalculateFloatyPosition(Vector3 currentPosition, float distance, float topBorder, float bottomBorder, float leftBorder, float rightBorder)
+    {
         /*
             0 - Right
             1 - Up Right
@@ -21,27 +21,31 @@ public class MovementPatternCalculation {
         */
         List<int> directions = new List<int>();
 
-        for(int i  = 0 ; i < 8 ; i++){
+        for (int i = 0; i < 8; i++)
+        {
             directions.Add(i);
         }
 
-        while (true){
-            if(directions.Count <= 0){
+        while (true)
+        {
+            if (directions.Count <= 0)
+            {
                 Debug.LogError("Not possible for actor to move within screen with given movement distance");
                 break;
             }
 
-            int direction = directions[Random.Range(0,directions.Count)];
+            int direction = directions[Random.Range(0, directions.Count)];
             Vector3 newPosition;
-            
-            switch(direction){
-                case 0: 
+
+            switch (direction)
+            {
+                case 0:
                     newPosition = currentPosition + new Vector3(distance, 0f, 0f);
                     break;
-                case 1: 
+                case 1:
                     newPosition = currentPosition + (distance * new Vector3(Mathf.Cos(45f * Mathf.Deg2Rad), Mathf.Sin(45f * Mathf.Deg2Rad), 0f));
                     break;
-                case 2: 
+                case 2:
                     newPosition = currentPosition + new Vector3(0f, distance, 0f);
                     break;
                 case 3:
@@ -57,15 +61,18 @@ public class MovementPatternCalculation {
                     newPosition = currentPosition + new Vector3(0f, -distance, 0f);
                     break;
                 case 7:
-                    newPosition = currentPosition + (distance * new Vector3(Mathf.Cos(315f  * Mathf.Deg2Rad), Mathf.Sin(315f * Mathf.Deg2Rad), 0f));
+                    newPosition = currentPosition + (distance * new Vector3(Mathf.Cos(315f * Mathf.Deg2Rad), Mathf.Sin(315f * Mathf.Deg2Rad), 0f));
                     break;
                 default:
                     newPosition = Vector3.zero;
                     break;
             }
-            if(HelperFunctions.IsOnScreen(newPosition, topBorder, bottomBorder, leftBorder, rightBorder)){
+            if (HelperFunctions.IsOnScreen(newPosition, topBorder, bottomBorder, leftBorder, rightBorder))
+            {
                 return newPosition;
-            } else {
+            }
+            else
+            {
                 directions.Remove(direction);
             }
         }
@@ -74,13 +81,15 @@ public class MovementPatternCalculation {
         return Vector3.positiveInfinity;
     }
 
-    public static Vector3 CalculateDirectedScreenPosition(Vector3 position, Rect imagebounds){
+    public static Vector3 CalculateDirectedScreenPosition(Vector3 position, Rect imagebounds)
+    {
         ScreenBorders border = HelperFunctions.CloseToBorder(position);
         Rect CameraRect = Camera.main.pixelRect;
         float height, width;
         Vector3 cameraHeight, cameraWidth;
-        switch(border){
-            case(ScreenBorders.Top):
+        switch (border)
+        {
+            case (ScreenBorders.Top):
                 height = CameraRect.y - imagebounds.height * 1.5f;
                 cameraHeight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x, height, Camera.main.nearClipPlane));
                 return new Vector3(position.x, cameraHeight.y, position.z);
@@ -101,21 +110,27 @@ public class MovementPatternCalculation {
         }
     }
 
-    public static Vector3 CalculateDirectedPlayerPosition(Vector3 position){
+    public static Vector3 CalculateDirectedPlayerPosition(Vector3 position)
+    {
         return PlayerControllerScript.instance.transform.position;
     }
-    public static Vector2 CalculateDirectedBossPosition(Vector3 position, float bossDistance){  
+    public static Vector2 CalculateDirectedBossPosition(Vector3 position, float bossDistance)
+    {
         GameObject boss = GameObject.FindWithTag("Boss");
-        if(boss != null){
+        if (boss != null)
+        {
             return boss.transform.position;
-        } else {
+        }
+        else
+        {
             return Vector2.zero;
         }
-        
+
     }
 }
 
-public enum ScreenBorders {
+public enum ScreenBorders
+{
     Top,
     Bottom,
     Left,

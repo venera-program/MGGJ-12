@@ -13,7 +13,7 @@ public class PlayerControllerScript : MonoBehaviour
      private const string IS_MOVING = "isMoving";
      private const string WAS_HIT = "wasHit";
      private bool flipped;
-    
+
      public Transform spawnPoint;
 
      public static PlayerControllerScript instance;
@@ -60,7 +60,7 @@ public class PlayerControllerScript : MonoBehaviour
           collider = GetComponent<Collider2D>();
 
           controller = new PlayerController();
-          
+
           animator = GetComponentInChildren<Animator>();
           playerImage = GetComponentInChildren<Image>();
           script = GetComponent<PlayerSkill>();
@@ -72,12 +72,12 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Shoot.started += Shoot;
           controller.Main.Shoot.canceled += StopShoot;
           controller.Main.Skill.started += StartSkillUse;
-        if (MainMenu.instance != null)
-        {
-            controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
+          if (MainMenu.instance != null)
+          {
+               controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
 
-            controller.UI.Cancel.started += MainMenu.instance.BackButton;
-        }
+               controller.UI.Cancel.started += MainMenu.instance.BackButton;
+          }
           GetComponent<Health>().healthChange.AddListener(OnHit);
           Graze.instance.endSkillTimer.AddListener(EndSkillUse);
           LevelManager.OnLevelChange += HealMC;
@@ -91,11 +91,13 @@ public class PlayerControllerScript : MonoBehaviour
           _spawnPoint = transform.position;
      }
 
-     private void HealMC(sbyte currentLevel){
+     private void HealMC(sbyte currentLevel)
+     {
           GetComponent<Health>().FullHeal();
      }
 
-     private void ResetMC(){
+     private void ResetMC()
+     {
           StopCoroutine(RespawnPlayer());
           Move(Vector2.zero);
           startGeneratingProject = false;
@@ -112,7 +114,7 @@ public class PlayerControllerScript : MonoBehaviour
      {
           controller.Main.Shoot.started -= Shoot;
           controller.Main.Shoot.canceled -= StopShoot;
-          controller.Main.Skill.started -= StartSkillUse; 
+          controller.Main.Skill.started -= StartSkillUse;
           controller.Main.Escape.performed -= MainMenu.instance.OpenPauseMenu;
 
           controller.UI.Cancel.started -= MainMenu.instance.BackButton;
@@ -142,12 +144,15 @@ public class PlayerControllerScript : MonoBehaviour
                     if (projectileTimer > projectileSpawnInterval)
                     {
                          projectileTimer = 0f;
-                         if(!skillActivated){
+                         if (!skillActivated)
+                         {
                               GeneratePlayerProjectiles();
-                         } else {
+                         }
+                         else
+                         {
                               GeneratePlayerSpecialProjectiles();
                          }
-                         
+
                     }
                }
           }
@@ -187,9 +192,12 @@ public class PlayerControllerScript : MonoBehaviour
           if (cont.interaction is HoldInteraction)
           {
                startGeneratingProject = true;
-               if(!skillActivated){
+               if (!skillActivated)
+               {
                     AudioManager.Instance.PlayPlayerBullet_SFX();
-               } else {
+               }
+               else
+               {
                     AudioManager.Instance.PlayPlayerSpecial_SFX();
                }
           }
@@ -199,37 +207,46 @@ public class PlayerControllerScript : MonoBehaviour
      {
           if (cont.interaction is HoldInteraction)
           {
-               if(!skillActivated){
+               if (!skillActivated)
+               {
                     AudioManager.Instance.StopPlayerBullet_SFX();
-               } else {
+               }
+               else
+               {
                     AudioManager.Instance.StopPlayerSpecial_SFX();
                }
                startGeneratingProject = false;
           }
      }
 
-     private void StartSkillUse(UnityEngine.InputSystem.InputAction.CallbackContext cont){
-          if (!Graze.instance.IsGrazeFull()) return; 
-          if(!skillActivated){
+     private void StartSkillUse(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+     {
+          if (!Graze.instance.IsGrazeFull()) return;
+          if (!skillActivated)
+          {
                Graze.instance.StartSkillTimer();
                skillActivated = true;
                script.switchToSkillAnimation();
           }
      }
 
-     private void EndSkillUse(){
+     private void EndSkillUse()
+     {
           AudioManager.Instance.StopPlayerSpecial_SFX();
           Debug.Log("You have reached the endskilluse method, please leave a message after the tone.");
           script.skillIsOver();
-          if(startGeneratingProject){
+          if (startGeneratingProject)
+          {
                AudioManager.Instance.PlayPlayerBullet_SFX();
           }
           skillActivated = false;
-          
+
      }
 
-     private void GeneratePlayerProjectiles(){
-          for (int i = 0; i < regularShootingPattern.Length; i++){
+     private void GeneratePlayerProjectiles()
+     {
+          for (int i = 0; i < regularShootingPattern.Length; i++)
+          {
                float rad = regularShootingPattern[i].startingAngle * Mathf.Deg2Rad;
                float xPos = Mathf.Cos(rad) * regularShootingPattern[i].radius;
                float yPos = Mathf.Sin(rad) * regularShootingPattern[i].radius;
@@ -250,31 +267,36 @@ public class PlayerControllerScript : MonoBehaviour
           }
      }
 
-     private void GeneratePlayerSpecialProjectiles(){
+     private void GeneratePlayerSpecialProjectiles()
+     {
           bool enoughSpecialAngle = ProjectilePool.instance.GetAvailableProjectileCount(ProjectileType.specialAngle) > specialShootingPattern.Length - 1;
           bool enoughSpecialForward = ProjectilePool.instance.GetAvailableProjectileCount(ProjectileType.specialForward) > 1;
-          if(!enoughSpecialAngle || !enoughSpecialForward) return;
+          if (!enoughSpecialAngle || !enoughSpecialForward) return;
 
-               for(int i = 0; i < specialShootingPattern.Length ; i++){
-                    float rad = specialShootingPattern[i].startingAngle * Mathf.Deg2Rad;
-                    float xPos = Mathf.Cos(rad) * specialShootingPattern[i].radius;
-                    float yPos = Mathf.Sin(rad) * specialShootingPattern[i].radius;
-                    Vector3 finalPosition = new Vector3(transform.position.x + xPos + specialShootingPattern[i].offset.x,
-                    transform.position.y + yPos + specialShootingPattern[i].offset.y, 0f);
-                    GameObject projectile;
-                    if (Mathf.Approximately(specialShootingPattern[i].startingAngle, 90f)){
-                         projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.specialForward);
-                    }
-                    else{
-                         projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.specialAngle);
-                    }
-                    projectile.transform.position = finalPosition;
-                    Projectile script = projectile.GetComponent<Projectile>();
-                    script.ConstructProjectile(specialShootingPattern[i].speed, specialShootingPattern[i].startingAngle);
+          for (int i = 0; i < specialShootingPattern.Length; i++)
+          {
+               float rad = specialShootingPattern[i].startingAngle * Mathf.Deg2Rad;
+               float xPos = Mathf.Cos(rad) * specialShootingPattern[i].radius;
+               float yPos = Mathf.Sin(rad) * specialShootingPattern[i].radius;
+               Vector3 finalPosition = new Vector3(transform.position.x + xPos + specialShootingPattern[i].offset.x,
+               transform.position.y + yPos + specialShootingPattern[i].offset.y, 0f);
+               GameObject projectile;
+               if (Mathf.Approximately(specialShootingPattern[i].startingAngle, 90f))
+               {
+                    projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.specialForward);
                }
+               else
+               {
+                    projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.specialAngle);
+               }
+               projectile.transform.position = finalPosition;
+               Projectile script = projectile.GetComponent<Projectile>();
+               script.ConstructProjectile(specialShootingPattern[i].speed, specialShootingPattern[i].startingAngle);
+          }
      }
 
-     public void EnablePlayerControls(){
+     public void EnablePlayerControls()
+     {
           controller.Main.Enable();
           canMove = true;
           controller.Main.Shoot.started += Shoot;
@@ -283,7 +305,8 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Escape.Enable();
      }
 
-     public void DisablePlayerControls(){
+     public void DisablePlayerControls()
+     {
           controller.Main.Shoot.started -= Shoot;
           controller.Main.Shoot.canceled -= StopShoot;
           controller.Main.Skill.started -= StartSkillUse;
@@ -293,28 +316,30 @@ public class PlayerControllerScript : MonoBehaviour
           InputSystem.PauseHaptics();
      }
 
-     public void EnablePauseButton(){
+     public void EnablePauseButton()
+     {
           controller.Main.Escape.Enable();
      }
 
-     public void DisablePauseButton(){
+     public void DisablePauseButton()
+     {
           controller.Main.Escape.Disable();
      }
- 
+
 
      private void OnHit(float currHealth, float maxHealth)
      {
           if (currHealth < maxHealth)
           {
                AudioManager.Instance.PlayPlayerDies_SFX();
-               animator.SetBool("wasHit",true);
+               animator.SetBool("wasHit", true);
                StartCoroutine(RespawnPlayer());
           }
      }
 
      private IEnumerator RespawnPlayer()
      {
-          
+
           var collider = GetComponent<Collider2D>();
           collider.enabled = false;
           controller.Main.Move.Disable();

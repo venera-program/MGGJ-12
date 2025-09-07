@@ -1,19 +1,16 @@
 using UnityEngine;
-using System;
-using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using MGGJ25.Shared;
 
-public class VolumeControl : MonoBehaviour 
+public class VolumeControl : MonoBehaviour
 {
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private AudioMixer mixer;
 
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private Slider musicVolumeSlider;
-    
+
     void Start()
     {
         float value;

@@ -36,26 +36,30 @@ public static class PlayerData
         Debug.Log($"New Score: {_score}");
     }
 
-    public static void ClearScore(){
+    public static void ClearScore()
+    {
         Score = 0f;
     }
 
     public static Action OnGrazeChanged = () => { };
-    public static int Graze 
+    public static int Graze
     {
         get => _graze;
-        set {
+        set
+        {
             _graze = value;
             OnGrazeChanged();
         }
     }
     [SerializeField] private static int _graze = 0;
-    public static void UpdateGraze(int additionalAmount){
+    public static void UpdateGraze(int additionalAmount)
+    {
         Graze += additionalAmount;
         Debug.Log($"GrazePoints: {_graze}");
     }
 
-    public static void ClearGraze(){
+    public static void ClearGraze()
+    {
         Graze = 0;
     }
 }

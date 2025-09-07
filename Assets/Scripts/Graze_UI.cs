@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 [RequireComponent(typeof(TMPro.TMP_Text))]
 public class Graze_UI : MonoBehaviour

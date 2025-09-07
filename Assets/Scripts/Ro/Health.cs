@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using MGGJ25.Shared;
 
 public class Health : MonoBehaviour
 {
@@ -54,11 +53,13 @@ public class Health : MonoBehaviour
         healthChange.Invoke(currHealth, maxHealth);
     }
 
-    public float GetCurrHealth(){
+    public float GetCurrHealth()
+    {
         return currHealth;
     }
 
-    public float GetMaxHealth(){
+    public float GetMaxHealth()
+    {
         return maxHealth;
     }
 
@@ -68,8 +69,9 @@ public class Health : MonoBehaviour
         _IFrameRoutine = StartCoroutine(CountIFrames(ISeconds));
     }
 
-    public void StopIFrames(){
-       if (_IFrameRoutine != null)
+    public void StopIFrames()
+    {
+        if (_IFrameRoutine != null)
         {
             StopCoroutine(_IFrameRoutine);
             _IFrameRoutine = null;
