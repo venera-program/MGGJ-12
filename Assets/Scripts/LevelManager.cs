@@ -26,7 +26,8 @@ public class LevelManager : MonoBehaviour
     public float levelLoadDelay;
     public float winScreenDelay;
 
-    void Start(){
+    void Start()
+    {
         LoadMainMenu();
     }
 
@@ -47,9 +48,17 @@ public class LevelManager : MonoBehaviour
         CurrentLevelIndex = levelNumber;
         OnLevelChange.Invoke(CurrentLevelIndex);
 
+        if (_levelThread != null)
+        {
+            Debug.LogWarning("Stopping existing level thread.");
+            StopCoroutine(_levelThread);
+            _levelThread = null;
+        }
+
         if (CurrentLevelIndex == -1)
         {
-            if(AudioManager.Instance != null){
+            if (AudioManager.Instance != null)
+            {
                 AudioManager.Instance.StopClearMusic();
                 AudioManager.Instance.StopAllSfx();
             }
@@ -57,13 +66,12 @@ public class LevelManager : MonoBehaviour
             // The main menu doesn't need an execution loop
             return;
         }
-        
+
         _levelThread = StartCoroutine(ExecuteLevel());
     }
 
     private IEnumerator ExecuteLevel()
     {
-       
         SetUpLevel();
         while (!BossDefeated)
         {
@@ -73,20 +81,24 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(levelLoadDelay);
         Debug.Log($"2. Boss has been defeated. Current Level Index is {CurrentLevelIndex}");
 
-        // Load next level, else load main menu
+        // Load next level, else load win screen
         // L 1|2|3
         // i 0|1|2
         if (levels.Length > CurrentLevelIndex + 1)
         {
             UnloadLevel();
-            if(PlayerControllerScript.instance != null){
+            if (PlayerControllerScript.instance != null)
+            {
                 PlayerControllerScript.instance.EnablePauseButton();
             }
             LoadLevel((sbyte)(CurrentLevelIndex + 1));
-        } else {
+        }
+        else
+        {
             yield return new WaitForSeconds(winScreenDelay);
             OnGameWin.Invoke();
-            if(PlayerControllerScript.instance != null){
+            if (PlayerControllerScript.instance != null)
+            {
                 PlayerControllerScript.instance.DisablePauseButton();
             }
         }
@@ -100,26 +112,29 @@ public class LevelManager : MonoBehaviour
         OnLevelUnload.Invoke();
     }
 
-    private void SetUpLevel(){
+    private void SetUpLevel()
+    {
         CombatUI.SetActive(true);
         BackgroundImage.sprite = levels[CurrentLevelIndex].NewBackgroundTexture;
-        if(AudioManager.Instance != null){
+        if (AudioManager.Instance != null)
+        {
             AudioManager.Instance.StopClearMusic();
             AudioManager.Instance.StopAllSfx();
             AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].bgMusic);
         }
         BackgroundUI.SetActive(true);
-        Enemy_Spawner.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
+        Enemy_Spawner.Instance.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
         BossDefeated = false;
     }
 
     [ContextMenu("LoadMainMenu")]
     public void LoadMainMenu()
     {
-        if(PlayerControllerScript.instance != null){
+        if (PlayerControllerScript.instance != null)
+        {
             PlayerControllerScript.instance.DisablePlayerControls();
             Debug.Log("Freezing Game");
-        } 
+        }
         UnloadLevel();
         LoadLevel(-1);
     }
@@ -127,14 +142,16 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("LoadFirstLevel")]
     public void LoadFirstLevel()
     {
-        if(PlayerControllerScript.instance != null){
+        if (PlayerControllerScript.instance != null)
+        {
             PlayerControllerScript.instance.EnablePlayerControls();
-        } 
+        }
         UnloadLevel();
         LoadLevel(0);
     }
 
-    public void RestartLevel(){
+    public void RestartLevel()
+    {
         UnloadLevel();
         LoadLevel(CurrentLevelIndex);
     }

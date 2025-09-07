@@ -6,19 +6,6 @@ using UnityEngine.Events;
 [DisallowMultipleComponent]
 public class Enemy_Spawner : MonoBehaviour
 {
-    public const float TICK_LENGTH = 0.1f;
-
-    public static Enemy_Spawner Instance;
-
-    public Dictionary<int, List<SpawnInfo>> spawnInfos = new Dictionary<int, List<SpawnInfo>>();
-    public GameObject[] EnemyPrefabs;
-    public Transform[] EnemySpawners;
-
-    private List<GameObject> _enemies = new List<GameObject>();
-
-    private bool _spawning;
-    private int _currentTick;
-    public UnityEvent bossSpawned = new UnityEvent();
     public class SpawnInfo
     {
         public SpawnInfo(byte enemyPrefabIndex, byte spawnLocationIndex)
@@ -31,6 +18,20 @@ public class Enemy_Spawner : MonoBehaviour
         public byte SpawnerIndex;
     }
 
+    public const float TICK_LENGTH = 0.1f;
+
+    public static Enemy_Spawner Instance;
+
+    public Dictionary<int, List<SpawnInfo>> spawnInfos = new Dictionary<int, List<SpawnInfo>>();
+    public GameObject[] EnemyPrefabs;
+    public Transform[] EnemySpawners;
+    public UnityEvent BossSpawned = new UnityEvent();
+
+    private List<GameObject> _Enemies = new List<GameObject>();
+    private int _LatestTickIndex;
+    private Coroutine _TickProcess;
+    private int _CurrentTick;
+
     private void Awake()
     {
         Instance = this;
@@ -38,9 +39,9 @@ public class Enemy_Spawner : MonoBehaviour
         LevelManager.OnLevelUnload += EndProcess;
     }
 
-    public static void StartProcessFromAsset(TextAsset spawnInfoCSV)
+    public void StartProcessFromAsset(TextAsset spawnInfoCSV)
     {
-        Instance.spawnInfos.Clear();
+        spawnInfos.Clear();
 
         string[] lines = spawnInfoCSV.text.Split('\n');
         for (int i = 0; i < lines.Length; i++)
@@ -51,52 +52,62 @@ public class Enemy_Spawner : MonoBehaviour
             byte.TryParse(parts[1], out byte enemyPrefabIndex);
             byte.TryParse(parts[2], out byte spawnLocationIndex);
 
-            if (!Instance.spawnInfos.ContainsKey(tickIndex))
+            if (!spawnInfos.ContainsKey(tickIndex))
             {
-                Instance.spawnInfos[tickIndex] = new List<SpawnInfo>();
+                spawnInfos[tickIndex] = new List<SpawnInfo>();
+                if (tickIndex > _LatestTickIndex)
+                {
+                    _LatestTickIndex = tickIndex;
+                }
             }
-            Instance.spawnInfos[tickIndex].Add(new SpawnInfo(enemyPrefabIndex, spawnLocationIndex));
+            spawnInfos[tickIndex].Add(new SpawnInfo(enemyPrefabIndex, spawnLocationIndex));
         }
 
-        Instance._spawning = true;
-        Instance.StartCoroutine(Instance.ProcessTicks());
+        _TickProcess = StartCoroutine(ProcessTicks());
     }
 
-    public static void EndProcess()
+    public void EndProcess()
     {
-        GameObject obj;
-        for (int i = 0; i < Instance._enemies.Count; i++)
+        if (_TickProcess != null)
         {
-            obj = Instance._enemies[i];
+            StopCoroutine(_TickProcess);
+        }
+
+        GameObject obj;
+        for (int i = 0; i < Instance._Enemies.Count; i++)
+        {
+            obj = Instance._Enemies[i];
             if (obj != null)
             {
                 Destroy(obj);
             }
         }
-
-        Instance._spawning = false;
     }
 
     private IEnumerator ProcessTicks()
     {
-        _currentTick = 0;
+        _CurrentTick = 0;
 
-        while (_spawning)
+        while (_LatestTickIndex > _CurrentTick)
         {
-            if (Instance.spawnInfos.ContainsKey(_currentTick))
+            Debug.Log("Current Tick is: " + _CurrentTick);
+            if (Instance.spawnInfos.ContainsKey(_CurrentTick))
             {
-                foreach (var enemyInfo in spawnInfos[_currentTick])
+                foreach (var enemyInfo in spawnInfos[_CurrentTick])
                 {
                     GameObject enemy = Instantiate(EnemyPrefabs[enemyInfo.EnemyPrefabIndex], EnemySpawners[enemyInfo.SpawnerIndex]);
-                    _enemies.Add(enemy);
-                    if(enemy.tag == "Boss"){
-                        bossSpawned.Invoke();
+                    _Enemies.Add(enemy);
+                    if (enemy.tag == "Boss")
+                    {
+                        BossSpawned.Invoke();
                     }
+                    Debug.Log("spawned enemy", enemy);
                 }
             }
             yield return new WaitForSeconds(TICK_LENGTH); // Wait tick length
-            Debug.Log("Current Tick is: " + _currentTick);
-            _currentTick++;
+            _CurrentTick++;
         }
+
+        Debug.Log("Done Spawning.");
     }
 }
