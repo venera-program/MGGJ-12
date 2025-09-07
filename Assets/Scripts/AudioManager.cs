@@ -95,27 +95,34 @@ namespace MGGJ25.Shared
                 if (source.clip == clip) return;
             }
 
-            if(clip != playerbulletSound && clip != playerspecialSound){
+            if (clip != playerbulletSound && clip != playerspecialSound)
+            {
                 AudioSource audioSource = GetAvailableAudioSource();
                 audioSource.clip = clip;
                 audioSource.Play();
                 StartCoroutine(ReturnToPoolAfterPlayback(audioSource));
-            } else {
+            }
+            else
+            {
                 sfxLoopAudioSource.clip = clip;
                 sfxLoopAudioSource.Play();
             }
-            
+
         }
 
-        public void StopSfx(AudioClip clip){
+        public void StopSfx(AudioClip clip)
+        {
 
-            if(clip == playerbulletSound || clip == playerspecialSound){
+            if (clip == playerbulletSound || clip == playerspecialSound)
+            {
                 sfxLoopAudioSource.Stop();
                 return;
             }
 
-            foreach (var source in sfxAudioSources){
-                if(source.clip == clip){
+            foreach (var source in sfxAudioSources)
+            {
+                if (source.clip == clip)
+                {
                     source.Stop();
                 }
             }
@@ -147,17 +154,21 @@ namespace MGGJ25.Shared
             musicAudioSource.Stop();
         }
 
-        public void StopClearMusic(){
+        public void StopClearMusic()
+        {
             musicAudioSource.Stop();
             musicAudioSource.clip = null;
         }
 
-        public void SetMusicVolume(float volume){
+        public void SetMusicVolume(float volume)
+        {
             musicAudioSource.volume = volume;
         }
 
-        public void SetSFXVolume(float volume){
-            foreach (AudioSource source in sfxAudioSources){
+        public void SetSFXVolume(float volume)
+        {
+            foreach (AudioSource source in sfxAudioSources)
+            {
                 source.volume = volume;
             }
 
@@ -177,7 +188,7 @@ namespace MGGJ25.Shared
         public void PlayPlayerSpecial_SFX() => PlaySfx(playerspecialSound);
         public void PlayPlayerGraze_SFX() => PlaySfx(playergrazeSound);
         public void PlayPlayerGrazeFull_SFX() => PlaySfx(playergrazefullSound);
-        public void PlayPlayerEmpty_SFX() => PlaySfx(playeremptySound);     
+        public void PlayPlayerEmpty_SFX() => PlaySfx(playeremptySound);
         public void PlayEnemyBullet_SFX() => PlaySfx(enemybulletSound);
         public void PlayEnemyDies_SFX() => PlaySfx(enemydiesSound);
         public void PlayUISelect_SFX() => PlaySfx(uiselectSound);

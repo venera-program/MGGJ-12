@@ -1,37 +1,43 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
-   private Stack<GameObject> lastGameObject = new Stack<GameObject>();
-   private Stack<GameObject> lastSelected = new Stack<GameObject>();
-   [SerializeField] private GameObject firstSelectedButton;
-   [SerializeField] private GameObject settingsMenu;
-   [SerializeField] private GameObject creditsScreen;
-   [SerializeField] private GameObject pauseMenu;
+    private Stack<GameObject> lastGameObject = new Stack<GameObject>();
+    private Stack<GameObject> lastSelected = new Stack<GameObject>();
+    [SerializeField] private GameObject firstSelectedButton;
+    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject creditsScreen;
+    [SerializeField] private GameObject pauseMenu;
 
-   public static MainMenu instance;
+    public static MainMenu instance;
 
-   void Awake(){
-        if(instance != null && instance != this){
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
             Destroy(gameObject);
-        } else {
+        }
+        else
+        {
             instance = this;
         }
-   }
+    }
 
-   void OnEnable(){
-    EventSystem.current.SetSelectedGameObject(firstSelectedButton);
-   }
+    void OnEnable()
+    {
+        EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+    }
 
-   public void OpenMenu(MenuSO menu){
-        OpenMenu(menu.menus);               
-   }
-   public void OpenMenu(Menus menu){
-    switch(menu){
+    public void OpenMenu(MenuSO menu)
+    {
+        OpenMenu(menu.menus);
+    }
+    public void OpenMenu(Menus menu)
+    {
+        switch (menu)
+        {
             case Menus.Settings:
                 settingsMenu.SetActive(true);
                 lastGameObject.Push(settingsMenu);
@@ -47,35 +53,42 @@ public class MainMenu : MonoBehaviour
             default:
                 break;
         }
-   }
+    }
 
-   public void OpenPauseMenu(UnityEngine.InputSystem.InputAction.CallbackContext cont){
+    public void OpenPauseMenu(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+    {
         OpenMenu(Menus.PauseMenu);
-   }
+    }
 
-   public void AddButton(GameObject button){
+    public void AddButton(GameObject button)
+    {
         lastSelected.Push(button);
-   }
+    }
 
 
-   public void BackButton(UnityEngine.InputSystem.InputAction.CallbackContext cont){
-        if(lastGameObject.Count > 0){
+    public void BackButton(UnityEngine.InputSystem.InputAction.CallbackContext cont)
+    {
+        if (lastGameObject.Count > 0)
+        {
             GameObject lastMenu = lastGameObject.Pop();
             lastMenu.SetActive(false);
         }
-        if(lastSelected.Count > 0){
+        if (lastSelected.Count > 0)
+        {
             GameObject selected = lastSelected.Pop();
             EventSystem.current.SetSelectedGameObject(selected);
         }
-   }
+    }
 
-   public void Quit(){
+    public void Quit()
+    {
         Application.Quit();
-   }
+    }
 }
 
 
-public enum Menus {
+public enum Menus
+{
     Settings,
     Credits,
     PauseMenu

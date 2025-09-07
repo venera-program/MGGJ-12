@@ -1,24 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using MGGJ25.Shared;
 using UnityEngine.InputSystem;
-public class Graze : MonoBehaviour{
-   public static Graze instance;
-   [Header("Graze Meter")]
-   [SerializeField] private int grazeAmount;
-   public int maxGrazeAmount;
-   public UnityEvent<int, int> updateGrazeValue = new UnityEvent<int, int>();
-   public UnityEvent endSkillTimer = new UnityEvent();
+public class Graze : MonoBehaviour
+{
+    public static Graze instance;
+    [Header("Graze Meter")]
+    [SerializeField] private int grazeAmount;
+    public int maxGrazeAmount;
+    public UnityEvent<int, int> updateGrazeValue = new UnityEvent<int, int>();
+    public UnityEvent endSkillTimer = new UnityEvent();
     // key == ID of gameObject
     // value == # of times the projectile has touched the area.
-   private Dictionary<int, int> projectileContact = new Dictionary<int,int>();
+    private Dictionary<int, int> projectileContact = new Dictionary<int, int>();
 
 
-   [Header("Graze Radius")]
+    [Header("Graze Radius")]
     public float grazeRadius = 5f;
-   [Header("Graze Visual")]
+    [Header("Graze Visual")]
     [SerializeField] private Group grazePattern;
     [SerializeField] private GameObject grazeImage;
     [SerializeField] private Transform grazeImageParent;
@@ -46,22 +46,30 @@ public class Graze : MonoBehaviour{
 
 
 
-    void Awake(){
-        if(instance != null && instance != this){
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
             Destroy(gameObject);
-        } else {
+        }
+        else
+        {
             instance = this;
         }
     }
 
-    void Start(){
-        for(int i = 0; i < grazePattern.projectileCount; i++){
+    void Start()
+    {
+        for (int i = 0; i < grazePattern.projectileCount; i++)
+        {
             float angle = HelperFunctions.CalculateProjectilePositionAngle(i, grazePattern);
             float x = Mathf.Cos(angle) * grazeRadius + transform.position.x;
             float y = Mathf.Sin(angle) * grazeRadius + transform.position.y;
-            Instantiate(grazeImage, new Vector3(x,y,0f), Quaternion.identity, grazeImageParent);
-            if(isRumbleOn){
-                if(Gamepad.current != null){
+            Instantiate(grazeImage, new Vector3(x, y, 0f), Quaternion.identity, grazeImageParent);
+            if (isRumbleOn)
+            {
+                if (Gamepad.current != null)
+                {
                     Gamepad.current.SetMotorSpeeds(leftMotorSpeed, rightMotorSpeed);
                     Gamepad.current.PauseHaptics();
                 }
@@ -69,113 +77,142 @@ public class Graze : MonoBehaviour{
         }
     }
 
-    void OnEnable(){
+    void OnEnable()
+    {
         LevelManager.OnLevelUnload += ClearGrazeCount;
         LevelManager.OnLevelUnload += ResetGrazeCountUI;
         LevelManager.OnLevelUnload += StopSkillTimer;
     }
 
-    void OnDisable(){
+    void OnDisable()
+    {
         LevelManager.OnLevelUnload -= ClearGrazeCount;
         LevelManager.OnLevelUnload -= ResetGrazeCountUI;
         LevelManager.OnLevelUnload -= StopSkillTimer;
     }
 
-    void Update(){
-        if(startTimer){
+    void Update()
+    {
+        if (startTimer)
+        {
             SkillTimer();
         }
-        if(isRumbleOn && startRumbleTimer){
+        if (isRumbleOn && startRumbleTimer)
+        {
             RumbleTimer();
         }
     }
 
-   public void AddGrazeCount(int instanceID, Vector3 position){
-    if(!startTimer){
-        if(!projectileContact.ContainsKey(instanceID)){
-            projectileContact.Add(instanceID, 1);
-            grazeAmount = Mathf.Clamp(grazeAmount + 1, 0, maxGrazeAmount);
-            updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
-            PlayerData.UpdateGraze(1);
-            AudioManager.Instance.PlayPlayerGraze_SFX();
-            hits.Add(position);
-            startRumbleTimer = true;
-            if(Gamepad.current != null){
-                Gamepad.current.ResumeHaptics();
+    public void AddGrazeCount(int instanceID, Vector3 position)
+    {
+        if (!startTimer)
+        {
+            if (!projectileContact.ContainsKey(instanceID))
+            {
+                projectileContact.Add(instanceID, 1);
+                grazeAmount = Mathf.Clamp(grazeAmount + 1, 0, maxGrazeAmount);
+                updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
+                PlayerData.UpdateGraze(1);
+                AudioManager.Instance.PlayPlayerGraze_SFX();
+                hits.Add(position);
+                startRumbleTimer = true;
+                if (Gamepad.current != null)
+                {
+                    Gamepad.current.ResumeHaptics();
+                }
             }
-        } else {
-            return;
+            else
+            {
+                return;
+            }
+
+            if (IsGrazeFull()) AudioManager.Instance.PlayPlayerGrazeFull_SFX();
         }
 
-        if(IsGrazeFull()) AudioManager.Instance.PlayPlayerGrazeFull_SFX();
     }
-    
-   }
 
-   public bool IsGrazeFull(){
-    return grazeAmount >= maxGrazeAmount;
-   }
+    public bool IsGrazeFull()
+    {
+        return grazeAmount >= maxGrazeAmount;
+    }
 
-   public void StartSkillTimer(){
+    public void StartSkillTimer()
+    {
         startTimer = true;
-   }
+    }
 
-   public void StopSkillTimer(){
+    public void StopSkillTimer()
+    {
         startTimer = false;
         skillTimer = 0f;
         ClearGrazeCount();
         endSkillTimer.Invoke();
-   }
+    }
 
-   private void SkillTimer(){
+    private void SkillTimer()
+    {
         skillTimer += Time.deltaTime;
-        if(skillTimer >= skillDuration){
+        if (skillTimer >= skillDuration)
+        {
             StopSkillTimer();
-        } else {
+        }
+        else
+        {
             GrazeBarCountDown(skillTimer, skillDuration);
         }
-   }
+    }
 
-   private void RumbleTimer(){
+    private void RumbleTimer()
+    {
         rumbleTimer += Time.deltaTime;
-        if (rumbleTimer >= rumbleDuration){
+        if (rumbleTimer >= rumbleDuration)
+        {
             startRumbleTimer = false;
             rumbleTimer = 0f;
-            if(Gamepad.current != null){
+            if (Gamepad.current != null)
+            {
                 Gamepad.current.PauseHaptics();
             }
         }
-   }
-    private void GrazeBarCountDown(float time, float maxTime){
-        float ev = curve.Evaluate(time/maxTime);
+    }
+    private void GrazeBarCountDown(float time, float maxTime)
+    {
+        float ev = curve.Evaluate(time / maxTime);
         float value = Mathf.Lerp(0f, (float)maxGrazeAmount, ev);
         updateGrazeValue.Invoke((int)value, maxGrazeAmount);
     }
-   public void ClearGrazeCount(){
+    public void ClearGrazeCount()
+    {
         projectileContact.Clear();
         grazeAmount = 0;
         updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
         hits.Clear();
-   }
+    }
 
-   public void ResetGrazeCountUI(){
+    public void ResetGrazeCountUI()
+    {
         PlayerData.ClearGraze();
-   }
+    }
 
-   public void RemoveGrazeCount(int instanceID){
-        if(projectileContact.ContainsKey(instanceID)){
+    public void RemoveGrazeCount(int instanceID)
+    {
+        if (projectileContact.ContainsKey(instanceID))
+        {
             projectileContact.Remove(instanceID);
         }
-   }
-   void OnDrawGizmos(){
-       if(turnOnGizmos){
+    }
+    void OnDrawGizmos()
+    {
+        if (turnOnGizmos)
+        {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, grazeRadius);
             Gizmos.color = Color.red;
-            for(int i = 0; i < hits.Count ; i++){
-                 Gizmos.DrawWireSphere(hits[i], .25f);
+            for (int i = 0; i < hits.Count; i++)
+            {
+                Gizmos.DrawWireSphere(hits[i], .25f);
             }
-           
-       }
-   }
+
+        }
+    }
 }
