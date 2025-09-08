@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EnemyAnimation : MonoBehaviour
 {
-
     private Animator animator;
     [SerializeField] private float pukeTime;
 
@@ -12,16 +11,16 @@ public class EnemyAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void pukeBullets()
+    public void PukeBullets()
     {
-        if (!(animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
         {
             animator.Play("Attacking");
-            StartCoroutine(endPukeBullets(pukeTime));
+            StartCoroutine(EndPukeBullets(pukeTime));
         }
     }
 
-    private IEnumerator endPukeBullets(float duration)
+    private IEnumerator EndPukeBullets(float duration)
     {
         yield return new WaitForSeconds(duration);
         animator.Play("Moving");

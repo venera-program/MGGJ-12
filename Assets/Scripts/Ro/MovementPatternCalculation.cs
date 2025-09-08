@@ -19,7 +19,7 @@ public class MovementPatternCalculation
             6 - Down
             7 - Down Right
         */
-        List<int> directions = new List<int>();
+        List<int> directions = new();
 
         for (int i = 0; i < 8; i++)
         {
@@ -89,19 +89,19 @@ public class MovementPatternCalculation
         Vector3 cameraHeight, cameraWidth;
         switch (border)
         {
-            case (ScreenBorders.Top):
+            case ScreenBorders.Top:
                 height = CameraRect.y - imagebounds.height * 1.5f;
                 cameraHeight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x, height, Camera.main.nearClipPlane));
                 return new Vector3(position.x, cameraHeight.y, position.z);
-            case (ScreenBorders.Bottom):
+            case ScreenBorders.Bottom:
                 height = CameraRect.y + CameraRect.height + imagebounds.height * 1.5f;
                 cameraHeight = Camera.main.ScreenToWorldPoint(new Vector3(CameraRect.x, height, Camera.main.nearClipPlane));
                 return new Vector3(position.x, cameraHeight.y, position.z);
-            case (ScreenBorders.Left):
+            case ScreenBorders.Left:
                 width = CameraRect.width + imagebounds.width;
                 cameraWidth = Camera.main.ScreenToWorldPoint(new Vector3(width, CameraRect.y, Camera.main.nearClipPlane));
                 return new Vector3(cameraWidth.x, position.y, position.z);
-            case (ScreenBorders.Right):
+            case ScreenBorders.Right:
                 width = CameraRect.x - imagebounds.width;
                 cameraWidth = Camera.main.ScreenToWorldPoint(new Vector3(width, CameraRect.y, Camera.main.nearClipPlane));
                 return new Vector3(cameraWidth.x, position.y, position.z);
@@ -125,7 +125,6 @@ public class MovementPatternCalculation
         {
             return Vector2.zero;
         }
-
     }
 }
 

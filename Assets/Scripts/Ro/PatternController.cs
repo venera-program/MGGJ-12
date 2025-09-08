@@ -6,8 +6,6 @@ public class PatternController : MonoBehaviour
 {
     public Pattern[] Patterns;
     private int index = 0;
-    private float timer = 0;
-    private bool hasStarted = false;
     private GroupController groupSpawner;
 
     void Awake()
@@ -24,7 +22,7 @@ public class PatternController : MonoBehaviour
 
     private void ProgressPattern(float currHealth, float maxHealth)
     {
-        if (Patterns[index].HPValueEnd >= ((currHealth / maxHealth) * 100f))
+        if (Patterns[index].HPValueEnd >= (currHealth / maxHealth * 100f))
         {
             index++;
             if (index >= Patterns.Length)
@@ -34,7 +32,6 @@ public class PatternController : MonoBehaviour
             groupSpawner.StartGroup(Patterns[index].groups);
         }
     }
-
 }
 
 [Serializable]

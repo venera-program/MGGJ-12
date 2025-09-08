@@ -36,16 +36,13 @@ public class PlayerControllerScript : MonoBehaviour
      public float deccel;
      [SerializeField] private float projectileSpawnInterval;
 
-     private Vector2 _spawnPoint;
      private Vector2 direction = Vector2.zero;
-     private Rigidbody2D rb;
+     private Rigidbody2D _RB;
      private float projectileTimer = 0f;
      private bool startProjectSpawnTimer = false;
      private bool startGeneratingProject = false;
      private bool skillActivated = false;
-
-     private Collider2D collider;
-
+     private Collider2D _Collider;
      private bool canMove = true;
 
      void Awake()
@@ -56,11 +53,9 @@ public class PlayerControllerScript : MonoBehaviour
           }
           instance = this;
 
-          rb = GetComponent<Rigidbody2D>();
-          collider = GetComponent<Collider2D>();
-
           controller = new PlayerController();
-
+          _RB = GetComponent<Rigidbody2D>();
+          _Collider = GetComponent<Collider2D>();
           animator = GetComponentInChildren<Animator>();
           playerImage = GetComponentInChildren<Image>();
           script = GetComponent<PlayerSkill>();
@@ -88,7 +83,6 @@ public class PlayerControllerScript : MonoBehaviour
      private void Start()
      {
           projectileTimer = projectileSpawnInterval;
-          _spawnPoint = transform.position;
      }
 
      private void HealMC(sbyte currentLevel)
@@ -101,10 +95,10 @@ public class PlayerControllerScript : MonoBehaviour
           StopCoroutine(RespawnPlayer());
           Move(Vector2.zero);
           startGeneratingProject = false;
-          animator.SetBool("wasHit", false);
+          animator.SetBool(WAS_HIT, false);
           EndSkillUse();
           transform.position = spawnPoint.position;
-          collider.enabled = true;
+          _Collider.enabled = true;
           controller.Main.Move.Enable();
           controller.Main.Shoot.Enable();
           controller.Main.Skill.Enable();
@@ -153,7 +147,6 @@ public class PlayerControllerScript : MonoBehaviour
                          {
                               GeneratePlayerSpecialProjectiles();
                          }
-
                     }
                }
           }
@@ -172,7 +165,7 @@ public class PlayerControllerScript : MonoBehaviour
 
      private void Move(Vector2 direction)
      {
-          float velocity = 0f;
+          float velocity;
           if (direction == Vector2.zero)
           {
                velocity = Mathf.Clamp(speed - Time.fixedDeltaTime * deccel, minSpeed, maxSpeed);
@@ -181,7 +174,7 @@ public class PlayerControllerScript : MonoBehaviour
           {
                velocity = Mathf.Clamp(Time.fixedDeltaTime * accel + speed, minSpeed, maxSpeed);
           }
-          rb.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position);
+          _RB.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position);
           animator.SetBool(IS_MOVING, PlayerInputRaw != Vector2.zero);
           flipped = direction.x < 0;
           playerImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
@@ -250,8 +243,6 @@ public class PlayerControllerScript : MonoBehaviour
                float rad = regularShootingPattern[i].startingAngle * Mathf.Deg2Rad;
                float xPos = Mathf.Cos(rad) * regularShootingPattern[i].radius;
                float yPos = Mathf.Sin(rad) * regularShootingPattern[i].radius;
-               Vector3 finalPosition = new Vector3(transform.position.x + xPos + regularShootingPattern[i].offset.x,
-                    transform.position.y + yPos + regularShootingPattern[i].offset.y, 0f);
                GameObject projectile;
                if (Mathf.Approximately(regularShootingPattern[i].startingAngle, 90f))
                {
@@ -261,9 +252,10 @@ public class PlayerControllerScript : MonoBehaviour
                {
                     projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.angle);
                }
-               projectile.transform.position = finalPosition;
-               Projectile script = projectile.GetComponent<Projectile>();
-               script.ConstructProjectile(regularShootingPattern[i].speed, regularShootingPattern[i].startingAngle);
+               projectile.transform.position = new Vector3(transform.position.x + xPos + regularShootingPattern[i].offset.x,
+                                                           transform.position.y + yPos + regularShootingPattern[i].offset.y,
+                                                           0f);
+               projectile.GetComponent<Projectile>().ConstructProjectile(regularShootingPattern[i].speed, regularShootingPattern[i].startingAngle);
           }
      }
 
@@ -278,8 +270,6 @@ public class PlayerControllerScript : MonoBehaviour
                float rad = specialShootingPattern[i].startingAngle * Mathf.Deg2Rad;
                float xPos = Mathf.Cos(rad) * specialShootingPattern[i].radius;
                float yPos = Mathf.Sin(rad) * specialShootingPattern[i].radius;
-               Vector3 finalPosition = new Vector3(transform.position.x + xPos + specialShootingPattern[i].offset.x,
-               transform.position.y + yPos + specialShootingPattern[i].offset.y, 0f);
                GameObject projectile;
                if (Mathf.Approximately(specialShootingPattern[i].startingAngle, 90f))
                {
@@ -289,9 +279,10 @@ public class PlayerControllerScript : MonoBehaviour
                {
                     projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.specialAngle);
                }
-               projectile.transform.position = finalPosition;
-               Projectile script = projectile.GetComponent<Projectile>();
-               script.ConstructProjectile(specialShootingPattern[i].speed, specialShootingPattern[i].startingAngle);
+               projectile.transform.position = new Vector3(transform.position.x + xPos + specialShootingPattern[i].offset.x,
+                                                           transform.position.y + yPos + specialShootingPattern[i].offset.y,
+                                                           0f);
+               projectile.GetComponent<Projectile>().ConstructProjectile(specialShootingPattern[i].speed, specialShootingPattern[i].startingAngle);
           }
      }
 
@@ -326,20 +317,18 @@ public class PlayerControllerScript : MonoBehaviour
           controller.Main.Escape.Disable();
      }
 
-
      private void OnHit(float currHealth, float maxHealth)
      {
           if (currHealth < maxHealth)
           {
                AudioManager.Instance.PlayPlayerDies_SFX();
-               animator.SetBool("wasHit", true);
+               animator.SetBool(WAS_HIT, true);
                StartCoroutine(RespawnPlayer());
           }
      }
 
      private IEnumerator RespawnPlayer()
      {
-
           var collider = GetComponent<Collider2D>();
           collider.enabled = false;
           controller.Main.Move.Disable();
@@ -352,7 +341,7 @@ public class PlayerControllerScript : MonoBehaviour
 
           yield return new WaitForSeconds(RESPAWN_DELAY);
 
-          animator.SetBool("wasHit", false);
+          animator.SetBool(WAS_HIT, false);
           transform.position = spawnPoint.position;
           //Debug.Log("The new position is " + transform.position);
           collider.enabled = true;

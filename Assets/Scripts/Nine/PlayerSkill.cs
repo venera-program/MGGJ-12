@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerSkill : MonoBehaviour
 {
     private Animator animator;
-    private Animator _default;
     [SerializeField] private AnimatorOverrideController mainAnimator;
     [SerializeField] private AnimatorOverrideController skillOverride;
     [SerializeField] private AnimatorOverrideController flickerOverride;

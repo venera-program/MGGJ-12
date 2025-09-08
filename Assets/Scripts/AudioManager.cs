@@ -11,8 +11,8 @@ namespace MGGJ25.Shared
         [SerializeField] private AudioSource sfxAudioSource;
         [SerializeField] private AudioSource sfxLoopAudioSource;
         [SerializeField] private GameObject audioSourcePrefab; // Prefab with an AudioSource component
-        private List<AudioSource> sfxAudioSources = new List<AudioSource>();
-        private Queue<AudioSource> availableSfxSources = new Queue<AudioSource>();
+        private List<AudioSource> sfxAudioSources = new();
+        private Queue<AudioSource> availableSfxSources = new();
 
         [Header("Pool Settings")]
         [SerializeField] private int initialPoolSize = 3; // Number of SFX sources to preallocate
@@ -22,7 +22,6 @@ namespace MGGJ25.Shared
         [SerializeField] private AudioClip level2MusicClip;
         [SerializeField] private AudioClip level3MusicClip;
         [SerializeField] private AudioClip volumetempClip;
-
 
         [Header("SFX Clips")]
         [SerializeField] private AudioClip playerbulletSound;
@@ -62,7 +61,7 @@ namespace MGGJ25.Shared
 
         private void CreateNewAudioSource()
         {
-            GameObject audioSourceObj = Instantiate(audioSourcePrefab, AudioManager.Instance.transform);
+            GameObject audioSourceObj = Instantiate(audioSourcePrefab, Instance.transform);
             audioSourceObj.SetActive(true);
             AudioSource audioSource = audioSourceObj.GetComponent<AudioSource>();
             audioSource.playOnAwake = false;
@@ -107,12 +106,10 @@ namespace MGGJ25.Shared
                 sfxLoopAudioSource.clip = clip;
                 sfxLoopAudioSource.Play();
             }
-
         }
 
         public void StopSfx(AudioClip clip)
         {
-
             if (clip == playerbulletSound || clip == playerspecialSound)
             {
                 sfxLoopAudioSource.Stop();

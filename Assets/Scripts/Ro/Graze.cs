@@ -9,12 +9,11 @@ public class Graze : MonoBehaviour
     [Header("Graze Meter")]
     [SerializeField] private int grazeAmount;
     public int maxGrazeAmount;
-    public UnityEvent<int, int> updateGrazeValue = new UnityEvent<int, int>();
-    public UnityEvent endSkillTimer = new UnityEvent();
+    public UnityEvent<int, int> updateGrazeValue = new();
+    public UnityEvent endSkillTimer = new();
     // key == ID of gameObject
     // value == # of times the projectile has touched the area.
-    private Dictionary<int, int> projectileContact = new Dictionary<int, int>();
-
+    private Dictionary<int, int> projectileContact = new();
 
     [Header("Graze Radius")]
     public float grazeRadius = 5f;
@@ -41,10 +40,8 @@ public class Graze : MonoBehaviour
 
     [Header("For Debugging Purposes")]
     public bool turnOnGizmos = false;
-    private List<Vector3> hits = new List<Vector3>();
 
-
-
+    private readonly List<Vector3> _hits = new();
 
     void Awake()
     {
@@ -114,7 +111,7 @@ public class Graze : MonoBehaviour
                 updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
                 PlayerData.UpdateGraze(1);
                 AudioManager.Instance.PlayPlayerGraze_SFX();
-                hits.Add(position);
+                _hits.Add(position);
                 startRumbleTimer = true;
                 if (Gamepad.current != null)
                 {
@@ -128,7 +125,6 @@ public class Graze : MonoBehaviour
 
             if (IsGrazeFull()) AudioManager.Instance.PlayPlayerGrazeFull_SFX();
         }
-
     }
 
     public bool IsGrazeFull()
@@ -186,7 +182,7 @@ public class Graze : MonoBehaviour
         projectileContact.Clear();
         grazeAmount = 0;
         updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
-        hits.Clear();
+        _hits.Clear();
     }
 
     public void ResetGrazeCountUI()
@@ -208,11 +204,10 @@ public class Graze : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, grazeRadius);
             Gizmos.color = Color.red;
-            for (int i = 0; i < hits.Count; i++)
+            for (int i = 0; i < _hits.Count; i++)
             {
-                Gizmos.DrawWireSphere(hits[i], .25f);
+                Gizmos.DrawWireSphere(_hits[i], .25f);
             }
-
         }
     }
 }

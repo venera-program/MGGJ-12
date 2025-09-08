@@ -14,10 +14,10 @@ public class ProjectilePool : MonoBehaviour
     [SerializeField] private float undirected2;
 
     [Header("Enemy Projectile Lists")]
-    private Queue<GameObject> directedPool = new Queue<GameObject>();
-    private Queue<GameObject> directed2Pool = new Queue<GameObject>();
-    private Queue<GameObject> undirectedPool = new Queue<GameObject>();
-    private Queue<GameObject> undirected2Pool = new Queue<GameObject>();
+    private Queue<GameObject> directedPool = new();
+    private Queue<GameObject> directed2Pool = new();
+    private Queue<GameObject> undirectedPool = new();
+    private Queue<GameObject> undirected2Pool = new();
 
     [Header("Player Projectile Count")]
     [SerializeField] private float angle;
@@ -26,13 +26,13 @@ public class ProjectilePool : MonoBehaviour
     [SerializeField] private float specialForward;
 
     [Header("Player Projectile Lists")]
-    private Queue<GameObject> anglePool = new Queue<GameObject>();
-    private Queue<GameObject> forwardPool = new Queue<GameObject>();
-    private Queue<GameObject> specialAnglePool = new Queue<GameObject>();
-    private Queue<GameObject> specialForwardPool = new Queue<GameObject>();
+    private Queue<GameObject> anglePool = new();
+    private Queue<GameObject> forwardPool = new();
+    private Queue<GameObject> specialAnglePool = new();
+    private Queue<GameObject> specialForwardPool = new();
 
     [Header("Special Attack Event")]
-    public UnityEvent<int> specialAttackCount = new UnityEvent<int>();
+    public UnityEvent<int> specialAttackCount = new();
 
     void Awake()
     {
@@ -120,29 +120,29 @@ public class ProjectilePool : MonoBehaviour
 
         switch (type)
         {
-            case (ProjectileType.directed):
+            case ProjectileType.directed:
                 project = directedPool.Count > 0 ? directedPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 break;
-            case (ProjectileType.directed2):
+            case ProjectileType.directed2:
                 project = directed2Pool.Count > 0 ? directed2Pool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 break;
-            case (ProjectileType.undirected):
+            case ProjectileType.undirected:
                 project = undirectedPool.Count > 0 ? undirectedPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 break;
-            case (ProjectileType.undirected2):
+            case ProjectileType.undirected2:
                 project = undirected2Pool.Count > 0 ? undirected2Pool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 break;
-            case (ProjectileType.angle):
+            case ProjectileType.angle:
                 project = anglePool.Count > 0 ? anglePool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 break;
-            case (ProjectileType.forward):
+            case ProjectileType.forward:
                 project = forwardPool.Count > 0 ? forwardPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 break;
-            case (ProjectileType.specialAngle):
+            case ProjectileType.specialAngle:
                 project = specialAnglePool.Count > 0 ? specialAnglePool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
-            case (ProjectileType.specialForward):
+            case ProjectileType.specialForward:
                 project = specialForwardPool.Count > 0 ? specialForwardPool.Dequeue() : ProjectileResources.instance.defaultProjectile;
                 specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
@@ -160,29 +160,29 @@ public class ProjectilePool : MonoBehaviour
         project.gameObject.SetActive(false);
         switch (project.projectileType)
         {
-            case (ProjectileType.directed):
+            case ProjectileType.directed:
                 directedPool.Enqueue(project.gameObject);
                 break;
-            case (ProjectileType.directed2):
+            case ProjectileType.directed2:
                 directed2Pool.Enqueue(project.gameObject);
                 break;
-            case (ProjectileType.undirected):
+            case ProjectileType.undirected:
                 undirectedPool.Enqueue(project.gameObject);
                 break;
-            case (ProjectileType.undirected2):
+            case ProjectileType.undirected2:
                 undirected2Pool.Enqueue(project.gameObject);
                 break;
-            case (ProjectileType.angle):
+            case ProjectileType.angle:
                 anglePool.Enqueue(project.gameObject);
                 break;
-            case (ProjectileType.forward):
+            case ProjectileType.forward:
                 forwardPool.Enqueue(project.gameObject);
                 break;
-            case (ProjectileType.specialAngle):
+            case ProjectileType.specialAngle:
                 specialAnglePool.Enqueue(project.gameObject);
                 specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
-            case (ProjectileType.specialForward):
+            case ProjectileType.specialForward:
                 specialForwardPool.Enqueue(project.gameObject);
                 specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
                 break;
@@ -193,21 +193,21 @@ public class ProjectilePool : MonoBehaviour
     {
         switch (type)
         {
-            case (ProjectileType.directed):
+            case ProjectileType.directed:
                 return directedPool.Count;
-            case (ProjectileType.directed2):
+            case ProjectileType.directed2:
                 return directed2Pool.Count;
-            case (ProjectileType.undirected):
+            case ProjectileType.undirected:
                 return undirectedPool.Count;
-            case (ProjectileType.undirected2):
+            case ProjectileType.undirected2:
                 return undirected2Pool.Count;
-            case (ProjectileType.angle):
+            case ProjectileType.angle:
                 return anglePool.Count;
-            case (ProjectileType.forward):
+            case ProjectileType.forward:
                 return forwardPool.Count;
-            case (ProjectileType.specialAngle):
+            case ProjectileType.specialAngle:
                 return specialAnglePool.Count;
-            case (ProjectileType.specialForward):
+            case ProjectileType.specialForward:
                 return specialForwardPool.Count;
             default:
                 return 0;

@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
     public float maxHealth;
     public float currHealth;
-    public UnityEvent<float, float> healthChange = new UnityEvent<float, float>();
+    public UnityEvent<float, float> healthChange = new();
     [SerializeField] private AudioClip hurtSFX;
 
     private Coroutine _IFrameRoutine;

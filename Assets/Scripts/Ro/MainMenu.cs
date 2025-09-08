@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
-    private Stack<GameObject> lastGameObject = new Stack<GameObject>();
-    private Stack<GameObject> lastSelected = new Stack<GameObject>();
+    private Stack<GameObject> lastGameObject = new();
+    private Stack<GameObject> lastSelected = new();
     [SerializeField] private GameObject firstSelectedButton;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject creditsScreen;
@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
     {
         OpenMenu(menu.menus);
     }
+
     public void OpenMenu(Menus menu)
     {
         switch (menu)
@@ -65,7 +66,6 @@ public class MainMenu : MonoBehaviour
         lastSelected.Push(button);
     }
 
-
     public void BackButton(UnityEngine.InputSystem.InputAction.CallbackContext cont)
     {
         if (lastGameObject.Count > 0)
@@ -85,7 +85,6 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 }
-
 
 public enum Menus
 {

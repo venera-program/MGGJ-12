@@ -8,8 +8,6 @@ public class BossHealthBarUI : MonoBehaviour
     [SerializeField] private Slider bossHealthSlider;
     [SerializeField] private GameObject sliderObject;
     [SerializeField] private float turnOffDelay;
-    private Coroutine turningOffHealthbar = null;
-
     public static BossHealthBarUI instance;
 
     void Awake()

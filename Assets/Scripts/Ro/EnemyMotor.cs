@@ -25,7 +25,6 @@ public class EnemyMotor : MonoBehaviour
     [Header("For Following Boss Only")]
     public float bossDistance;
 
-
     [Header("Border padding")]
     [Tooltip("In pixels")]
     public float topBorder;
@@ -43,9 +42,6 @@ public class EnemyMotor : MonoBehaviour
     [Header("For debugging purposes")]
     public bool editmode = false;
 
-    //for Animating enemy sprites
-    [Header("For animation purposes")]
-    private Animator animator;
     private bool flipped;
     private Image enemyImage;
 
@@ -54,7 +50,6 @@ public class EnemyMotor : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         imagebounds = GetComponentInChildren<Image>().sprite.rect;
         enemyImage = GetComponentInChildren<Image>();
-        animator = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -114,7 +109,7 @@ public class EnemyMotor : MonoBehaviour
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
         rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
         flipped = direction.x < 0;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
+        transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
     }
 
     private void HandleDirectedScreenMovement()
@@ -156,7 +151,6 @@ public class EnemyMotor : MonoBehaviour
             flipped = direction.x < 0;
             enemyImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
         }
-
     }
 
     void OnDrawGizmos()
@@ -174,10 +168,8 @@ public class EnemyMotor : MonoBehaviour
             }
             Gizmos.DrawLineList(screenPoints);
         }
-
     }
 }
-
 
 public enum EnemyMovementType
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> Hearts = new List<GameObject>();
+    [SerializeField] private List<GameObject> Hearts = new();
     private Health playerHealth;
 
     public void OnEnable()
@@ -31,7 +31,6 @@ public class PlayerHealthUI : MonoBehaviour
             {
                 Hearts[i].SetActive(true);
             }
-
         }
     }
 }

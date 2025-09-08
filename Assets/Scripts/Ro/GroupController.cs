@@ -4,7 +4,6 @@ using System;
 
 public class GroupController : MonoBehaviour
 {
-
     private Group[] groups;
     private float[] spawnedThisSecond;
     public float timer;
@@ -23,7 +22,6 @@ public class GroupController : MonoBehaviour
 
     void Update()
     {
-
         if (startSpawning)
         {
             timer += Time.deltaTime;
@@ -46,7 +44,6 @@ public class GroupController : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void StartGroup(Group[] currGroup)
@@ -58,7 +55,7 @@ public class GroupController : MonoBehaviour
 
     private void StartSpawning(Group currGroup)
     {
-        script.pukeBullets();
+        script.PukeBullets();
         switch (currGroup.pattern)
         {
             case GroupType.Ring:
@@ -82,7 +79,7 @@ public class GroupController : MonoBehaviour
             float positionAngle = HelperFunctions.CalculateProjectilePositionAngle(i, ring);
             float xPos = Mathf.Cos(positionAngle);
             float yPos = Mathf.Sin(positionAngle);
-            Vector2 projectilePosition = new Vector2((xPos * ring.radius) + transform.position.x + ring.offset.x,
+            Vector2 projectilePosition = new((xPos * ring.radius) + transform.position.x + ring.offset.x,
                                 (yPos * ring.radius) + transform.position.y + ring.offset.y);
             GameObject projectile;
             if (ring.movementAngle == MovementAngle.Fixed)
@@ -113,8 +110,8 @@ public class GroupController : MonoBehaviour
             float positionAngle = HelperFunctions.CalculateProjectilePositionAngle(i, stack);
             float xPos = Mathf.Cos(positionAngle);
             float yPos = Mathf.Sin(positionAngle);
-            Vector2 projectilePosition = new Vector2((xPos * stack.radius) + transform.position.x + stack.offset.x,
-                (yPos * stack.radius) + transform.position.y + stack.offset.y);
+            Vector2 projectilePosition = new((xPos * stack.radius) + transform.position.x + stack.offset.x,
+                                             (yPos * stack.radius) + transform.position.y + stack.offset.y);
 
             GameObject projectile;
             if (stack.movementAngle == MovementAngle.Fixed)
@@ -131,15 +128,12 @@ public class GroupController : MonoBehaviour
                 projectile = ProjectilePool.instance.ActivateProjectile(ProjectileType.def);
             }
             projectile.transform.position = projectilePosition;
-            Projectile proj = projectile.GetComponent<Projectile>();
             float angle = HelperFunctions.CaluclateProjectileMovementAngle(i, stack, projectilePosition, transform.position);
-            proj.ConstructProjectile(stack.speed + (stack.speed * stack.speedMultiplier * (i + 1)), angle);
+            projectile.GetComponent<Projectile>().ConstructProjectile(stack.speed + (stack.speed * stack.speedMultiplier * (i + 1)), angle);
         }
     }
 
 }
-
-
 
 public enum MovementAngle
 {
@@ -154,7 +148,6 @@ public enum PositionAngle
     FixedPosition,
     RandomPosition,
 }
-
 
 public enum GroupType
 {

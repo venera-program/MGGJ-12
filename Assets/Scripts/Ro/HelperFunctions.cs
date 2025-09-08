@@ -15,7 +15,6 @@ public class HelperFunctions
 
         Vector3 topLeft = main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + CameraRect.height - topBorder, main.nearClipPlane));
         Vector3 topRight = main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + CameraRect.height - topBorder, main.nearClipPlane));
-        Vector3 bottomLeft = main.ScreenToWorldPoint(new Vector3(CameraRect.x + leftBorder, CameraRect.y + bottomBorder, main.nearClipPlane));
         Vector3 bottomRight = main.ScreenToWorldPoint(new Vector3(CameraRect.x + CameraRect.width - rightBorder, CameraRect.y + bottomBorder, main.nearClipPlane));
 
         bool betweenX = (position.x >= topLeft.x) && (position.x <= topRight.x);
@@ -53,7 +52,7 @@ public class HelperFunctions
 
     public static ScreenBorders CloseToBorder(Vector2 position)
     {
-        Vector3[] corners = HelperFunctions.ScreenCorners();
+        Vector3[] corners = ScreenCorners();
         //top left
         //top right
         //bottom left
@@ -95,14 +94,13 @@ public class HelperFunctions
     // Returns the angle in radians to be used for position
     public static float CalculateProjectilePositionAngle(int index, Group group)
     {
-
         switch (group.pattern)
         {
-            case (GroupType.Ring):
+            case GroupType.Ring:
                 return CalculateRingPositionAngle(index, group);
-            case (GroupType.Spread):
+            case GroupType.Spread:
                 return CalculateRingPositionAngle(index, group);
-            case (GroupType.Stack):
+            case GroupType.Stack:
                 return CalculateStackPositionAngle(index, group);
             default:
                 return 0f;
@@ -111,15 +109,13 @@ public class HelperFunctions
 
     private static float CalculateRingPositionAngle(int i, Group ring)
     {
-        bool isStartingAngleLess = ring.startingAngle < ring.endingAngle;
         float angleDiff = Mathf.Abs(ring.startingAngle - ring.endingAngle);
 
         if (ring.positionAngle == PositionAngle.FixedPosition)
         {
             float angleIncrement = angleDiff / ring.projectileCount;
-            float angleToCalculate = 0f;
             float rawAngle = angleIncrement * i + ring.startingAngle;
-            angleToCalculate = rawAngle > 360 ? rawAngle - 360 : rawAngle;
+            float angleToCalculate = rawAngle > 360 ? rawAngle - 360 : rawAngle;
             float angleRad = Mathf.Deg2Rad * angleToCalculate;
             return angleRad;
         }
@@ -127,19 +123,11 @@ public class HelperFunctions
         if (ring.positionAngle == PositionAngle.RandomPosition)
         {
             float angleIncrement = Random.Range(0f, angleDiff);
-            float angleToCalculate = 0f;
             float rawAngle = angleIncrement + ring.startingAngle;
-            angleToCalculate = rawAngle > 360 ? rawAngle - 360 : rawAngle;
+            float angleToCalculate = rawAngle > 360 ? rawAngle - 360 : rawAngle;
             return angleToCalculate * Mathf.Deg2Rad;
         }
 
-        return 0f;
-
-    }
-
-    private static float CalculateSpreadPositionAngle(int i, Group ring)
-    {
-        // using starting angle 
         return 0f;
     }
 
@@ -153,11 +141,11 @@ public class HelperFunctions
     {
         switch (group.pattern)
         {
-            case (GroupType.Ring):
+            case GroupType.Ring:
                 return CalculateRingMovementAngle(index, group, position, center);
-            case (GroupType.Spread):
+            case GroupType.Spread:
                 return CalculateRingMovementAngle(index, group, position, center);
-            case (GroupType.Stack):
+            case GroupType.Stack:
                 return CalculateStackMovementAngle(index, group, position);
             default:
                 return 0f;
@@ -167,7 +155,6 @@ public class HelperFunctions
     private static float CalculateRingMovementAngle(int i, Group ring, Vector3 position, Vector3 center)
     {
         // return the angle that the projectile should be rotated towards
-
         if (ring.movementAngle == MovementAngle.Fixed)
         {
             return CalculateRingPositionAngle(i, ring) * Mathf.Rad2Deg;
@@ -186,11 +173,6 @@ public class HelperFunctions
             float angle = Vector2.SignedAngle(Vector2.right, (Vector2)angleDiff);
             return angle;
         }
-        return 0f;
-    }
-
-    private static float CalculateSpreadMovementAngle(int i, Group spread, Vector3 position)
-    {
         return 0f;
     }
 
@@ -213,15 +195,14 @@ public class HelperFunctions
     public static float RoundToDecimal(float number, int decimalPlaces)
     {
         float multiplicant = Mathf.Pow(10, (float)decimalPlaces);
-        return (Mathf.Floor(number * multiplicant)) / multiplicant;
+        return Mathf.Floor(number * multiplicant) / multiplicant;
     }
 
     public static bool IsContact(Vector2 mainCenter, Vector2 closestOtherColliderPoint, float mainRadius)
     {
         // this if statement is needed because when a collider is deactivated, the "closest" point passed in ends up being the center;
         if (mainCenter == closestOtherColliderPoint) return false;
-        bool isInContact = ((mainCenter - closestOtherColliderPoint).sqrMagnitude) <= (mainRadius * mainRadius);
+        bool isInContact = (mainCenter - closestOtherColliderPoint).sqrMagnitude <= (mainRadius * mainRadius);
         return isInContact;
     }
-
 }
