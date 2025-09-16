@@ -1,10 +1,18 @@
 using UnityEngine;
+
+[RequireComponent(typeof(Projectile))]
 public class ProjectileDamage : DealDamage
 {
-    [SerializeField] private Projectile script;
+    private Projectile script;
+
+    private void Awake()
+    {
+        script = GetComponent<Projectile>();
+    }
+
     public override void OnContact()
     {
-        if (tag == "EnemyProjectile")
+        if (CompareTag("EnemyProjectile"))
         {
             Graze.instance.RemoveGrazeCount(gameObject.GetInstanceID());
         }

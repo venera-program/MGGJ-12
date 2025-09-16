@@ -52,7 +52,7 @@ public static class PlayerData
         }
     }
     [SerializeField] private static int _graze = 0;
-    public static void UpdateGraze(int additionalAmount)
+    public static void AddGraze(int additionalAmount)
     {
         Graze += additionalAmount;
         // Debug.Log($"GrazePoints: {_graze}");

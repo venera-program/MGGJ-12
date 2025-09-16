@@ -1,24 +1,47 @@
 using UnityEngine;
-public abstract class DealDamage : MonoBehaviour
+
+public class DealDamage : MonoBehaviour
 {
-    public float damage;
-    public string[] tagsToPayAttentionTo;
-    public bool isOnCollision;
-    public bool isOnTrigger;
-    void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] private float damage;
+    [SerializeField] private string[] affectedTags;
+    [SerializeField] private bool isOnCollision;
+    [SerializeField] private bool isOnTrigger;
+
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        if (isOnTrigger)
+        if (isOnCollision)
         {
-            for (int i = 0; i < tagsToPayAttentionTo.Length; i++)
+            for (int i = 0; i < affectedTags.Length; i++)
             {
-                if (other.tag == tagsToPayAttentionTo[i])
+                if (other.gameObject.CompareTag(affectedTags[i]))
                 {
-                    other.GetComponent<Health>()?.TakeDamage(damage);
+                    if (other.gameObject.TryGetComponent<Health>(out var health))
+                    {
+                        health.TakeDamage(damage);
+                    }
                     OnContact();
                 }
             }
         }
     }
 
-    public abstract void OnContact();
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (isOnTrigger)
+        {
+            for (int i = 0; i < affectedTags.Length; i++)
+            {
+                if (other.CompareTag(affectedTags[i]))
+                {
+                    if (other.TryGetComponent<Health>(out var health))
+                    {
+                        health.TakeDamage(damage);
+                    }
+                    OnContact();
+                }
+            }
+        }
+    }
+
+    public virtual void OnContact() { }
 }

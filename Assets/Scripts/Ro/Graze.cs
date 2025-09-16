@@ -109,14 +109,11 @@ public class Graze : MonoBehaviour
                 projectileContact.Add(instanceID, 1);
                 grazeAmount = Mathf.Clamp(grazeAmount + 1, 0, maxGrazeAmount);
                 updateGrazeValue.Invoke(grazeAmount, maxGrazeAmount);
-                PlayerData.UpdateGraze(1);
+                PlayerData.AddGraze(1);
                 AudioManager.Instance.PlayPlayerGraze_SFX();
                 _hits.Add(position);
                 startRumbleTimer = true;
-                if (Gamepad.current != null)
-                {
-                    Gamepad.current.ResumeHaptics();
-                }
+                Gamepad.current?.ResumeHaptics();
             }
             else
             {
@@ -165,18 +162,17 @@ public class Graze : MonoBehaviour
         {
             startRumbleTimer = false;
             rumbleTimer = 0f;
-            if (Gamepad.current != null)
-            {
-                Gamepad.current.PauseHaptics();
-            }
+            Gamepad.current?.PauseHaptics();
         }
     }
+
     private void GrazeBarCountDown(float time, float maxTime)
     {
         float ev = curve.Evaluate(time / maxTime);
         float value = Mathf.Lerp(0f, (float)maxGrazeAmount, ev);
         updateGrazeValue.Invoke((int)value, maxGrazeAmount);
     }
+
     public void ClearGrazeCount()
     {
         projectileContact.Clear();
@@ -197,6 +193,7 @@ public class Graze : MonoBehaviour
             projectileContact.Remove(instanceID);
         }
     }
+
     void OnDrawGizmos()
     {
         if (turnOnGizmos)
