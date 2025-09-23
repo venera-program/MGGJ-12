@@ -121,7 +121,7 @@ public class LevelManager : MonoBehaviour
         {
             AudioManager.Instance.StopClearMusic();
             AudioManager.Instance.StopAllSfx();
-            AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].bgMusic);
+            AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].BGMusic);
         }
         BackgroundUI.SetActive(true);
         Enemy_Spawner.Instance.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);

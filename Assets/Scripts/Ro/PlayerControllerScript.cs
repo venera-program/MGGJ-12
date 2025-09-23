@@ -20,12 +20,10 @@ public class PlayerControllerScript : MonoBehaviour
 
      public Vector2 PlayerInputRaw { get => direction; set => direction = value; }
 
-     public PlayerController controller;
-
-     private Animator animator;
-     private Image playerImage;
-     private PlayerSkill script;
-
+     private PlayerController _controller;
+     private Animator _animator;
+     private Image _playerImage;
+     private PlayerSkill _skill;
 
      [Range(0f, 30f)] public float speed = 5;
      public Group[] regularShootingPattern;
@@ -53,25 +51,25 @@ public class PlayerControllerScript : MonoBehaviour
           }
           instance = this;
 
-          controller = new PlayerController();
+          _controller = new PlayerController();
           _RB = GetComponent<Rigidbody2D>();
           _Collider = GetComponent<Collider2D>();
-          animator = GetComponentInChildren<Animator>();
-          playerImage = GetComponentInChildren<Image>();
-          script = GetComponent<PlayerSkill>();
+          _animator = GetComponentInChildren<Animator>();
+          _playerImage = GetComponentInChildren<Image>();
+          _skill = GetComponent<PlayerSkill>();
      }
 
      private void OnEnable()
      {
-          controller.Enable();
-          controller.Main.Shoot.started += Shoot;
-          controller.Main.Shoot.canceled += StopShoot;
-          controller.Main.Skill.started += StartSkillUse;
+          _controller.Enable();
+          _controller.Main.Shoot.started += Shoot;
+          _controller.Main.Shoot.canceled += StopShoot;
+          _controller.Main.Skill.started += StartSkillUse;
           if (MainMenu.instance != null)
           {
-               controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
+               _controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
 
-               controller.UI.Cancel.started += MainMenu.instance.BackButton;
+               _controller.UI.Cancel.started += MainMenu.instance.BackButton;
           }
           GetComponent<Health>().healthChange.AddListener(OnHit);
           Graze.instance.endSkillTimer.AddListener(EndSkillUse);
@@ -95,29 +93,29 @@ public class PlayerControllerScript : MonoBehaviour
           StopCoroutine(RespawnPlayer());
           Move(Vector2.zero);
           startGeneratingProject = false;
-          animator.SetBool(WAS_HIT, false);
+          _animator.SetBool(WAS_HIT, false);
           EndSkillUse();
           transform.position = spawnPoint.position;
           _Collider.enabled = true;
-          controller.Main.Move.Enable();
-          controller.Main.Shoot.Enable();
-          controller.Main.Skill.Enable();
+          _controller.Main.Move.Enable();
+          _controller.Main.Shoot.Enable();
+          _controller.Main.Skill.Enable();
           GetComponent<Health>().StopIFrames();
      }
 
      void OnDisable()
      {
-          controller.Main.Shoot.started -= Shoot;
-          controller.Main.Shoot.canceled -= StopShoot;
-          controller.Main.Skill.started -= StartSkillUse;
-          controller.Main.Escape.performed -= MainMenu.instance.OpenPauseMenu;
+          _controller.Main.Shoot.started -= Shoot;
+          _controller.Main.Shoot.canceled -= StopShoot;
+          _controller.Main.Skill.started -= StartSkillUse;
+          _controller.Main.Escape.performed -= MainMenu.instance.OpenPauseMenu;
 
-          controller.UI.Cancel.started -= MainMenu.instance.BackButton;
+          _controller.UI.Cancel.started -= MainMenu.instance.BackButton;
           LevelManager.OnLevelChange -= HealMC;
           LevelManager.OnLevelUnload -= ResetMC;
           LevelManager.OnLevelUnload -= PlayerData.ClearScore;
 
-          controller.Disable();
+          _controller.Disable();
           InputSystem.PauseHaptics();
           GetComponent<Health>().healthChange.RemoveListener(OnHit);
           Graze.instance.endSkillTimer.RemoveListener(EndSkillUse);
@@ -125,7 +123,7 @@ public class PlayerControllerScript : MonoBehaviour
 
      void Update()
      {
-          if (!controller.Main.Shoot.enabled)
+          if (!_controller.Main.Shoot.enabled)
           {
                return;
           }
@@ -159,7 +157,7 @@ public class PlayerControllerScript : MonoBehaviour
                return;
           }
 
-          direction = controller.Main.Move.ReadValue<Vector2>();
+          direction = _controller.Main.Move.ReadValue<Vector2>();
           Move(direction);
      }
 
@@ -175,9 +173,9 @@ public class PlayerControllerScript : MonoBehaviour
                velocity = Mathf.Clamp(Time.fixedDeltaTime * accel + speed, minSpeed, maxSpeed);
           }
           _RB.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position);
-          animator.SetBool(IS_MOVING, PlayerInputRaw != Vector2.zero);
+          _animator.SetBool(IS_MOVING, PlayerInputRaw != Vector2.zero);
           flipped = direction.x < 0;
-          playerImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
+          _playerImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
      }
 
      private void Shoot(InputAction.CallbackContext cont)
@@ -220,7 +218,7 @@ public class PlayerControllerScript : MonoBehaviour
           {
                Graze.instance.StartSkillTimer();
                skillActivated = true;
-               script.SwitchToSkillAnimation();
+               _skill.SwitchToSkillAnimation();
           }
      }
 
@@ -228,7 +226,8 @@ public class PlayerControllerScript : MonoBehaviour
      {
           AudioManager.Instance.StopPlayerSpecial_SFX();
           Debug.Log("You have reached the endskilluse method, please leave a message after the tone.");
-          script.SkillIsOver();
+          _skill.SkillIsOver();
+          // If firing projectiles when skill disabled, turn on default soundloop
           if (startGeneratingProject)
           {
                AudioManager.Instance.PlayPlayerBullet_SFX();
@@ -288,33 +287,33 @@ public class PlayerControllerScript : MonoBehaviour
 
      public void EnablePlayerControls()
      {
-          controller.Main.Enable();
+          _controller.Main.Enable();
           canMove = true;
-          controller.Main.Shoot.started += Shoot;
-          controller.Main.Shoot.canceled += StopShoot;
-          controller.Main.Skill.started += StartSkillUse;
-          controller.Main.Escape.Enable();
+          _controller.Main.Shoot.started += Shoot;
+          _controller.Main.Shoot.canceled += StopShoot;
+          _controller.Main.Skill.started += StartSkillUse;
+          _controller.Main.Escape.Enable();
      }
 
      public void DisablePlayerControls()
      {
-          controller.Main.Shoot.started -= Shoot;
-          controller.Main.Shoot.canceled -= StopShoot;
-          controller.Main.Skill.started -= StartSkillUse;
-          controller.Main.Escape.Disable();
+          _controller.Main.Shoot.started -= Shoot;
+          _controller.Main.Shoot.canceled -= StopShoot;
+          _controller.Main.Skill.started -= StartSkillUse;
+          _controller.Main.Escape.Disable();
           canMove = false;
-          controller.Main.Disable();
+          _controller.Main.Disable();
           InputSystem.PauseHaptics();
      }
 
      public void EnablePauseButton()
      {
-          controller.Main.Escape.Enable();
+          _controller.Main.Escape.Enable();
      }
 
      public void DisablePauseButton()
      {
-          controller.Main.Escape.Disable();
+          _controller.Main.Escape.Disable();
      }
 
      private void OnHit(float currHealth, float maxHealth)
@@ -322,7 +321,7 @@ public class PlayerControllerScript : MonoBehaviour
           if (currHealth < maxHealth)
           {
                AudioManager.Instance.PlayPlayerDies_SFX();
-               animator.SetBool(WAS_HIT, true);
+               _animator.SetBool(WAS_HIT, true);
                StartCoroutine(RespawnPlayer());
           }
      }
@@ -331,9 +330,9 @@ public class PlayerControllerScript : MonoBehaviour
      {
           var collider = GetComponent<Collider2D>();
           collider.enabled = false;
-          controller.Main.Move.Disable();
-          controller.Main.Shoot.Disable();
-          controller.Main.Skill.Disable();
+          _controller.Main.Move.Disable();
+          _controller.Main.Shoot.Disable();
+          _controller.Main.Skill.Disable();
 
           // Reset logic states
           Move(Vector2.zero);
@@ -341,14 +340,14 @@ public class PlayerControllerScript : MonoBehaviour
 
           yield return new WaitForSeconds(RESPAWN_DELAY);
 
-          animator.SetBool(WAS_HIT, false);
+          _animator.SetBool(WAS_HIT, false);
           transform.position = spawnPoint.position;
           //Debug.Log("The new position is " + transform.position);
           collider.enabled = true;
 
-          controller.Main.Move.Enable();
-          controller.Main.Shoot.Enable();
-          controller.Main.Skill.Enable();
+          _controller.Main.Move.Enable();
+          _controller.Main.Shoot.Enable();
+          _controller.Main.Skill.Enable();
 
           GetComponent<Health>().TriggerIFrames(I_SECONDS);
      }
