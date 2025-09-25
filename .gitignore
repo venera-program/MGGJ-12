@@ -100,3 +100,4 @@ InitTestScene*.unity*
 
 # Dumb file that can be auto-generated
 .vscode/settings.json
+Assets/Prefabs/Ro/EnemyProjectiles/Default.prefab

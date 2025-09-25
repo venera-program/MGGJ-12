@@ -9,6 +9,10 @@ public class MovementPatternCalculation
     ///</summary>
     public static Vector3 CalculateFloatyPosition(Vector3 currentPosition, float distance, float topBorder, float bottomBorder, float leftBorder, float rightBorder)
     {
+        if(distance < 1f){
+            Debug.Log($"Was not able to find a direction/distance to move towards on screen. \n Enemy will now head towards player direction");
+            return PlayerControllerScript.instance.transform.position;
+        }
         /*
             0 - Right
             1 - Up Right
@@ -19,7 +23,7 @@ public class MovementPatternCalculation
             6 - Down
             7 - Down Right
         */
-        List<int> directions = new();
+        List<int> directions = new List<int>();
 
         for (int i = 0; i < 8; i++)
         {
@@ -30,7 +34,7 @@ public class MovementPatternCalculation
         {
             if (directions.Count <= 0)
             {
-                Debug.LogError("Not possible for actor to move within screen with given movement distance");
+                Debug.Log($"Not possible for actor to move within screen with given movement distance of {distance}");
                 break;
             }
 
@@ -69,16 +73,17 @@ public class MovementPatternCalculation
             }
             if (HelperFunctions.IsOnScreen(newPosition, topBorder, bottomBorder, leftBorder, rightBorder))
             {
+                PrintCalculatedFloatyDestinationResult(newPosition, direction, true);
                 return newPosition;
             }
             else
             {
+                PrintCalculatedFloatyDestinationResult(newPosition, direction, false);
                 directions.Remove(direction);
             }
         }
 
-        //should never run into this.
-        return Vector3.positiveInfinity;
+        return CalculateFloatyPosition(currentPosition, distance * .90f , topBorder, bottomBorder, leftBorder, rightBorder);
     }
 
     public static Vector3 CalculateDirectedScreenPosition(Vector3 position, Rect imagebounds)
@@ -125,6 +130,58 @@ public class MovementPatternCalculation
         {
             return Vector2.zero;
         }
+    }
+
+    private static void PrintCalculatedFloatyDestinationResult(Vector3 position, int direction, bool onScreen){
+        string writtenDirection = "";
+        string writtenResult = "";
+        /*
+            0 - Right
+            1 - Up Right
+            2 - Up
+            3 - Up Left
+            4 - Left
+            5 - Down Left
+            6 - Down
+            7 - Down Right
+        */
+
+        switch(direction){
+            case 0 : 
+                writtenDirection = "Right";
+                break;
+            case 1 :
+                writtenDirection = "Up Right";
+                break;
+            case 2 : 
+                writtenDirection = "Up";
+                break;
+            case 3 :
+                writtenDirection = "Up Left";
+                break;
+            case 4 :
+                writtenDirection = "Left";
+                break;
+            case 5 :
+                writtenDirection = "Down Left";
+                break;
+            case 6 :
+                writtenDirection = "Down";
+                break;
+            case 7 :
+                writtenDirection = "Down Right";
+                break;
+            default :
+                writtenDirection = "Error";
+                break;
+        }
+        if(onScreen){
+            writtenResult = "on screen";
+        } else {
+            writtenResult = "not on screen";
+        }
+
+        Debug.Log($"The calculated position in {writtenDirection} is {position.ToString()} and is {writtenResult}");
     }
 }
 

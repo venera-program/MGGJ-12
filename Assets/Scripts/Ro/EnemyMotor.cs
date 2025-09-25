@@ -58,6 +58,8 @@ public class EnemyMotor : MonoBehaviour
         {
             case EnemyMovementType.Floaty:
                 nextDestination = MovementPatternCalculation.CalculateFloatyPosition(transform.position, movementDistance, topBorder, bottomBorder, leftBorder, rightBorder);
+                PrintFloatyDestination(nextDestination);
+                DebugEnemyMotorPositions.instance.SetFloatyPositionMarker(gameObject.GetInstanceID(), nextDestination);
                 break;
             case EnemyMovementType.DirectedScreen:
                 nextDestination = MovementPatternCalculation.CalculateDirectedScreenPosition(transform.position, imagebounds);
@@ -105,6 +107,8 @@ public class EnemyMotor : MonoBehaviour
         if (HelperFunctions.IsAtPosition(rb.position, nextDestination, accuracy))
         {
             nextDestination = MovementPatternCalculation.CalculateFloatyPosition(rb.position, movementDistance, topBorder, bottomBorder, leftBorder, rightBorder);
+            PrintFloatyDestination(nextDestination);
+            DebugEnemyMotorPositions.instance.SetFloatyPositionMarker(gameObject.GetInstanceID(), nextDestination);
         }
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
         rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
@@ -168,6 +172,14 @@ public class EnemyMotor : MonoBehaviour
             }
             Gizmos.DrawLineList(screenPoints);
         }
+    }
+
+    private void PrintFloatyDestination(Vector3 position){
+        Debug.Log($"Current Floaty Destination for {gameObject.name} : {position.ToString()}");
+    }
+    void OnDestroy()
+    {
+        DebugEnemyMotorPositions.RemoveFloatyPositionMarker(gameObject.GetInstanceID());
     }
 }
 
