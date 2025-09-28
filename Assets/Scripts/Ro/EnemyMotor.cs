@@ -171,15 +171,43 @@ public class EnemyMotor : MonoBehaviour
                 Gizmos.DrawSphere(screenPoints[i], .1f);
             }
             Gizmos.DrawLineList(screenPoints);
+
+            if(movementType == EnemyMovementType.Floaty){
+                Gizmos.color = Color.green;
+                Vector3 currPosition = transform.position;
+
+                Vector3 right = currPosition + new Vector3(movementDistance, 0f, 0f);
+                Vector3 upRight = currPosition + (movementDistance * new Vector3(Mathf.Cos(45f * Mathf.Deg2Rad), Mathf.Sin(45f * Mathf.Deg2Rad), 0f));
+                Vector3 up = currPosition + new Vector3(0f, movementDistance,0f);
+                Vector3 upLeft = currPosition + (movementDistance * new Vector3(Mathf.Cos(135f * Mathf.Deg2Rad), Mathf.Sin(135f * Mathf.Deg2Rad), 0f));
+                Vector3 left = currPosition + new Vector3(-movementDistance, 0f, 0f);
+                Vector3 downLeft = currPosition + (movementDistance * new Vector3(Mathf.Cos(225f * Mathf.Deg2Rad), Mathf.Sin(225f * Mathf.Deg2Rad), 0f));
+                Vector3 down = currPosition + new Vector3(0f, -movementDistance, 0f);
+                Vector3 downRight = currPosition + (movementDistance * new Vector3(Mathf.Cos(315f * Mathf.Deg2Rad), Mathf.Sin(315f * Mathf.Deg2Rad), 0f));
+
+                Gizmos.DrawLine(currPosition, right);
+                Gizmos.DrawLine(currPosition, upRight);
+                Gizmos.DrawLine(currPosition, up);
+                Gizmos.DrawLine(currPosition, upLeft);
+                Gizmos.DrawLine(currPosition, left);
+                Gizmos.DrawLine(currPosition, downLeft);
+                Gizmos.DrawLine(currPosition, down);
+                Gizmos.DrawLine(currPosition, downRight);
+
+            }
         }
     }
 
     private void PrintFloatyDestination(Vector3 position){
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
         Debug.Log($"Current Floaty Destination for {gameObject.name} : {position.ToString()}");
+        #endif
     }
     void OnDestroy()
     {
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
         DebugEnemyMotorPositions.RemoveFloatyPositionMarker(gameObject.GetInstanceID());
+        #endif
     }
 }
 

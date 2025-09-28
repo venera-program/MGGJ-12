@@ -4,6 +4,19 @@ using Random = UnityEngine.Random;
 
 public class MovementPatternCalculation
 {
+    /*
+            0 - Right
+            1 - Up Right
+            2 - Up
+            3 - Up Left
+            4 - Left
+            5 - Down Left
+            6 - Down
+            7 - Down Right
+        */
+    public static Vector3[] vectorDirections = {Vector3.right, new Vector3(Mathf.Cos(45f * Mathf.Deg2Rad), Mathf.Sin(45f * Mathf.Deg2Rad)), Vector3.up, new Vector3(Mathf.Cos(135f * Mathf.Deg2Rad), Mathf.Sin(135f * Mathf.Deg2Rad)),
+    Vector3.right * -1, new Vector3(Mathf.Cos(225f * Mathf.Deg2Rad), Mathf.Sin(225f * Mathf.Deg2Rad)), Vector3.up * -1, new Vector3(Mathf.Cos(315f * Mathf.Deg2Rad), Mathf.Sin(315f * Mathf.Deg2Rad)),
+    Vector3.zero};
     /// <summary>
     /// A function that calculates the next accepted position for an actor to move towards to.
     ///</summary>
@@ -39,38 +52,7 @@ public class MovementPatternCalculation
             }
 
             int direction = directions[Random.Range(0, directions.Count)];
-            Vector3 newPosition;
-
-            switch (direction)
-            {
-                case 0:
-                    newPosition = currentPosition + new Vector3(distance, 0f, 0f);
-                    break;
-                case 1:
-                    newPosition = currentPosition + (distance * new Vector3(Mathf.Cos(45f * Mathf.Deg2Rad), Mathf.Sin(45f * Mathf.Deg2Rad), 0f));
-                    break;
-                case 2:
-                    newPosition = currentPosition + new Vector3(0f, distance, 0f);
-                    break;
-                case 3:
-                    newPosition = currentPosition + (distance * new Vector3(Mathf.Cos(135f * Mathf.Deg2Rad), Mathf.Sin(135f * Mathf.Deg2Rad), 0f));
-                    break;
-                case 4:
-                    newPosition = currentPosition + new Vector3(-distance, 0f, 0f);
-                    break;
-                case 5:
-                    newPosition = currentPosition + (distance * new Vector3(Mathf.Cos(225f * Mathf.Deg2Rad), Mathf.Sin(225f * Mathf.Deg2Rad), 0f));
-                    break;
-                case 6:
-                    newPosition = currentPosition + new Vector3(0f, -distance, 0f);
-                    break;
-                case 7:
-                    newPosition = currentPosition + (distance * new Vector3(Mathf.Cos(315f * Mathf.Deg2Rad), Mathf.Sin(315f * Mathf.Deg2Rad), 0f));
-                    break;
-                default:
-                    newPosition = Vector3.zero;
-                    break;
-            }
+            Vector3 newPosition = currentPosition + distance * vectorDirections[direction];
             if (HelperFunctions.IsOnScreen(newPosition, topBorder, bottomBorder, leftBorder, rightBorder))
             {
                 PrintCalculatedFloatyDestinationResult(newPosition, direction, true);
@@ -133,6 +115,7 @@ public class MovementPatternCalculation
     }
 
     private static void PrintCalculatedFloatyDestinationResult(Vector3 position, int direction, bool onScreen){
+        #if UNITY_EDITOR || DEVELOPMENT_BUILD
         string writtenDirection = "";
         string writtenResult = "";
         /*
@@ -182,7 +165,8 @@ public class MovementPatternCalculation
         }
 
         Debug.Log($"The calculated position in {writtenDirection} is {position.ToString()} and is {writtenResult}");
-    }
+        #endif
+    } 
 }
 
 public enum ScreenBorders
