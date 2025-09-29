@@ -43,13 +43,13 @@ public class EnemyMotor : MonoBehaviour
     public bool editmode = false;
 
     private bool flipped;
-    private Image enemyImage;
+    private SpriteRenderer enemyImage;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        imagebounds = GetComponentInChildren<Image>().sprite.rect;
-        enemyImage = GetComponentInChildren<Image>();
+        imagebounds = GetComponentInChildren<SpriteRenderer>().sprite.rect;
+        enemyImage = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Start()
@@ -113,7 +113,7 @@ public class EnemyMotor : MonoBehaviour
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
         rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
         flipped = direction.x < 0;
-        transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
+        enemyImage.flipX = flipped;
     }
 
     private void HandleDirectedScreenMovement()
@@ -125,7 +125,7 @@ public class EnemyMotor : MonoBehaviour
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
         rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
         flipped = direction.x < 0;
-        enemyImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
+        enemyImage.flipX = flipped;
     }
 
     private void HandleDirectedPlayerMovement()
@@ -139,7 +139,8 @@ public class EnemyMotor : MonoBehaviour
         Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
         rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
         flipped = direction.x < 0;
-        enemyImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
+        enemyImage.flipX = flipped;
+        
     }
 
     private void HandleDirectedBossMovement()
@@ -153,7 +154,7 @@ public class EnemyMotor : MonoBehaviour
             Vector2 direction = ((Vector2)nextDestination - rb.position).normalized;
             rb.MovePosition(rb.position + speed * Time.fixedDeltaTime * direction);
             flipped = direction.x < 0;
-            enemyImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180 : 0f, 0f));
+            enemyImage.flipX = flipped;
         }
     }
 
