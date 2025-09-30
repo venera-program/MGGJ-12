@@ -16,5 +16,6 @@ public class GameOverUI : MonoBehaviour
         {
             gameOverUI.SetActive(true);
         }
+
     }
 }

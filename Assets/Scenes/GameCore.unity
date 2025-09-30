@@ -553,6 +553,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1819429441353780576, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: I_SECONDS
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1819429441353780576, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
+      propertyPath: isInvincible
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2333738256646880877, guid: b7fea203de9eb4144a57f70e1546d743, type: 3}
       propertyPath: spawnPoint
       value: 

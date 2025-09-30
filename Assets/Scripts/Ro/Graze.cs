@@ -9,11 +9,12 @@ public class Graze : MonoBehaviour
     [Header("Graze Meter")]
     [SerializeField] private int grazeAmount;
     public int maxGrazeAmount;
-    public UnityEvent<int, int> updateGrazeValue = new();
-    public UnityEvent endSkillTimer = new();
+    public UnityEvent<int, int> updateGrazeValue = new UnityEvent<int, int>();
+    public UnityEvent endSkillTimer = new UnityEvent();
     // key == ID of gameObject
     // value == # of times the projectile has touched the area.
-    private Dictionary<int, int> projectileContact = new();
+    private Dictionary<int, int> projectileContact = new Dictionary<int, int>();
+    private bool isPaused = false;
 
     [Header("Graze Radius")]
     public float grazeRadius = 5f;
@@ -41,7 +42,7 @@ public class Graze : MonoBehaviour
     [Header("For Debugging Purposes")]
     public bool turnOnGizmos = false;
 
-    private readonly List<Vector3> _hits = new();
+    private readonly List<Vector3> _hits = new List<Vector3>();
 
     void Awake()
     {
@@ -102,7 +103,7 @@ public class Graze : MonoBehaviour
 
     public void AddGrazeCount(int instanceID, Vector3 position)
     {
-        if (!startTimer)
+        if (!startTimer && !isPaused)
         {
             if (!projectileContact.ContainsKey(instanceID))
             {
@@ -192,6 +193,13 @@ public class Graze : MonoBehaviour
         {
             projectileContact.Remove(instanceID);
         }
+    }
+
+    public void StopGrazeCount(){
+        isPaused = true;
+    }
+    public void StartGrazeCount(){
+        isPaused = false;
     }
 
     void OnDrawGizmos()

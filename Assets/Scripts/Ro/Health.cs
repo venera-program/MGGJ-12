@@ -4,9 +4,10 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] private float I_SECONDS = 1;
     public float maxHealth;
     public float currHealth;
-    public UnityEvent<float, float> healthChange = new();
+    public UnityEvent<float, float> healthChange = new UnityEvent<float, float>();
     [SerializeField] private AudioClip hurtSFX;
 
     private Coroutine _IFrameRoutine;
@@ -21,6 +22,12 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(_IFrameRoutine == null && CompareTag("Player")){
+            TriggerIFrames(I_SECONDS);
+            currHealth = Mathf.Clamp(currHealth - damage, 0f, maxHealth);
+            Debug.Log($"{transform.name} took {damage} damage");
+            healthChange.Invoke(currHealth, maxHealth);
+        }
         if (_IFrameRoutine != null)
         {
             Debug.Log("trying to take damage when immune", this);

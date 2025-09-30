@@ -100,7 +100,9 @@ public class LevelManager : MonoBehaviour
             if (PlayerControllerScript.instance != null)
             {
                 PlayerControllerScript.instance.DisablePauseButton();
+                PlayerControllerScript.instance.DisablePlayerControls();
             }
+            
         }
     }
 

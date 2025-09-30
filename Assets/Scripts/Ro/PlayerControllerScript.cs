@@ -9,7 +9,6 @@ using MGGJ25.Shared;
 public class PlayerControllerScript : MonoBehaviour
 {
      private const float RESPAWN_DELAY = 0.5f;
-     [SerializeField] private float I_SECONDS = 120;
      private const string IS_MOVING = "isMoving";
      private const string WAS_HIT = "wasHit";
      private bool flipped;
@@ -199,7 +198,12 @@ public class PlayerControllerScript : MonoBehaviour
      {
           if (cont.interaction is HoldInteraction)
           {
-               if (!skillActivated)
+              StopShoot();
+          }
+     }
+
+     private void StopShoot(){
+          if (!skillActivated)
                {
                     AudioManager.Instance.StopPlayerBullet_SFX();
                }
@@ -208,7 +212,6 @@ public class PlayerControllerScript : MonoBehaviour
                     AudioManager.Instance.StopPlayerSpecial_SFX();
                }
                startGeneratingProject = false;
-          }
      }
 
      private void StartSkillUse(InputAction.CallbackContext cont)
@@ -297,13 +300,14 @@ public class PlayerControllerScript : MonoBehaviour
 
      public void DisablePlayerControls()
      {
+          StopShoot();
           _controller.Main.Shoot.started -= Shoot;
           _controller.Main.Shoot.canceled -= StopShoot;
           _controller.Main.Skill.started -= StartSkillUse;
           _controller.Main.Escape.Disable();
           canMove = false;
           _controller.Main.Disable();
-          InputSystem.PauseHaptics();
+          Gamepad.current?.PauseHaptics();
      }
 
      public void EnablePauseButton()
@@ -348,7 +352,5 @@ public class PlayerControllerScript : MonoBehaviour
           _controller.Main.Move.Enable();
           _controller.Main.Shoot.Enable();
           _controller.Main.Skill.Enable();
-
-          GetComponent<Health>().TriggerIFrames(I_SECONDS);
      }
 }
