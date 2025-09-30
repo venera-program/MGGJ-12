@@ -691,7 +691,7 @@ PrefabInstance:
     - target: {fileID: 6402084223330263848, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
       propertyPath: EnemyPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 2279419871392914990, guid: c43a11c9f409aae4089bbc7611041924, type: 3}
+      objectReference: {fileID: 5819460166187031149, guid: e271b5f4c7717a44a80110a43950c2ca, type: 3}
     - target: {fileID: 6402084223330263848, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
       propertyPath: EnemyPrefabs.Array.data[1]
       value: 
