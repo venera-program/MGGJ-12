@@ -22,7 +22,7 @@ public class PlayerControllerScript : MonoBehaviour
 
      private PlayerController _controller;
      private Animator _animator;
-     private Image _playerImage;
+     private SpriteRenderer sprite;
      private PlayerSkill _skill;
 
      [Range(0f, 30f)] public float speed = 5;
@@ -55,7 +55,7 @@ public class PlayerControllerScript : MonoBehaviour
           _RB = GetComponent<Rigidbody2D>();
           _Collider = GetComponent<Collider2D>();
           _animator = GetComponentInChildren<Animator>();
-          _playerImage = GetComponentInChildren<Image>();
+          sprite = GetComponentInChildren<SpriteRenderer>();
           _skill = GetComponent<PlayerSkill>();
      }
 
@@ -175,7 +175,7 @@ public class PlayerControllerScript : MonoBehaviour
           _RB.MovePosition((direction * velocity * Time.fixedDeltaTime) + (Vector2)transform.position);
           _animator.SetBool(IS_MOVING, PlayerInputRaw != Vector2.zero);
           flipped = direction.x < 0;
-          _playerImage.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f));
+          sprite.flipX = flipped;
      }
 
      private void Shoot(InputAction.CallbackContext cont)
