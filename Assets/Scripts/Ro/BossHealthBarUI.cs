@@ -68,7 +68,7 @@ public class BossHealthBarUI : MonoBehaviour
     private IEnumerator TurnOff(float delay)
     {
         yield return new WaitForSeconds(delay);
-        bossHealthSlider.value = 0;
+        bossHealthSlider.value = 1f;
         sliderObject.SetActive(false);
     }
 }

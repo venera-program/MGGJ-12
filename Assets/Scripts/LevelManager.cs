@@ -111,8 +111,8 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Unloading Level.");
         BackgroundUI.SetActive(false);
         MenuUI.SetActive(false);
-        CombatUI.SetActive(false);
         OnLevelUnload.Invoke();
+        CombatUI.SetActive(false);
     }
 
     private void SetUpLevel()
