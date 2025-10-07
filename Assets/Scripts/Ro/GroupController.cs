@@ -4,11 +4,12 @@ using System;
 
 public class GroupController : MonoBehaviour
 {
+
+    private const int MAX_GROUPS = 50;
+    private Timer[] projectileSpawnTimers = new Timer[MAX_GROUPS];
+
     private Group[] groups;
-    private float[] spawnedThisSecond;
-    public float timer;
     private bool startSpawning = false;
-    public int decimalPlaces = 2;
     private GameObject parent;
     private Animator animator;
     private EnemyAnimation enemyAnimation;
@@ -22,29 +23,13 @@ public class GroupController : MonoBehaviour
 
     void Update()
     {
-        if (startSpawning)
-        {
-            timer += Time.deltaTime;
-            for (int i = 0; i < groups.Length; i++)
-            {
-                float truncTime = HelperFunctions.RoundToDecimal(timer, decimalPlaces); // be able to divide to spawn 
-                // timer, index , trunctime, delay, interval
-                if (truncTime != spawnedThisSecond[i])
-                { // statement used so that spawning doesn't happen multiple times per parts of a second
-                    bool isDivisible = ((truncTime - groups[i].delay) % groups[i].spawnInterval) == 0;
-                    DebugMethods.PrintGroupDetermination(timer, truncTime, i, groups[i], parent.name);
-                    if (Mathf.Approximately(truncTime, groups[i].delay))
-                    {
-                        DebugMethods.PrintGroupInformation(groups[i], truncTime, i, parent.name);
-                        StartSpawning(groups[i]);
-                        spawnedThisSecond[i] = truncTime;
-                    }
-                    else if (isDivisible)
-                    {
-                        DebugMethods.PrintGroupInformation(groups[i], truncTime, i, parent.name);
-                        StartSpawning(groups[i]);
-                        spawnedThisSecond[i] = truncTime;
-                    }
+        if (startSpawning){
+            for (int i = 0; i < groups.Length; i++){
+                projectileSpawnTimers[i].Update(Time.deltaTime);
+                if(projectileSpawnTimers[i].isTimerDone()){
+                    DebugMethods.PrintGroupInformation(groups[i], projectileSpawnTimers[i].CurrentTime(), i, parent.name);
+                    projectileSpawnTimers[i].ResetTimer();
+                    StartSpawning(groups[i]);
                 }
             }
         }
@@ -53,22 +38,11 @@ public class GroupController : MonoBehaviour
     public void StartGroup(Group[] currGroup)
     {
         groups = currGroup;
-        spawnedThisSecond = new float[groups.Length];
-        SpawnRoundOne();
-        startSpawning = true;
-
-    }
-
-    private void SpawnRoundOne(){
-        for(int i = 0 ; i < groups.Length; i++){
-            if(groups[i].delay == 0f){
-                DebugMethods.PrintGroupInformation(groups[i], 0f, i, parent.name);
-                spawnedThisSecond[i] = 0f;
-                StartSpawning(groups[i]);
-            }
+        for(int i = 0 ; i < currGroup.Length; i++){
+            projectileSpawnTimers[i].Initialize(currGroup[i].spawnInterval, currGroup[i].delay);
         }
+        startSpawning = true;
     }
-
     private void StartSpawning(Group currGroup)
     {
         enemyAnimation.PukeBullets();
