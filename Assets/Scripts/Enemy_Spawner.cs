@@ -22,12 +22,12 @@ public class Enemy_Spawner : MonoBehaviour
 
     public static Enemy_Spawner Instance;
 
-    public Dictionary<int, List<SpawnInfo>> spawnInfos = new();
+    public Dictionary<int, List<SpawnInfo>> spawnInfos = new Dictionary<int, List<SpawnInfo>>();
     public GameObject[] EnemyPrefabs;
     public Transform[] EnemySpawners;
-    public UnityEvent BossSpawned = new();
+    public UnityEvent BossSpawned = new UnityEvent();
 
-    private List<GameObject> _Enemies = new();
+    private List<GameObject> _Enemies = new List<GameObject>();
     private int _LatestTickIndex;
     private Coroutine _TickProcess;
     private int _CurrentTick;
@@ -87,7 +87,7 @@ public class Enemy_Spawner : MonoBehaviour
     private IEnumerator ProcessTicks()
     {
         _CurrentTick = 0;
-
+        DebugMethods.PrintTicks(_CurrentTick);
         while (_LatestTickIndex > _CurrentTick)
         {
             // Debug.Log("Current Tick is: " + _CurrentTick);
@@ -106,6 +106,7 @@ public class Enemy_Spawner : MonoBehaviour
             }
             yield return new WaitForSeconds(TICK_LENGTH); // Wait tick length
             _CurrentTick++;
+            DebugMethods.PrintTicks(_CurrentTick);
         }
 
         Debug.Log("Done Spawning.");

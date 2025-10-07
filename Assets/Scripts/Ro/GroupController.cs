@@ -11,13 +11,13 @@ public class GroupController : MonoBehaviour
     public int decimalPlaces = 2;
     private GameObject parent;
     private Animator animator;
-    private EnemyAnimation script;
+    private EnemyAnimation enemyAnimation;
 
     void Awake()
     {
         parent = transform.parent.gameObject;
         animator = parent.GetComponentInChildren<Animator>();
-        script = parent.GetComponentInChildren<EnemyAnimation>();
+        enemyAnimation = parent.GetComponentInChildren<EnemyAnimation>();
     }
 
     void Update()
@@ -28,16 +28,20 @@ public class GroupController : MonoBehaviour
             for (int i = 0; i < groups.Length; i++)
             {
                 float truncTime = HelperFunctions.RoundToDecimal(timer, decimalPlaces); // be able to divide to spawn 
+                // timer, index , trunctime, delay, interval
                 if (truncTime != spawnedThisSecond[i])
                 { // statement used so that spawning doesn't happen multiple times per parts of a second
                     bool isDivisible = ((truncTime - groups[i].delay) % groups[i].spawnInterval) == 0;
+                    DebugMethods.PrintGroupDetermination(timer, truncTime, i, groups[i], parent.name);
                     if (Mathf.Approximately(truncTime, groups[i].delay))
                     {
+                        DebugMethods.PrintGroupInformation(groups[i], truncTime, i, parent.name);
                         StartSpawning(groups[i]);
                         spawnedThisSecond[i] = truncTime;
                     }
                     else if (isDivisible)
                     {
+                        DebugMethods.PrintGroupInformation(groups[i], truncTime, i, parent.name);
                         StartSpawning(groups[i]);
                         spawnedThisSecond[i] = truncTime;
                     }
@@ -50,12 +54,24 @@ public class GroupController : MonoBehaviour
     {
         groups = currGroup;
         spawnedThisSecond = new float[groups.Length];
+        SpawnRoundOne();
         startSpawning = true;
+
+    }
+
+    private void SpawnRoundOne(){
+        for(int i = 0 ; i < groups.Length; i++){
+            if(groups[i].delay == 0f){
+                DebugMethods.PrintGroupInformation(groups[i], 0f, i, parent.name);
+                spawnedThisSecond[i] = 0f;
+                StartSpawning(groups[i]);
+            }
+        }
     }
 
     private void StartSpawning(Group currGroup)
     {
-        script.PukeBullets();
+        enemyAnimation.PukeBullets();
         switch (currGroup.pattern)
         {
             case GroupType.Ring:
@@ -79,7 +95,7 @@ public class GroupController : MonoBehaviour
             float positionAngle = HelperFunctions.CalculateProjectilePositionAngle(i, ring);
             float xPos = Mathf.Cos(positionAngle);
             float yPos = Mathf.Sin(positionAngle);
-            Vector2 projectilePosition = new((xPos * ring.radius) + transform.position.x + ring.offset.x,
+            Vector2 projectilePosition = new Vector2 ((xPos * ring.radius) + transform.position.x + ring.offset.x,
                                 (yPos * ring.radius) + transform.position.y + ring.offset.y);
             GameObject projectile;
             if (ring.movementAngle == MovementAngle.Fixed)
@@ -110,7 +126,7 @@ public class GroupController : MonoBehaviour
             float positionAngle = HelperFunctions.CalculateProjectilePositionAngle(i, stack);
             float xPos = Mathf.Cos(positionAngle);
             float yPos = Mathf.Sin(positionAngle);
-            Vector2 projectilePosition = new((xPos * stack.radius) + transform.position.x + stack.offset.x,
+            Vector2 projectilePosition = new Vector2 ((xPos * stack.radius) + transform.position.x + stack.offset.x,
                                              (yPos * stack.radius) + transform.position.y + stack.offset.y);
 
             GameObject projectile;

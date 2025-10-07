@@ -7,16 +7,19 @@ public class PatternController : MonoBehaviour
     public Pattern[] Patterns;
     private int index = 0;
     private GroupController groupSpawner;
+    private Health script;
 
     void Awake()
     {
         groupSpawner = GetComponent<GroupController>();
-        transform.parent.GetComponent<Health>().healthChange.AddListener(ProgressPattern);
+        script = transform.parent.GetComponent<Health>();
+        script.healthChange.AddListener(ProgressPattern);
     }
 
     // percentage of health
     void Start()
     {
+        DebugMethods.PrintPatternInformation(index, script.GetCurrHealth(), script.GetMaxHealth(), transform.parent.name);
         groupSpawner.StartGroup(Patterns[index].groups);
     }
 
@@ -29,6 +32,7 @@ public class PatternController : MonoBehaviour
             {
                 index = 0;
             }
+            DebugMethods.PrintPatternInformation(index, currHealth, maxHealth, transform.parent.name);
             groupSpawner.StartGroup(Patterns[index].groups);
         }
     }
@@ -49,6 +53,10 @@ public struct Group
     public PositionAngle positionAngle;
     public float speed;
     public float speedMultiplier;
+
+    public override string ToString(){
+        return $"{pattern} group with {projectileCount} projectiles, and is {movementAngle}";
+    }
 }
 
 [Serializable]
