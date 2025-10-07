@@ -26,8 +26,9 @@ public class LevelManager : MonoBehaviour
     public float levelLoadDelay;
     public float winScreenDelay;
 
-    void Awake()
+    void Start()
     {
+        Debug.Log("In Start");
         LoadMainMenu();
     }
 
@@ -63,6 +64,9 @@ public class LevelManager : MonoBehaviour
                 AudioManager.Instance.StopAllSfx();
             }
             MenuUI.SetActive(true);
+            if (PlayerControllerScript.instance != null){
+                PlayerControllerScript.instance.DisablePlayerControls();
+            }
             // The main menu doesn't need an execution loop
             return;
         }
@@ -137,11 +141,6 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("LoadMainMenu")]
     public void LoadMainMenu()
     {
-        if (PlayerControllerScript.instance != null)
-        {
-            PlayerControllerScript.instance.DisablePlayerControls();
-            Debug.Log("Freezing Game");
-        }
         UnloadLevel();
         LoadLevel(-1);
     }

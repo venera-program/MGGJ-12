@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
-    private Stack<GameObject> lastGameObject = new();
-    private Stack<GameObject> lastSelected = new();
+    private Stack<GameObject> lastGameObject = new Stack<GameObject>();
+    private Stack<GameObject> lastSelected = new Stack<GameObject>();
     [SerializeField] private GameObject firstSelectedButton;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject creditsScreen;
