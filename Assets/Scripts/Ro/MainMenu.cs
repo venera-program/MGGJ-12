@@ -82,7 +82,13 @@ public class MainMenu : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        #if UNITY_STANDALONE_WIN
+            Application.Quit();
+        #endif
+
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }
 
