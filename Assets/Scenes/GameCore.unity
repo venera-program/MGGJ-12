@@ -189,6 +189,10 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 6431016342212905125, guid: 5bbb3568b8deabd43892e761e9af77b8, type: 3}
+      propertyPath: mainMenuMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 54b40f4d302a2b14aade009e69c12c98, type: 3}
+    - target: {fileID: 6431016342212905125, guid: 5bbb3568b8deabd43892e761e9af77b8, type: 3}
       propertyPath: sfxLoopAudioSource
       value: 
       objectReference: {fileID: 560875147}

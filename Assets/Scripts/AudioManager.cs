@@ -11,13 +11,14 @@ namespace MGGJ25.Shared
         [SerializeField] private AudioSource sfxAudioSource;
         [SerializeField] private AudioSource sfxLoopAudioSource;
         [SerializeField] private GameObject audioSourcePrefab; // Prefab with an AudioSource component
-        private List<AudioSource> sfxAudioSources = new();
-        private Queue<AudioSource> availableSfxSources = new();
+        private List<AudioSource> sfxAudioSources = new List<AudioSource>();
+        private Queue<AudioSource> availableSfxSources = new Queue<AudioSource>();
 
         [Header("Pool Settings")]
         [SerializeField] private int initialPoolSize = 3; // Number of SFX sources to preallocate
 
         [Header("Music Clips")]
+        [SerializeField] private AudioClip mainMenuMusicClip;
         [SerializeField] private AudioClip level1MusicClip;
         [SerializeField] private AudioClip level2MusicClip;
         [SerializeField] private AudioClip level3MusicClip;
@@ -177,6 +178,7 @@ namespace MGGJ25.Shared
         public void PlayLevel2_Music() => PlayMusic(level2MusicClip);
         public void PlayLevel3_Music() => PlayMusic(level3MusicClip);
         public void PlayVolume_Temp() => PlayMusic(volumetempClip);
+        public void PlayMainMenu_Music() => PlayMusic(mainMenuMusicClip);
         #endregion
 
         #region SFX Sounds

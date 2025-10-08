@@ -62,6 +62,7 @@ public class LevelManager : MonoBehaviour
             {
                 AudioManager.Instance.StopClearMusic();
                 AudioManager.Instance.StopAllSfx();
+                AudioManager.Instance.PlayMainMenu_Music();
             }
             MenuUI.SetActive(true);
             if (PlayerControllerScript.instance != null){

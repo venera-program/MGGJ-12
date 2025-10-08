@@ -14,10 +14,10 @@ public class ProjectilePool : MonoBehaviour
     [SerializeField] private float undirected2;
 
     [Header("Enemy Projectile Lists")]
-    private Queue<GameObject> directedPool = new();
-    private Queue<GameObject> directed2Pool = new();
-    private Queue<GameObject> undirectedPool = new();
-    private Queue<GameObject> undirected2Pool = new();
+    private Queue<GameObject> directedPool = new Queue<GameObject>();
+    private Queue<GameObject> directed2Pool = new Queue<GameObject>();
+    private Queue<GameObject> undirectedPool = new Queue<GameObject>();
+    private Queue<GameObject> undirected2Pool = new Queue<GameObject>();
 
     [Header("Player Projectile Count")]
     [SerializeField] private float angle;
@@ -26,13 +26,13 @@ public class ProjectilePool : MonoBehaviour
     [SerializeField] private float specialForward;
 
     [Header("Player Projectile Lists")]
-    private Queue<GameObject> anglePool = new();
-    private Queue<GameObject> forwardPool = new();
-    private Queue<GameObject> specialAnglePool = new();
-    private Queue<GameObject> specialForwardPool = new();
+    private Queue<GameObject> anglePool = new Queue<GameObject>();
+    private Queue<GameObject> forwardPool = new Queue<GameObject>();
+    private Queue<GameObject> specialAnglePool = new Queue<GameObject>();
+    private Queue<GameObject> specialForwardPool = new Queue<GameObject>();
 
     [Header("Special Attack Event")]
-    public UnityEvent<int> specialAttackCount = new();
+    public UnityEvent<int> specialAttackCount = new UnityEvent<int>();
 
     void Awake()
     {
@@ -116,7 +116,6 @@ public class ProjectilePool : MonoBehaviour
     public GameObject ActivateProjectile(ProjectileType type)
     {
         GameObject project;
-        AudioManager.Instance.PlayEnemyBullet_SFX();
 
         switch (type)
         {

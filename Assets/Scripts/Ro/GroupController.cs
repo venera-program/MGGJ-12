@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using MGGJ25.Shared;
 
 
 public class GroupController : MonoBehaviour
@@ -46,6 +47,9 @@ public class GroupController : MonoBehaviour
     private void StartSpawning(Group currGroup)
     {
         enemyAnimation.PukeBullets();
+        if(currGroup.projectileCount != 0){
+            AudioManager.Instance.PlayEnemyBullet_SFX();
+        }
         switch (currGroup.pattern)
         {
             case GroupType.Ring:

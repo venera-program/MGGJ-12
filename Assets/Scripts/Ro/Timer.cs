@@ -28,6 +28,7 @@ public struct Timer {
 
     public void Update(float deltaTime){
         currTime += deltaTime;
+        //timestamp?
     }
 
     public bool isTimerDone(){
