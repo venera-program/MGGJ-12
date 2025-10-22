@@ -199,6 +199,12 @@ public class EnemyMotor : MonoBehaviour
         }
     }
 
+    public void StopMoving(){
+        isMoving = false;
+    }
+    public void StartMoving(){
+        isMoving = true;
+    }
     private void PrintFloatyDestination(Vector3 position){
         #if UNITY_EDITOR || DEVELOPMENT_BUILD
         Debug.Log($"Current Floaty Destination for {gameObject.name} : {position.ToString()}");

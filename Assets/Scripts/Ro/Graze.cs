@@ -132,26 +132,28 @@ public class Graze : MonoBehaviour
 
     public void StartSkillTimer()
     {
-        startTimer = true;
+        if(PlayerControllerScript.instance.isSkillActivated()){
+            startTimer = true;
+        }
     }
 
-    public void StopSkillTimer()
-    {
+    public void PauseSkillTimer(){
+        startTimer = false;
+    }
+
+    public void StopSkillTimer(){
         startTimer = false;
         skillTimer = 0f;
         ClearGrazeCount();
         endSkillTimer.Invoke();
     }
 
-    private void SkillTimer()
-    {
+    private void SkillTimer(){
         skillTimer += Time.deltaTime;
-        if (skillTimer >= skillDuration)
-        {
+        if (skillTimer >= skillDuration){
             StopSkillTimer();
         }
-        else
-        {
+        else{
             GrazeBarCountDown(skillTimer, skillDuration);
         }
     }

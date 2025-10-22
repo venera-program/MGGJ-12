@@ -31,6 +31,7 @@ public class Enemy_Spawner : MonoBehaviour
     private int _LatestTickIndex;
     private Coroutine _TickProcess;
     private int _CurrentTick;
+    private bool isTicking = true;
 
     private void Awake()
     {
@@ -85,30 +86,45 @@ public class Enemy_Spawner : MonoBehaviour
     }
 
     private IEnumerator ProcessTicks()
-    {
+    { 
+        // put in a bool statement to pause
         _CurrentTick = 0;
         DebugMethods.PrintTicks(_CurrentTick);
         while (_LatestTickIndex > _CurrentTick)
         {
-            // Debug.Log("Current Tick is: " + _CurrentTick);
-            if (Instance.spawnInfos.ContainsKey(_CurrentTick))
-            {
-                foreach (var enemyInfo in spawnInfos[_CurrentTick])
+            if(isTicking){
+                // Debug.Log("Current Tick is: " + _CurrentTick);
+                if (Instance.spawnInfos.ContainsKey(_CurrentTick))
                 {
-                    GameObject enemy = Instantiate(EnemyPrefabs[enemyInfo.EnemyPrefabIndex], EnemySpawners[enemyInfo.SpawnerIndex]);
-                    _Enemies.Add(enemy);
-                    if (enemy.CompareTag("Boss"))
+                    foreach (var enemyInfo in spawnInfos[_CurrentTick])
                     {
-                        BossSpawned.Invoke();
-                    }
+                        GameObject enemy = Instantiate(EnemyPrefabs[enemyInfo.EnemyPrefabIndex], EnemySpawners[enemyInfo.SpawnerIndex]);
+                        _Enemies.Add(enemy);
+                        if (enemy.CompareTag("Boss"))
+                        {
+                            BossSpawned.Invoke();
+                        }
                     // Debug.Log("spawned enemy", enemy);
+                    }   
+                }}
+
+                yield return new WaitForSeconds(TICK_LENGTH); // Wait tick length
+                if(isTicking){
+                    _CurrentTick++;
                 }
-            }
-            yield return new WaitForSeconds(TICK_LENGTH); // Wait tick length
-            _CurrentTick++;
-            DebugMethods.PrintTicks(_CurrentTick);
+                DebugMethods.PrintTicks(_CurrentTick);
+            
+            
         }
 
         Debug.Log("Done Spawning.");
+    }
+
+    public void TurnOffTick(){
+        isTicking = false;
+    }
+
+    public void TurnOnTick(){
+        isTicking = true;
     }
 }

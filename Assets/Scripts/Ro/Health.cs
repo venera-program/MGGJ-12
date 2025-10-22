@@ -22,13 +22,13 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(_IFrameRoutine == null && CompareTag("Player")){
+        if(_IFrameRoutine == null && CompareTag("Player") && !isInvincible){
             TriggerIFrames(I_SECONDS);
             currHealth = Mathf.Clamp(currHealth - damage, 0f, maxHealth);
             Debug.Log($"{transform.name} took {damage} damage");
             healthChange.Invoke(currHealth, maxHealth);
         }
-        if (_IFrameRoutine != null)
+        if (_IFrameRoutine != null && !isInvincible)
         {
             Debug.Log("trying to take damage when immune", this);
             return;

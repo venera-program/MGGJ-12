@@ -34,6 +34,8 @@ public class ProjectilePool : MonoBehaviour
     [Header("Special Attack Event")]
     public UnityEvent<int> specialAttackCount = new UnityEvent<int>();
 
+    private List<Projectile> projectiles = new List<Projectile>();
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -54,28 +56,36 @@ public class ProjectilePool : MonoBehaviour
         for (int i = 0; i < directed; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.directed, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.directed;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.directed;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             directedPool.Enqueue(newProject);
         }
         for (int i = 0; i < directed2; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.directed2, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.directed2;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.directed2;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             directed2Pool.Enqueue(newProject);
         }
         for (int i = 0; i < undirected; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.undirected, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.undirected;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.undirected;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             undirectedPool.Enqueue(newProject);
         }
         for (int i = 0; i < undirected2; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.undirected2, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.undirected2;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.undirected2;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             undirected2Pool.Enqueue(newProject);
         }
@@ -86,28 +96,36 @@ public class ProjectilePool : MonoBehaviour
         for (int i = 0; i < angle; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.angle, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.angle;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.angle;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             anglePool.Enqueue(newProject);
         }
         for (int i = 0; i < forward; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.forward, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.forward;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.forward;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             forwardPool.Enqueue(newProject);
         }
         for (int i = 0; i < specialAngle; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.specialAngle, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.specialAngle;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.specialAngle;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             specialAnglePool.Enqueue(newProject);
         }
         for (int i = 0; i < specialForward; i++)
         {
             GameObject newProject = Instantiate(ProjectileResources.instance.specialForward, transform);
-            newProject.GetComponent<Projectile>().projectileType = ProjectileType.specialForward;
+            Projectile temp = newProject.GetComponent<Projectile>();
+            temp.projectileType = ProjectileType.specialForward;
+            projectiles.Add(temp);
             newProject.SetActive(false);
             specialForwardPool.Enqueue(newProject);
         }
@@ -248,6 +266,16 @@ public class ProjectilePool : MonoBehaviour
             a.SetActive(false);
         }
         specialAttackCount.Invoke(specialAnglePool.Count + specialForwardPool.Count);
+    }
+    public void UnpauseProjectilesMovement(){
+        foreach(Projectile A in projectiles){
+            A.StartMoving();
+        }
+    }
+    public void StopProjectilesMovement(){
+        foreach(Projectile A in projectiles){
+            A.StopMoving();
+        }
     }
 }
 

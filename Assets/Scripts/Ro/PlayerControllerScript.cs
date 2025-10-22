@@ -219,10 +219,14 @@ public class PlayerControllerScript : MonoBehaviour
           if (!Graze.instance.IsGrazeFull()) return;
           if (!skillActivated)
           {
-               Graze.instance.StartSkillTimer();
                skillActivated = true;
+               Graze.instance.StartSkillTimer();
                _skill.SwitchToSkillAnimation();
           }
+     }
+
+     public bool isSkillActivated(){
+          return skillActivated;
      }
 
      private void EndSkillUse()
@@ -318,6 +322,14 @@ public class PlayerControllerScript : MonoBehaviour
      public void DisablePauseButton()
      {
           _controller.Main.Escape.Disable();
+     }
+
+     public void StopAnimations(){
+          _animator.enabled = false;
+     }
+
+     public void StartAnimations(){
+          _animator.enabled = true;
      }
 
      private void OnHit(float currHealth, float maxHealth)

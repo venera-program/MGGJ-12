@@ -52,9 +52,12 @@ public class Projectile : MonoBehaviour
         StartMoving();
     }
 
-    private void StartMoving()
+    public void StartMoving()
     {
         isMoving = true;
+    }
+    public void StopMoving(){
+        isMoving = false;
     }
 
     public void Move(float movementSpeed)

@@ -127,6 +127,14 @@ public class GroupController : MonoBehaviour
         }
     }
 
+    public void StopSpawning(){
+        startSpawning = false;
+    }
+
+    public void UnpauseSpawning(){
+        startSpawning = true;
+    }
+
 }
 
 public enum MovementAngle

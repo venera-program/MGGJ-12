@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyAnimation : MonoBehaviour
 {
     private Animator animator;
+    public Animator _animator {get {return animator;}}
     [SerializeField] private float pukeTime;
 
     void Awake()
