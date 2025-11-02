@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/Ro/Editor/Row2.uss?fileID=7433441132597879392&amp;guid=5dcd552936e2934499b17c60d661b645&amp;type=3#Row2" />
+    <ui:VisualElement style="flex-grow: 1; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+        <ui:IntegerField label="Ticks" value="0" name="Key" class="unity-base-field__aligned unity-property-field__inspector-property" style="width: 326px; -unity-text-align: upper-left; transform-origin: center; margin-left: 4px; flex-grow: initial; min-width: auto; justify-content: flex-start; align-self: flex-start; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; margin-right: 6%; height: auto;" />
+        <uie:ObjectField label="Dialogue SO" name="Value" type="DialogueSO, Assembly-CSharp" allow-scene-objects="true" class="unity-base-field__aligned unity-base-field__inspector-field unity-property-field__inspector-property" style="width: auto; justify-content: flex-start; flex-grow: initial; margin-right: 6%; flex-shrink: 0; height: auto; -unity-text-align: upper-left; overflow: hidden; opacity: 1; display: flex; align-items: stretch; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-self: flex-start;" />
+    </ui:VisualElement>
+</ui:UXML>

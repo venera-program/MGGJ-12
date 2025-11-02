@@ -15,3 +15,4 @@ MonoBehaviour:
   _newBackgroundTexture: {fileID: 21300000, guid: 44119df0981f3e746a9c4ac5bf9caf04, type: 3}
   _spawnInfoCSV: {fileID: 4900000, guid: 0f12842984bc301439775c2f182f40ee, type: 3}
   _bgMusic: {fileID: 8300000, guid: 961695e22cab7d14b98d94c30ab8745b, type: 3}
+  _levelDialogue: {fileID: 11400000, guid: 2c8da6fca3122894a96f41d5edd729fc, type: 2}

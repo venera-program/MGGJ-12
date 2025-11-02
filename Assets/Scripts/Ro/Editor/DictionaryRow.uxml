@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/Ro/Editor/dictionaryRow.uss?fileID=7433441132597879392&amp;guid=f34795883e486104aa7ca5b43aabf764&amp;type=3#dictionaryRow" />
+    <ui:VisualElement style="flex-grow: 1; overflow: hidden; flex-direction: row; align-items: flex-start; top: auto; align-self: auto;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; height: 100%; min-height: 100%;">
+            <ui:IntegerField label="Ticks" value="0" name="Key" style="width: 40%; -unity-text-align: upper-left; transform-origin: center; margin-left: 4px; flex-grow: initial; min-width: 40%; justify-content: center; align-self: center; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;" />
+            <uie:ObjectField label="Dialogue SO" name="Value" type="DialogueSO, Assembly-CSharp" allow-scene-objects="true" style="width: auto; justify-content: center; flex-grow: 0; margin-right: 6%; flex-shrink: initial; height: auto; -unity-text-align: upper-left; overflow: hidden; opacity: 1; display: flex; align-items: stretch; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

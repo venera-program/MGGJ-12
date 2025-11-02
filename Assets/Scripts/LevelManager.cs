@@ -137,6 +137,7 @@ public class LevelManager : MonoBehaviour
         {
             PlayerControllerScript.instance.EnablePlayerControls();
         }
+        LoadLevelStartDialogue();
     }
 
     [ContextMenu("LoadMainMenu")]
@@ -157,5 +158,12 @@ public class LevelManager : MonoBehaviour
     {
         UnloadLevel();
         LoadLevel(CurrentLevelIndex);
+    }
+
+    private void LoadLevelStartDialogue () {
+        DialogueSO dialogue = levels[CurrentLevelIndex].LevelDialogue.startOfLevelDialogue;
+        if(dialogue != null){
+            DialogueManager.instance.SetUpDialogue(dialogue);
+        }
     }
 }

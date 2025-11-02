@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueMenu: {fileID: 8577580493602638757}
   textBox: {fileID: 549577135}
+  wordLoadingSeconds: 0.1
 --- !u!1 &258049535
 GameObject:
   m_ObjectHideFlags: 0
