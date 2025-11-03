@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
 
     public float levelLoadDelay;
     public float winScreenDelay;
+    
 
     void Start()
     {
@@ -153,10 +154,8 @@ public class LevelManager : MonoBehaviour
         LoadLevel(0);
     }
 
-    public void RestartLevel()
-    {
-        UnloadLevel();
-        LoadLevel(CurrentLevelIndex);
+    public void RestartLevel(){
+        StartCoroutine(LevelRestartDelay(.01f));
     }
 
     private void LoadLevelStartDialogue () {
@@ -164,5 +163,11 @@ public class LevelManager : MonoBehaviour
         if(dialogue != null){
             DialogueManager.instance.SetUpDialogue(dialogue);
         }
+    }
+
+    private IEnumerator LevelRestartDelay(float time){
+        yield return new WaitForSeconds(time);
+        UnloadLevel();
+        LoadLevel(CurrentLevelIndex);
     }
 }
