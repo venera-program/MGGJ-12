@@ -28,7 +28,6 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("In Start");
         LoadMainMenu();
     }
 
@@ -82,10 +81,8 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
-        Debug.Log($"Boss has been defeated. Current Level Index is {CurrentLevelIndex}");
-        yield return new WaitForSeconds(levelLoadDelay);
-        Debug.Log($"2. Boss has been defeated. Current Level Index is {CurrentLevelIndex}");
 
+        yield return new WaitForSeconds(levelLoadDelay);
         // Load next level, else load win screen
         // L 1|2|3
         // i 0|1|2
@@ -131,7 +128,9 @@ public class LevelManager : MonoBehaviour
             AudioManager.Instance.PlayMusic(levels[CurrentLevelIndex].BGMusic);
         }
         BackgroundUI.SetActive(true);
-        Enemy_Spawner.Instance.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV);
+        Enemy_Spawner.Instance.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV); 
+        LevelDialogueManager.instance.SetCurrLevelDialogue(levels[CurrentLevelIndex].LevelDialogue.duringLevelDialogue);
+        LevelClock.Instance.StartClock();
         BossDefeated = false;
         if (PlayerControllerScript.instance != null)
         {

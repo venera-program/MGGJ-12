@@ -45,4 +45,12 @@ public class EnemyManager : MonoBehaviour {
             A.StopSpawning();
         }
     }
+
+    public void StartEnemySpawning(){
+        Enemy_Spawner.Instance.StartSpawning();
+    }
+
+    public void StopEnemySpawning(){
+        Enemy_Spawner.Instance.StopSpawning();
+    }
 }

@@ -55,7 +55,6 @@ public static class PlayerData
     public static void AddGraze(int additionalAmount)
     {
         Graze += additionalAmount;
-        // Debug.Log($"GrazePoints: {_graze}");
     }
 
     public static void ClearGraze()

@@ -12,21 +12,23 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void StartTick(){
-        Enemy_Spawner.Instance.TurnOnTick();
+        LevelClock.Instance.TurnOnTick();
     }
 
     public void StopTick(){
-        Enemy_Spawner.Instance.TurnOffTick();
+        LevelClock.Instance.TurnOffTick();
     }
 
     public void StartEnemy(){
         EnemyManager.instance.StartEnemyMovement();
         EnemyManager.instance.StartEnemyProjectileSpawning();
+        EnemyManager.instance.StartEnemySpawning();
     }
 
     public void StopEnemy(){
         EnemyManager.instance.StopEnemyMovement();
         EnemyManager.instance.StopEnemyProjectileSpawning();
+        EnemyManager.instance.StopEnemySpawning();
     }
 
     public void StartPlayerAnimation(){

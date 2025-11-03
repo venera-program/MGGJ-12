@@ -64,21 +64,16 @@ public class PlayerControllerScript : MonoBehaviour
           _controller.Main.Shoot.started += Shoot;
           _controller.Main.Shoot.canceled += StopShoot;
           _controller.Main.Skill.started += StartSkillUse;
-          if (MainMenu.instance != null)
-          {
-               _controller.Main.Escape.performed += MainMenu.instance.OpenPauseMenu;
-
-               _controller.UI.Cancel.started += MainMenu.instance.BackButton;
-          }
           GetComponent<Health>().healthChange.AddListener(OnHit);
           Graze.instance.endSkillTimer.AddListener(EndSkillUse);
+          _controller.UI.Cancel.started += UICancel;
+          _controller.Main.Escape.performed += OpenPauseMenu;
           LevelManager.OnLevelChange += HealMC;
           LevelManager.OnLevelUnload += ResetMC;
           LevelManager.OnLevelUnload += PlayerData.ClearScore;
      }
 
-     private void Start()
-     {
+     private void Start(){
           projectileTimer = projectileSpawnInterval;
      }
 
@@ -107,9 +102,8 @@ public class PlayerControllerScript : MonoBehaviour
           _controller.Main.Shoot.started -= Shoot;
           _controller.Main.Shoot.canceled -= StopShoot;
           _controller.Main.Skill.started -= StartSkillUse;
-          _controller.Main.Escape.performed -= MainMenu.instance.OpenPauseMenu;
-
-          _controller.UI.Cancel.started -= MainMenu.instance.BackButton;
+          _controller.Main.Escape.performed -= OpenPauseMenu;
+          _controller.UI.Cancel.started -= UICancel;
           LevelManager.OnLevelChange -= HealMC;
           LevelManager.OnLevelUnload -= ResetMC;
           LevelManager.OnLevelUnload -= PlayerData.ClearScore;
@@ -292,8 +286,20 @@ public class PlayerControllerScript : MonoBehaviour
           }
      }
 
-     public void EnablePlayerControls()
-     {
+     private void UICancel(InputAction.CallbackContext cont){
+          if(MainMenu.instance != null){
+               MainMenu.instance.BackButton(cont);
+          }
+     }
+
+     private void OpenPauseMenu(InputAction.CallbackContext cont){
+          if(MainMenu.instance != null){
+               MainMenu.instance.OpenPauseMenu(cont);
+          }
+
+     }
+
+     public void EnablePlayerControls(){
           _controller.Main.Enable();
           canMove = true;
           _controller.Main.Shoot.started += Shoot;
@@ -358,7 +364,6 @@ public class PlayerControllerScript : MonoBehaviour
 
           _animator.SetBool(WAS_HIT, false);
           transform.position = spawnPoint.position;
-          //Debug.Log("The new position is " + transform.position);
           collider.enabled = true;
 
           _controller.Main.Move.Enable();

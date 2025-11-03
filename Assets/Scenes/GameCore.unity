@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 225745514}
   - component: {fileID: 225745515}
+  - component: {fileID: 225745516}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -169,6 +170,18 @@ MonoBehaviour:
   dialogueMenu: {fileID: 8577580493602638757}
   textBox: {fileID: 549577135}
   wordLoadingSeconds: 0.1
+--- !u!114 &225745516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225745513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83aaeb8539a4944785d1a89306007cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &258049535
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,19 +950,48 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2718579805764562059, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1045378294}
   m_SourcePrefab: {fileID: 100100000, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
 --- !u!114 &1045378292 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4688758759550188642, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
   m_PrefabInstance: {fileID: 1045378291}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1045378293}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef7c33ff89daac946ab0307df20b8428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1045378293 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2718579805764562059, guid: 75a4ed15da64aff479e58171254eaa08, type: 3}
+  m_PrefabInstance: {fileID: 1045378291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1045378294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045378293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b280971491a92f84c87532fa8dfa969d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOfClock:
+    m_PersistentCalls:
+      m_Calls: []
+  tickTock:
+    m_PersistentCalls:
+      m_Calls: []
+  endOfClock:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1082025087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2372,6 +2414,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1045378292}
+    - target: {fileID: 8438729726237786341, guid: 370105d514bc06b4a95e6a8e8ad6a5b8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8526950574591641377, guid: 370105d514bc06b4a95e6a8e8ad6a5b8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
