@@ -20,7 +20,7 @@ public class LevelDialogueDrawer : Editor {
         Func<VisualElement> makeItem = MakeListItem;
         Action<VisualElement, int> bindItem = bindItemFunc;
         levelDialogueList = getCurrentList();
-        const int itemHeight = 65;
+        const int itemHeight = 125;
         var listView = new ListView(levelDialogueList, itemHeight, makeItem, bindItem);
         listView.style.flexGrow = 1.0f;
         listView.virtualizationMethod = CollectionVirtualizationMethod.FixedHeight;
