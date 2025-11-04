@@ -16,6 +16,7 @@ public class LevelDialogueManager : MonoBehaviour {
     public void Start(){
         LevelClock.Instance.tickTock.AddListener(LoadLevelDialogue);
     }
+    public void OnDisable(){
         LevelClock.Instance.tickTock.RemoveListener(LoadLevelDialogue);
     }
     public void SetCurrLevelDialogue(LevelDialogueSO leveldialogue){
