@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
 
     public static sbyte CurrentLevelIndex { get; private set; }
     public static bool BossDefeated = false;
+    public static bool BossDefeatedDialogue = false;
 
     public static Action OnGameWin = () => { };
 
@@ -82,8 +83,20 @@ public class LevelManager : MonoBehaviour
         {
             yield return null;
         }
-
+        
+        if (levels[CurrentLevelIndex].LevelDialogue != null){
+            if (levels[CurrentLevelIndex].LevelDialogue.bossDefeatedDialogue != null){
+                LevelDialogueManager.instance.StartBossDefeatedDialogue();
+                OnLevelUnload.Invoke();
+                while (!BossDefeatedDialogue){
+                    yield return null;
+                }
+            }
+        }
+         
         yield return new WaitForSeconds(levelLoadDelay);
+        
+
         // Load next level, else load win screen
         // L 1|2|3
         // i 0|1|2
@@ -130,9 +143,9 @@ public class LevelManager : MonoBehaviour
         }
         BackgroundUI.SetActive(true);
         Enemy_Spawner.Instance.StartProcessFromAsset(levels[CurrentLevelIndex].SpawnInfoCSV); 
-        LevelDialogueManager.instance.SetCurrLevelDialogue(levels[CurrentLevelIndex].LevelDialogue.duringLevelDialogue);
         LevelClock.Instance.StartClock();
         BossDefeated = false;
+        BossDefeatedDialogue = false;
         if (PlayerControllerScript.instance != null)
         {
             PlayerControllerScript.instance.EnablePlayerControls();
@@ -159,15 +172,21 @@ public class LevelManager : MonoBehaviour
     }
 
     private void LoadLevelStartDialogue () {
-        DialogueSO dialogue = levels[CurrentLevelIndex].LevelDialogue.startOfLevelDialogue;
-        if(dialogue != null){
-            DialogueManager.instance.SetUpDialogue(dialogue);
+        if(levels[CurrentLevelIndex].LevelDialogue != null){
+            LevelDialogueManager.instance.SetCurrLevelDialogue(levels[CurrentLevelIndex].LevelDialogue);
+            LevelDialogueManager.instance.LoadStartDialogue();
+        } else {
+            LevelDialogueManager.instance.SetCurrLevelDialogue(null);
         }
+        
     }
 
     private IEnumerator LevelRestartDelay(float time){
         yield return new WaitForSeconds(time);
         UnloadLevel();
         LoadLevel(CurrentLevelIndex);
+    }
+    public static void ResumeLevelTransition(){
+        BossDefeatedDialogue = true;
     }
 }

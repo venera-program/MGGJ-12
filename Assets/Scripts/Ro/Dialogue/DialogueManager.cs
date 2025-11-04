@@ -99,5 +99,8 @@ public class DialogueManager : MonoBehaviour{
         GameManager.instance.StartGrazeDetection();
         GameManager.instance.StartSkillTimer();
         GameManager.instance.StartProjectileMovement();
+        if(currDialogue.dialogueEnd != null){
+            currDialogue.dialogueEnd();
+        }
    }
 }

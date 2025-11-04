@@ -19,4 +19,4 @@ MonoBehaviour:
       VALUE: {fileID: 11400000, guid: 51ecbf8f04a66af44b70c0dc7c07cc20, type: 2}
     - KEY: 30
       VALUE: {fileID: 11400000, guid: bdc2a0ef6ffd54b439370cd636a9d536, type: 2}
-  _bossDefeatedDialogue: {fileID: 0}
+  _bossDefeatedDialogue: {fileID: 11400000, guid: ecc19ef6c5b1fd14585dbf1640f01f02, type: 2}
